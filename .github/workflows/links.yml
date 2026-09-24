@@ -13,7 +13,9 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
-          args: --no-progress --exclude '^https://example\.com' './**/*.md'
+          # Obsidian resolves a drawing embed, ![[name.excalidraw]], by basename
+          # under Excalidraw/; lychee reads it as a file beside the note.
+          args: --no-progress --exclude '^https://example\.com' --exclude '\.excalidraw$' './**/*.md'
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
