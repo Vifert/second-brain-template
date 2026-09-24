@@ -19,7 +19,7 @@ updated: 2026-09-18
 ## About
 
 Written at setup from the owner's own answers. Add a fact here only when the
-owner states it; an unknown stays absent rather than guessed (CLAUDE.md § People).
+owner states it; an unknown stays absent rather than guessed (AGENTS.md § People).
 
 ## Related
 

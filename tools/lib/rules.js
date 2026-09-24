@@ -47,7 +47,7 @@ const BODY_CAPS = { hub: 200, detail: 350, person: 120, idea: 150, decision: 150
 /** Thin-surface threshold: fewer bullets than this is reported (people stubs excepted). */
 const MIN_BULLETS = 4;
 
-/** Query-cost target from CLAUDE.md — the prime directive. */
+/** Query-cost target from AGENTS.md — the prime directive. */
 const COST_TARGET_MIN_X = 30;
 
 /**
@@ -153,22 +153,25 @@ const MAX_SUMMARY_CHARS = 200;
 
 /**
  * Context budgets, in tokens (bytes / 4): what every session loads before the
- * first question (D87). CLAUDE.md loads in every session and every subagent;
- * HANDOFF.md is read at every session start. Over budget is a build WARNING,
- * never a failure: the remedy is always to move detail into a .claude/rules/
- * file, a skill or a wiki node — never to delete or compress it to fit. A hard
- * size cap applied to content is how D01 lost 78 dated entries.
+ * first question (D87). AGENTS.md, the manual, loads in every session and
+ * every subagent — Claude Code's through CLAUDE.md, which imports it and adds
+ * only a few lines of its own (D90); HANDOFF.md is read at every session start.
+ * Over budget is a build WARNING, never a failure: the remedy is always to move
+ * detail into a .claude/rules/ file, a skill or a wiki node — never to delete
+ * or compress it to fit. A hard size cap applied to content is how D01 lost 78
+ * dated entries.
  */
-const CONTEXT_BUDGET_TOKENS = { 'CLAUDE.md': 6000, 'HANDOFF.md': 3000 };
+const CONTEXT_BUDGET_TOKENS = { 'AGENTS.md': 6000, 'CLAUDE.md': 400, 'HANDOFF.md': 3000 };
 
 /**
  * The first defect ID that is the owner's own (D89). Rows below it ship with
  * the template and are what the credit block counts; the owner's rows from here
- * on are theirs, not the credited author's. A template release that adds rows
- * moves this on, with "this vault's own defects start at" in the ledger,
- * HANDOFF.md and vault-operations.
+ * on are theirs, not the credited author's. It was 90 until the template's own
+ * rows reached D90 (template 1.1); 200 leaves room, so a release that adds rows
+ * need not move it again. When it does move, so does "this vault's own defects
+ * start at" in the ledger, HANDOFF.md, vault-operations and vault-tailor.
  */
-const OWNER_DEFECTS_FROM = 90;
+const OWNER_DEFECTS_FROM = 200;
 
 // ------------------------------------------------------------------ tags
 

@@ -8,7 +8,7 @@
 - **Claude Code carries no memory between sessions, so this file is the
   memory**: what exists, what was decided and why, what was deliberately left
   alone, and what is still open. Read it at the start of every session,
-  straight after CLAUDE.md. Where it disagrees with an assumption, it wins — or
+  straight after AGENTS.md. Where it disagrees with an assumption, it wins — or
   ask {{OWNER_NAME}}.
 - **It is updated when {{OWNER_NAME}} types `/vault-handoff`**, which holds the
   routine: append a Session Log entry (what happened, what was decided and
@@ -51,7 +51,7 @@
 ## Decisions
 
 - **Settled at setup**: {{SETUP_DECISIONS}}
-- **The architecture is Vifert's.** The credit block at the top of CLAUDE.md
+- **The architecture is Vifert's.** The credit block at the top of AGENTS.md
   stays there; edit anything else as the vault grows.
 
 ## Tooling
@@ -72,8 +72,8 @@ them, never reimplement them:
   the Obsidian plugin, in whichever installed Chromium browser answers.
 - The defect ledger, `tools/DEFECTS.md`, ships with D01–D79 from Vifert's vault, D80–D85
   from preparing this template for release, and D86–D88 ported from his vault's
-  D80–D82, and D89 from the template's own upkeep. **This vault's own defects
-  start at D90.**
+  D80–D82, D89 from the template's own upkeep, and D90–D93 from making it run under
+  any coding agent. **This vault's own defects start at D200.**
 
 ## Traps
 

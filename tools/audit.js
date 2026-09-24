@@ -204,7 +204,7 @@ console.log(`   block-list frontmatter: ${block.length}${block.length ? ' — ' 
 console.log('   (all list forms parse; the builder also warns on any alias lost since the last commit)');
 
 // ------------------------------------------------------- 7. query cost
-// The prime directive, measured. Simulates the CLAUDE.md protocol with a
+// The prime directive, measured. Simulates the AGENTS.md protocol with a
 // literal grep -i: L0 = every _index.tsv row matching the term, cut to
 // path+summary; L1 = the answer card of the first matching path. Tokens ≈ bytes / 4.
 H('7. QUERY COST (prime directive)');

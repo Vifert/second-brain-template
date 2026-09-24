@@ -2,15 +2,15 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/architecture-dark.png">
-  <img alt="How the second brain works: capture, the wiki graph, the build, the index layer and the query ladder, with the guards beneath and what Claude loads, and when" src="assets/architecture.png">
+  <img alt="How the second brain works: capture, the wiki graph, the build, the index layer and the query ladder, with the guards beneath and what the agent loads, and when" src="assets/architecture.png">
 </picture>
 
 The drawing is `Excalidraw/tooling/second-brain-architecture.excalidraw.md`,
 editable in Obsidian. It argues that the five stages are a one-way pipeline
 with a single validating step in the middle: nothing reaches the index layer
 except through `tools/build-index.js`, and nothing reaches an answer except
-through the index. A sixth zone beneath shows what Claude itself loads, and
-when.
+through the index. A sixth zone beneath shows what the agent itself loads,
+and when.
 
 Below is the same drawing as text — the transcription the vault itself
 retrieves from, in `wiki/tooling/second-brain-architecture-figure.md` — so
@@ -56,13 +56,13 @@ flowchart LR
     n31["tools/DEFECTS.md<br>every defect, each<br>with a guard in code"]
     n32["git — private repo<br>one commit a session<br>Obsidian setup versioned"]
   end
-  subgraph n33["6 — What Claude loads, and when"]
-    n34["CLAUDE.md — always-on core<br>query protocol · judgement rules"]
+  subgraph n33["6 — What the agent loads, and when"]
+    n34["AGENTS.md — always-on core<br>query protocol · judgement rules<br>Claude Code reads it via CLAUDE.md"]
     n35[".claude/rules/ — load by path<br>wiki · images · obsidian · tooling"]
     n36["Skills you start, by typing<br>/vault-compile · /vault-audit<br>/vault-deep-audit · /vault-handoff"]
-    n37["Skills Claude may start<br>vault-excalidraw · vault-tailor"]
+    n37["Skills the agent may start<br>vault-excalidraw · vault-tailor"]
     n38["Hooks — enforced, not remembered<br>block bash that runs backticks<br>refuse CRLF and control bytes<br>rebuild a stale index at Stop"]
-    n39["Read-only agents, skip CLAUDE.md<br>vault-fidelity-verifier<br>vault-gap-auditor"]
+    n39["Read-only agents, skip the manual<br>vault-fidelity-verifier<br>vault-gap-auditor"]
     n40["vault-tailor — fits the vault to you<br>study → interview in rounds →<br>propose → build your own<br>skills · agents · rules"]
   end
   n41["NotebookLM — grounded second reader<br>triage the batch · verify the compile · never a source (D74)"]
@@ -124,22 +124,22 @@ Read alongside the flowchart:
   than the sources."
 - **Legend** (under the guards): "Dashed border — a skill only you start, by
   typing it: /vault-compile, /vault-audit, /vault-deep-audit, /vault-handoff.
-  Claude may start vault-excalidraw and vault-tailor. Captures, the build and
-  the self-test are never gated." The dashed purple boxes — **/vault-compile**,
+  The agent may start vault-excalidraw and vault-tailor. Captures, the build
+  and the self-test are never gated." The dashed purple boxes — **/vault-compile**,
   the audit box and the gated skills in zone 6 — are those skills (D78).
-- **6 — What Claude loads, and when**: the always-on `CLAUDE.md` core points
-  to the `.claude/rules/` files, which load only when a file they cover is read
-  (D87). The gated skills dispatch the two read-only agents, which skip
-  `CLAUDE.md` and carry their own brief. `vault-tailor`, which Claude may
-  start, fits the vault to its owner: it studies the design, interviews them in
+- **6 — What the agent loads, and when**: the always-on `AGENTS.md` core —
+  Claude Code reads it through `CLAUDE.md` (D90) — points to the
+  `.claude/rules/` files, which load only when a file they cover is read (D87).
+  The gated skills dispatch the two read-only agents, which skip the manual and
+  carry their own brief. `vault-tailor`, which the agent may start, fits the vault to its owner: it studies the design, interviews them in
   rounds, then proposes and builds their own skills, agents and rules. The
   hooks enforce three traps rather than trusting memory, and rebuild a stale
   index at the end of a turn. The note: "Budgets warn, never fail: past its
-  token budget, CLAUDE.md or HANDOFF.md warns, and detail moves to a rules
+  token budget, AGENTS.md or HANDOFF.md warns, and detail moves to a rules
   file, a skill or a node — never deleted."
 
 Colour carries meaning, so it survives here: orange is the owner's own input,
-purple is a process Claude runs, blue is the main path and what always loads,
+purple is a process the agent runs, blue is the main path and what always loads,
 green is generated or committed output (and the tailoring that builds the
 owner's own additions), cyan is depth (body, figures, the deeper rungs), red is
 what refuses a mistake (the defect ledger and the hooks), violet is a read-only

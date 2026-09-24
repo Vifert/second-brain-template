@@ -73,7 +73,7 @@ formats are in `references/spec.md`; read it before your first `new` or
 ## Making a new drawing
 
 1. **Know what it has to say.** Pull what the drawing is about from the vault
-   the cheap way (Query Protocol in CLAUDE.md: route, then one card or section)
+   the cheap way (Query Protocol in AGENTS.md: route, then one card or section)
    so names, tables, jobs and statuses in it are real. Run `list` in case a
    drawing of this already exists; extending one beats a near-duplicate.
 2. **Design before coordinates.** For anything beyond a handful of boxes, read

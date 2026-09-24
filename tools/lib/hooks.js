@@ -73,4 +73,21 @@ function staleIndex(vaultAbs) {
   return newer(path.join(vaultAbs, 'wiki')) || newer(path.join(vaultAbs, 'Excalidraw'));
 }
 
-module.exports = { executedBackticks, bashProblems, mdProblems, staleIndex };
+/**
+ * The files an edit touched, whichever agent made it (D92). Claude Code's
+ * Write and Edit name one `tool_input.file_path`; Codex edits through
+ * `apply_patch`, whose patch text arrives in `tool_input.command` and names
+ * each file on an `*** Add File:`, `*** Update File:` or `*** Move to:` line.
+ * Relative paths resolve against the session's `cwd`.
+ */
+function editedFiles(input) {
+  const ti = (input && input.tool_input) || {};
+  const cwd = (input && input.cwd) || process.cwd();
+  if (typeof ti.file_path === 'string' && ti.file_path) return [path.resolve(cwd, ti.file_path)];
+  if (typeof ti.command !== 'string') return [];
+  const out = [];
+  for (const m of ti.command.matchAll(/^\*\*\* (?:Add File|Update File|Move to): (.+?)\s*$/gm)) out.push(path.resolve(cwd, m[1]));
+  return [...new Set(out)];
+}
+
+module.exports = { executedBackticks, bashProblems, mdProblems, staleIndex, editedFiles };

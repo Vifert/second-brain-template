@@ -1,6 +1,6 @@
 ---
 name: vault-handoff
-description: End-of-session upkeep for the vault — HANDOFF.md and its session log, the rules, global memory, and a final commit and push. The owner types /vault-handoff; Claude never starts it.
+description: End-of-session upkeep for the vault — HANDOFF.md and its session log, the rules, global memory, and a final commit and push. The owner types /vault-handoff; the agent never starts it.
 disable-model-invocation: true
 ---
 
@@ -25,8 +25,8 @@ assumptions. Do each step; skip one that has nothing to do.
    `### YYYY-MM-DD (D-Mon-YY)` heading per session day; create it the first
    time, following `.claude/rules/wiki-writing.md`), and a decision's full
    reasoning into a `detail` node in `wiki/tooling/`, leaving one line here.
-3. **CLAUDE.md and the rules.** If a rule changed this session, revise the file
-   that holds it — the always-on core or a `.claude/rules/` file — and grep the
+3. **AGENTS.md and the rules.** If a rule changed this session, revise the file
+   that holds it — the always-on core, `AGENTS.md`, or a `.claude/rules/` file — and grep the
    vault and `tools/` for its old wording (D20). If nothing changed, say so and
    leave them.
 4. **Global memory** at `{{MEMORY_PATH}}`: anything important enough to

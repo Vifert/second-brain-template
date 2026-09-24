@@ -5,7 +5,7 @@ paths:
   - "**/*.excalidraw.md"
 ---
 
-Rules for images and drawings. They load when an image or a drawing is read; the builder backs them. Moved out of `CLAUDE.md` so they load only when needed (D87).
+Rules for images and drawings. They load when an image or a drawing is read; the builder backs them. Moved out of the manual (`AGENTS.md`) so they load only when needed (D87).
 
 ## Images
 

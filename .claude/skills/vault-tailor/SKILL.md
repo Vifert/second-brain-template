@@ -30,7 +30,7 @@ tooling notes.
 1. **Read the design, in full** — about 87,000 tokens at version 1.0.0
    (September 2026); reading every file of the template would be about
    390,000, most of it code and the benchmark's corpus, and is not needed:
-   - `CLAUDE.md`, the four `.claude/rules/` files, `HANDOFF.md` and `SETUP.md`
+   - `AGENTS.md` (which `CLAUDE.md` imports), the four `.claude/rules/` files, `HANDOFF.md` and `SETUP.md`
      — what the vault runs by;
    - every skill in `.claude/skills/` with its `references/` — this file's
      `references/extending.md` is the guide for adding to the vault —, the two
@@ -139,10 +139,10 @@ One addition at a time, following `references/extending.md`:
 - **A subagent** is read-only unless it must write, carries its own brief,
   and sets `omitClaudeMd: true` so it does not pay for the whole manual.
 - **A rule** goes where it loads only when needed: a `.claude/rules/` file
-  with `paths:` when it concerns certain files, `CLAUDE.md` only when every
+  with `paths:` when it concerns certain files, `AGENTS.md` only when every
   session needs it. Every new rule gets a mechanical guard — the builder, the
   self-test or a hook — and a row in `tools/DEFECTS.md` (this vault's own
-  rows start at D90); a rule no code can check is written as one and marked
+  rows start at D200); a rule no code can check is written as one and marked
   so.
 - **A topic** is registered in `tools/build-index.js` before any node uses it,
   with a folder icon.

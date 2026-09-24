@@ -50,12 +50,17 @@ notes and chat exports each need a capture path and a compile rule.
 
 ## Other agents
 
-The method is written for Claude Code. `AGENTS.md` is the entry point for
-other agents.
+The vault runs under any coding agent: `AGENTS.md` is the manual they all read
+(Claude Code through `CLAUDE.md`), and the skills, read-only agents and hooks
+are generated from `.claude/` for Codex and Gemini CLI (D90–D93). But it was
+built and measured with Claude Code only. Nothing yet says what the cost ratio
+or the fidelity is under Codex, Gemini or anything else, and the Codex hooks and
+agents are checked by unit tests, not by a live run.
 
 - **Moves**: all of them, measured under a different agent.
-- **Start here**: set up a vault with another coding agent following
-  `SETUP.md`, compile the benchmark with it, and report the scorecard.
+- **Start here**: set up a vault with Codex or another agent following
+  `SETUP.md` (§ 4C for its steps), compile the benchmark with it, and report the
+  scorecard — and whether the hooks fired.
 
 ## Other languages
 

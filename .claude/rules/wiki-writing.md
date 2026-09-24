@@ -3,7 +3,7 @@ paths:
   - "wiki/**"
 ---
 
-Rules for writing into `wiki/`. They load when a file under `wiki/` is read; the builder backs each one, so a slip fails the build. Moved out of `CLAUDE.md` so they load only when needed (D87).
+Rules for writing into `wiki/`. They load when a file under `wiki/` is read; the builder backs each one, so a slip fails the build. Moved out of the manual (`AGENTS.md`) so they load only when needed (D87).
 
 ## Node Kinds and Size Rules
 

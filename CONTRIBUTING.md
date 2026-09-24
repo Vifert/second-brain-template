@@ -40,8 +40,11 @@ Node 22 (see `.node-version`); nothing to install.
 ## Improving the method
 
 This is where a contribution changes what the vault *does*: the rules in
-`CLAUDE.md` and `.claude/rules/`, the skills in `.claude/skills/`, the agents and hooks, the
-builder, the templates.
+`AGENTS.md` and `.claude/rules/`, the skills in `.claude/skills/`, the agents and hooks, the
+builder, the templates. `.claude/` is the source for every agent: after changing a
+skill, an agent or a hook, run `node tools/agents-sync.js` and commit what it
+writes to `.agents/` and `.codex/`. An AI agent contributing here reads
+[`docs/for-ai-agents.md`](docs/for-ai-agents.md) first.
 Claims are settled on numbers, not taste.
 
 1. **Propose.** Open an issue with the **Improvement Proposal** form: the
@@ -96,7 +99,7 @@ Take the next free ID. A rule with no guard is a hope.
 ## Why CI runs the audit
 
 Inside a vault, the audit runs only when its owner types `/vault-audit` —
-Claude never starts it on its own (D78). CI running `node tools/audit.js` on a
+the agent never starts it on its own (D78). CI running `node tools/audit.js` on a
 pull request is not a contradiction: it is a machine running a script because
 a person asked it to, which is the same as typing the command.
 
@@ -133,6 +136,6 @@ repository's MIT licence. There is no contributor licence agreement.
 Every accepted improvement is named in the release notes with its author and
 its scorecard delta, and the README's **How the method has improved** table
 grows a row for each release that moved the numbers. The architecture's credit
-to Vifert stays at the top of every `CLAUDE.md`.
+to Vifert stays at the top of every `AGENTS.md`.
 
 By taking part you agree to the [Code of Conduct](CODE_OF_CONDUCT.md).

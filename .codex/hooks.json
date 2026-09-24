@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/tools/hooks/stop-rebuild.js\"",
+            "commandWindows": "node \"$(git rev-parse --show-toplevel)/tools/hooks/stop-rebuild.js\"; exit $LASTEXITCODE"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/tools/hooks/post-write-check.js\"",
+            "commandWindows": "node \"$(git rev-parse --show-toplevel)/tools/hooks/post-write-check.js\"; exit $LASTEXITCODE"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/tools/hooks/pre-bash-guard.js\"",
+            "commandWindows": "node \"$(git rev-parse --show-toplevel)/tools/hooks/pre-bash-guard.js\"; exit $LASTEXITCODE"
+          }
+        ]
+      }
+    ]
+  }
+}

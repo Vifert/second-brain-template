@@ -44,15 +44,16 @@ Vifert asked on 19 September 2026, in the vault this template comes from, that n
 
 | Was | Now |
 | --- | --- |
-| `CLAUDE.md` § Capture Protocol → Compile Procedure | `/vault-compile` § 2 |
-| `CLAUDE.md` § NotebookLM (full) | `/vault-compile` § 4; a stub stays in `CLAUDE.md` |
-| `CLAUDE.md` § Audit | `/vault-audit` and `/vault-deep-audit` |
+| `AGENTS.md` § Capture Protocol → Compile Procedure | `/vault-compile` § 2 |
+| `AGENTS.md` § NotebookLM (full) | `/vault-compile` § 4; a stub stays in `AGENTS.md` |
+| `AGENTS.md` § Audit | `/vault-audit` and `/vault-deep-audit` |
 | Audit checks: fences, `[sic]`, people links, Obsidian settings, folder icons | the build, via `tools/lib/writechecks.js` |
 
 ## The Vault's Agents
 
 Two subagent definitions in `.claude/agents/` (D87). Both are read-only and set
-`omitClaudeMd: true`: a subagent otherwise loads the whole of `CLAUDE.md`, so
+`omitClaudeMd: true`: a subagent otherwise loads the whole manual (`CLAUDE.md`, which imports
+`AGENTS.md`), so
 each carries only the brief its job needs.
 
 | Agent | Used by | Does |

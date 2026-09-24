@@ -37,8 +37,8 @@ rules depend on, so a setting that was written back fails the next build.
 
 A warning, not a failure. Something is in `raw/` — a daily note, a document,
 a note made in Obsidian — and has not been compiled into the wiki yet. It waits
-for you to type `/vault-compile` in Claude Code. The agent will not compile it
-on its own.
+for you to type `/vault-compile` (`$vault-compile` in Codex). The agent will
+not compile it on its own.
 
 ## `/vault-compile` turns into a file path in a script
 
