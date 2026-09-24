@@ -146,8 +146,14 @@ function prepare(repo, dir, cfg) {
   const fs = require('fs');
   const path = require('path');
   if (fs.existsSync(dir) && fs.readdirSync(dir).length) throw new Error(`bench: ${dir} is not empty`);
+  // Copy the top-level entries one by one rather than through a cpSync filter:
+  // Node 20 on Windows hands the filter paths that path.relative() does not
+  // resolve against the repo, so bench/ and .git were copied too.
   const top = new Set(['.git', 'bench', 'node_modules']);
-  fs.cpSync(repo, dir, { recursive: true, filter: src => !top.has(path.relative(repo, src).split(path.sep)[0]) });
+  fs.mkdirSync(dir, { recursive: true });
+  for (const e of fs.readdirSync(repo, { withFileTypes: true })) {
+    if (!top.has(e.name)) fs.cpSync(path.join(repo, e.name), path.join(dir, e.name), { recursive: true });
+  }
   fs.cpSync(path.join(repo, 'bench', 'raw'), path.join(dir, 'raw'), { recursive: true });
   const o = cfg.owner;
   const rulesPath = path.join(dir, 'tools', 'lib', 'rules.js');
