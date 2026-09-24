@@ -1,0 +1,8 @@
+{
+  "attachmentFolderPath": "./assets",
+  "showUnsupportedFiles": true,
+  "alwaysUpdateLinks": true,
+  "uriCallbacks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "raw"
+}

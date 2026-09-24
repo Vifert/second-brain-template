@@ -1,0 +1,54 @@
+name: Bug report
+description: Something in the tools, skills or setup does not work.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, and what you saw.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: selftest
+    attributes:
+      label: Output of `node tools/selftest.js`
+      description: The last lines are enough if it is long. Remove anything personal first.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: build
+    attributes:
+      label: Output of `node tools/build-index.js`
+      description: Remove anything personal — note names, paths — first.
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: Windows 11, macOS 15, Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      placeholder: output of `node --version`
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Template version
+      description: The contents of `VERSION`, or the version under Setup in your `HANDOFF.md`.
+    validations:
+      required: true

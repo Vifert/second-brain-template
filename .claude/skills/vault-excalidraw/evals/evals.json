@@ -1,0 +1,65 @@
+{
+  "skill_name": "vault-excalidraw",
+  "evals": [
+    {
+      "id": 0,
+      "name": "new-drawing-into-note",
+      "prompt": "can you draw me an excalidraw diagram of how my daily notes get into the vault — I write one in obsidian with the calendar, it lands in raw/daily, gets compiled word for word into the work log or the journal, the facts get distilled into nodes, then the note moves to raw/_compiled. put it in the capture protocol note so I can keep editing it later",
+      "expected_output": "An editable Excalidraw/tooling/<name>.excalidraw.md drawing of the flow, embedded live in wiki/tooling/vault-capture-protocol.md with a transcription and matching drawing-hash; the vault builds clean.",
+      "files": [],
+      "assertions": [
+        "An editable drawing in the plugin's .excalidraw.md format was created under Excalidraw/<topic>/",
+        "Obsidian would read every label back correctly (8-character text ids, D73)",
+        "The drawing shows the whole flow: raw/daily, the work log, the journal, nodes, raw/_compiled",
+        "At least four arrows, every one bound to shapes at both ends",
+        "The drawing lints with no errors (overlaps, clipped labels, arrows through shapes)",
+        "vault-capture-protocol.md embeds the live drawing, not a PNG",
+        "The embed's section carries a transcription of at least 200 characters",
+        "The note records a drawing-hash matching the drawing",
+        "The vault builds with no problems under the drawing-aware builder"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "edit-owner-drawing",
+      "prompt": "in my latest excalidraw drawing the data-quality checks are in the wrong place, they run after the customer build, not before. fix that, and add a parallel-run step at the end — dashed, since it hasn't started yet. also give the file a proper name instead of the date",
+      "expected_output": "The plugin-saved (compressed, CRLF) drawing reordered to Raw files → Customer build → DQ checks → Warehouse load → dashed Parallel run, renamed to kebab-case, with its element link and note text intact.",
+      "files": [
+        "seeds/owner-drawing.excalidraw.md (copied to Excalidraw/Drawing 2026-09-17 18.02.11.excalidraw.md)"
+      ],
+      "assertions": [
+        "The date-named drawing was renamed to a descriptive kebab-case .excalidraw.md",
+        "Obsidian would read every label back correctly (8-character text ids, D73)",
+        "The drawing is still in the plugin's format and parses",
+        "Connectors run Raw files → Customer build → DQ checks → Warehouse load, with no leftover old links",
+        "The boxes are laid out left to right in the corrected order",
+        "A parallel-run step is connected after Warehouse load",
+        "The parallel-run step is dashed",
+        "The Customer build box keeps its element link to [[customer-migration]]",
+        "The owner's note \"customer pipeline - check with Sam\" survives",
+        "The drawing lints with no errors"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "extend-embedded-drawing",
+      "prompt": "on the query ladder drawing, add the Now page as a shortcut: status questions (\"what's my status?\") skip the ladder and go straight to the now card. keep the note that shows it in sync",
+      "expected_output": "query-ladder.excalidraw.md gains a Now card connected from Question and labelled for status questions; the vault-operations figure transcription and drawing-hash are updated; the build has no stale-drawing warning.",
+      "files": [
+        "seeds/query-ladder.excalidraw.md (copied to Excalidraw/tooling/), with a Figure section already in wiki/tooling/vault-operations.md"
+      ],
+      "assertions": [
+        "query-ladder.excalidraw.md is still in place and parses",
+        "Obsidian would read every label back correctly (8-character text ids, D73)",
+        "A shape for the Now page / now card was added",
+        "A bound arrow connects Question to the Now shape",
+        "The drawing says the shortcut is for status questions",
+        "The existing ladder L0–L3 is intact",
+        "The drawing lints with no errors",
+        "The note's transcription now covers the Now shortcut for status questions",
+        "The note's drawing-hash matches the edited drawing",
+        "The vault builds with no problems and no stale-drawing warning"
+      ]
+    }
+  ]
+}

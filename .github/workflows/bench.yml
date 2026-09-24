@@ -1,0 +1,26 @@
+name: bench
+on:
+  pull_request:
+    paths: ['bench/**', 'tools/**', 'CLAUDE.md', '.claude/**']
+permissions:
+  contents: read
+concurrency:
+  group: bench-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: The committed scorecard is a fresh score
+        run: node tools/bench.js --check
+      - name: Delta against main
+        run: |
+          git show origin/main:bench/results/baseline.json > "$RUNNER_TEMP/main.json"
+          echo "## Benchmark: this PR against main" >> "$GITHUB_STEP_SUMMARY"
+          node tools/bench.js --against "$RUNNER_TEMP/main.json" >> "$GITHUB_STEP_SUMMARY"

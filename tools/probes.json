@@ -1,0 +1,48 @@
+{
+  "_comment": "Probe corpus for tools/audit.js. Every term here is something the owner might plausibly type. When a lookup routes badly in real use, ADD THE TERM HERE so the failure can never silently return. Terms are compared case- and punctuation-insensitively via tools/lib/text.js — do not pre-normalise them. This file ships as a starter set that only covers the vault's own tooling nodes: add a group per topic as the vault grows (identity, career, projects, a work engagement...), with the first-person forms the owner actually uses ('my email', 'where do I live').",
+  "_benchmark_comment": "Representative point lookups. audit.js simulates the CLAUDE.md query protocol on each (route on _index.tsv, then one card) and reports the cost ratio against the fixed source baseline (BASELINE_BYTES in tools/lib/rules.js). Keep these realistic and specific; a broad term is a legitimately expensive query, not a benchmark. Replace the starter terms with the owner's own real questions once the vault holds their knowledge — aim for about 20, across every topic.",
+  "_benchmark": ["drawing-hash", "Iconize", "tag facets", "notebook for compiling", "query ladder", "folder layout", "image rules", "who am I"],
+  "_forbidden_comment": "Claims the owner corrected. Each pattern is a JavaScript regex tested case-insensitively against one line at a time, in every node except logs and verbatim full texts (D37). Every entry carries `catches` (wrong claims it must match) and `passes` (nearby true claims it must let through); the audit fails a fence whose examples misbehave (D50). When a new fact touches a fenced claim, add it to `passes` first. The one starter fence below guards the vault's own design: the retired 'read the source' rung must never come back.",
+  "_forbidden": [
+    {
+      "pattern": "^(?!.*\\b(?:no|retired|never|removed|any more)\\b).*(?:\\bL4\\b[^.\\n]{0,40}\\bread (?:the )?(?:raw )?sources?\\b|\\bfalls? back to (?:reading )?raw/)",
+      "reason": "raw/ and raw/_compiled/ are out of the query path; the old 'L4 — read the source' rung was retired (CLAUDE.md § Source Independence). If the wiki cannot answer, the wiki is wrong: capture what is missing.",
+      "catches": [
+        "- **L4 — read the source.** When the card falls short, open the raw file.",
+        "If the wiki is thin, fall back to raw/ for the answer."
+      ],
+      "passes": [
+        "There is no \"L4 — read the source\" fallback any more.",
+        "`raw/` and `raw/_compiled/` are out of the query path entirely.",
+        "Reading `raw/` is legitimate only during a compile."
+      ]
+    }
+  ],
+  "_must_route_comment": "Stronger than routability: each term must reach EVERY listed node at L0, not merely some node. A term that routes somewhere but misses the node it is really about is a silent wrong answer.",
+  "_must_route": {
+    "vault-compile": ["wiki/tooling/vault-skills.md"],
+    "vault-deep-audit": ["wiki/tooling/vault-skills.md"],
+    "deep audit": ["wiki/tooling/vault-skills.md"],
+    "how do I compile": ["wiki/tooling/vault-skills.md"],
+    "my skills": ["wiki/tooling/vault-skills.md"],
+    "Excalidraw": ["wiki/tooling/excalidraw-drawings.md", "wiki/tooling/obsidian-plugins.md"],
+    "my drawings": ["wiki/tooling/excalidraw-drawings.md"],
+    "drawing-hash": ["wiki/tooling/excalidraw-drawings.md"],
+    "excalidraw.com": ["wiki/tooling/excalidraw-drawings.md"],
+    "live canvas": ["wiki/tooling/excalidraw-drawings.md"],
+    "Iconize": ["wiki/tooling/obsidian-plugins.md"],
+    "Templater": ["wiki/tooling/obsidian-plugins.md"],
+    "my plugins": ["wiki/tooling/obsidian-plugins.md"],
+    "daily notes": ["wiki/tooling/obsidian-plugins.md", "wiki/tooling/vault-capture-protocol.md"],
+    "nested tags": ["wiki/tooling/vault-tag-facets.md"],
+    "image rules": ["wiki/tooling/vault-image-rules.md"],
+    "is raw disposable": ["wiki/tooling/second-brain-architecture.md"],
+    "pronouns": ["wiki/tooling/vault-capture-protocol.md"],
+    "NotebookLM": ["wiki/tooling/notebooklm-compile-support.md"],
+    "folder layout": ["wiki/tooling/second-brain-architecture-layout.md"]
+  },
+  "identity": ["who am I", "about me", "my identity", "my profile", "my name", "where do I live", "what do I do", "how should you answer me", "my preferences", "what am I doing now", "my status"],
+  "vault": ["query protocol", "index layer", "capture protocol", "obsidian trap", "git repo", "gitignore", "how do I audit", "what am I doing now", "Now page", "status log", "mentions", "image rules", "defect ledger", "folder structure", "subfolders", "how do corrections work", "verbatim", "my plugins", "Obsidian plugins", "Iconize", "folder icons", "Excalidraw", "Templater", "daily notes", "Calendar", "nested tags", "tag facets", "how do I tag", "my drawings", "draw a diagram", "drawing-hash", "live canvas", "share link", "vault-excalidraw", "NotebookLM", "folder layout"],
+  "_us_spelling_comment": "American spellings of words the vault's own text holds ONLY in British form — these test the builder's spelling-variant mechanism. audit.js fails any entry whose US form already appears in a node's title/summary/aliases/tags (it would pass without the mechanism) or whose British form appears nowhere (D24). Replace these with words from the owner's own prose if they write in one spelling and type in the other; if they write and type the same spelling, an empty list is honest.",
+  "us_spelling": []
+}

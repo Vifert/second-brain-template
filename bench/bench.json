@@ -1,0 +1,20 @@
+{
+  "owner": { "name": "Mira Okafor", "pronouns": "she/her", "slug": "mira-okafor", "identity": "mira-identity" },
+  "defaultBudget": 600,
+  "tokens": {
+    "VAULT_PATH": "a benchmark copy",
+    "GITHUB_REPO": "none — a benchmark copy, never pushed",
+    "MEMORY_PATH": "none — a benchmark copy",
+    "SETUP_DATE": "2026-05-01",
+    "NOTEBOOKLM_POLICY": "not used — a benchmark compile uses no outside service",
+    "PDF_TOOLING_NOTE": "The benchmark has no PDFs.",
+    "OWNER_WORK": "Data engineer.",
+    "OWNER_LOCATION": "Leeds, United Kingdom.",
+    "OWNER_ANSWER_STYLE": "Short and direct.",
+    "SETUP_SNAPSHOT": "an empty vault with the starter topics, and the benchmark sources waiting in raw/.",
+    "TOPICS_SUMMARY": "the starter topics only; do not register new ones.",
+    "SETUP_STATE": "complete.",
+    "SETUP_DECISIONS": "none beyond the defaults.",
+    "SETUP_SUMMARY": "Set up by `node tools/bench.js --prepare` for a benchmark compile."
+  }
+}

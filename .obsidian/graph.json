@@ -1,0 +1,79 @@
+{
+  "collapse-filter": true,
+  "search": "",
+  "showTags": true,
+  "showAttachments": true,
+  "hideUnresolved": true,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:wiki/people  ",
+      "color": {
+        "a": 1,
+        "rgb": 14701242
+      }
+    },
+    {
+      "query": "path:wiki/profile  ",
+      "color": {
+        "a": 1,
+        "rgb": 14765132
+      }
+    },
+    {
+      "query": "path:wiki/projects  ",
+      "color": {
+        "a": 1,
+        "rgb": 3586244
+      }
+    },
+    {
+      "query": "path:wiki/tooling  ",
+      "color": {
+        "a": 1,
+        "rgb": 8148200
+      }
+    },
+    {
+      "query": "path:wiki/journal  ",
+      "color": {
+        "a": 1,
+        "rgb": 1451241
+      }
+    },
+    {
+      "query": "path:wiki/learning  ",
+      "color": {
+        "a": 1,
+        "rgb": 12351233
+      }
+    },
+    {
+      "query": "path:wiki/career  ",
+      "color": {
+        "a": 1,
+        "rgb": 16750848
+      }
+    },
+    {
+      "query": "path:wiki/ideas  ",
+      "color": {
+        "a": 1,
+        "rgb": 10181046
+      }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": true,
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 0.2114719187142228,
+  "close": false
+}

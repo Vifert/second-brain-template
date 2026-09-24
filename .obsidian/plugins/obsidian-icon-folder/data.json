@@ -1,0 +1,74 @@
+{
+  "settings": {
+    "migrated": 6,
+    "iconPacksPath": ".obsidian/icons",
+    "fontSize": 16,
+    "emojiStyle": "native",
+    "iconColor": null,
+    "recentlyUsedIcons": [],
+    "recentlyUsedIconsSize": 5,
+    "rules": [
+      {
+        "rule": "^assets$",
+        "icon": "LiImages",
+        "for": "folders",
+        "order": 0
+      },
+      {
+        "rule": "^worklog$",
+        "icon": "LiClipboardList",
+        "for": "folders",
+        "order": 1
+      },
+      {
+        "rule": "^decisions$",
+        "icon": "LiSignpost",
+        "for": "folders",
+        "order": 2
+      },
+      {
+        "rule": "^daily$",
+        "icon": "LiCalendarDays",
+        "for": "folders",
+        "order": 3
+      }
+    ],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    },
+    "iconInTabsEnabled": false,
+    "iconInTitleEnabled": false,
+    "iconInTitlePosition": "above",
+    "iconInFrontmatterEnabled": false,
+    "iconInFrontmatterFieldName": "icon",
+    "iconColorInFrontmatterFieldName": "iconColor",
+    "iconsBackgroundCheckEnabled": false,
+    "iconsInNotesEnabled": true,
+    "iconsInLinksEnabled": true,
+    "iconIdentifier": ":",
+    "lucideIconPackType": "native",
+    "debugMode": false,
+    "useInternalPlugins": false
+  },
+  "wiki": "LiBrain",
+  "wiki/career": "LiTrendingUp",
+  "wiki/ideas": "LiLightbulb",
+  "wiki/journal": "LiNotebookPen",
+  "wiki/people": "LiUsers",
+  "wiki/profile": "LiCircleUserRound",
+  "wiki/projects": "LiRocket",
+  "wiki/tooling": "LiWrench",
+  "raw": "LiInbox",
+  "raw/_compiled": "LiArchive",
+  "raw/daily": "LiCalendarDays",
+  "tools": "LiSquareTerminal",
+  "tools/lib": "LiBlocks",
+  "output": "LiFileOutput",
+  "templates": "TiTemplate",
+  "Excalidraw": "LiPenTool",
+  "Excalidraw/tooling": "LiWrench",
+  "wiki/learning": "LiGraduationCap"
+}

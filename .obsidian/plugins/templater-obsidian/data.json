@@ -1,0 +1,18 @@
+{
+  "data_version": 2,
+  "templates_folder": "templates",
+  "ignore_folders_on_creation": [
+    {
+      "folder": "wiki"
+    },
+    {
+      "folder": "raw"
+    },
+    {
+      "folder": "tools"
+    },
+    {
+      "folder": "output"
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "questions": 30,
+  "build": "clean",
+  "cost": {
+    "median": 27,
+    "min": 11,
+    "max": 55
+  },
+  "routing": 66.7,
+  "fidelity": 69.4,
+  "forbidden": 0,
+  "graph": {
+    "nodes": 41,
+    "orphans": 0,
+    "deadEnds": 0,
+    "linksPerNode": 5.98,
+    "aliasesPerNode": 17.76
+  },
+  "perQuestion": [
+    {
+      "id": "q01",
+      "routed": true,
+      "firstHit": true,
+      "facts": 2,
+      "found": 2,
+      "forbidden": 0,
+      "tokens": 202,
+      "ratio": 55
+    },
+    {
+      "id": "q02",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 988,
+      "ratio": 11
+    },
+    {
+      "id": "q03",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 271,
+      "ratio": 41
+    },
+    {
+      "id": "q04",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 1013,
+      "ratio": 11
+    },
+    {
+      "id": "q05",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 902,
+      "ratio": 12
+    },
+    {
+      "id": "q06",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 354,
+      "ratio": 31
+    },
+    {
+      "id": "q07",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 411,
+      "ratio": 27
+    },
+    {
+      "id": "q08",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 976,
+      "ratio": 11
+    },
+    {
+      "id": "q09",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 632,
+      "ratio": 18
+    },
+    {
+      "id": "q10",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 483,
+      "ratio": 23
+    },
+    {
+      "id": "q11",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 442,
+      "ratio": 25
+    },
+    {
+      "id": "q12",
+      "routed": true,
+      "firstHit": true,
+      "facts": 2,
+      "found": 2,
+      "forbidden": 0,
+      "tokens": 630,
+      "ratio": 18
+    },
+    {
+      "id": "q13",
+      "routed": true,
+      "firstHit": true,
+      "facts": 2,
+      "found": 2,
+      "forbidden": 0,
+      "tokens": 339,
+      "ratio": 33
+    },
+    {
+      "id": "q14",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 437,
+      "ratio": 25
+    },
+    {
+      "id": "q15",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 300,
+      "ratio": 37
+    },
+    {
+      "id": "q16",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 391,
+      "ratio": 28
+    },
+    {
+      "id": "q17",
+      "routed": true,
+      "firstHit": true,
+      "facts": 2,
+      "found": 2,
+      "forbidden": 0,
+      "tokens": 530,
+      "ratio": 21
+    },
+    {
+      "id": "q18",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 533,
+      "ratio": 21
+    },
+    {
+      "id": "q19",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 535,
+      "ratio": 21
+    },
+    {
+      "id": "q20",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 302,
+      "ratio": 37
+    },
+    {
+      "id": "q21",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 399,
+      "ratio": 28
+    },
+    {
+      "id": "q22",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 401,
+      "ratio": 28
+    },
+    {
+      "id": "q23",
+      "routed": true,
+      "firstHit": false,
+      "facts": 1,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 493,
+      "ratio": 23
+    },
+    {
+      "id": "q24",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 245,
+      "ratio": 45
+    },
+    {
+      "id": "q25",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 266,
+      "ratio": 42
+    },
+    {
+      "id": "q26",
+      "routed": true,
+      "firstHit": false,
+      "facts": 2,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 1009,
+      "ratio": 11
+    },
+    {
+      "id": "q27",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 325,
+      "ratio": 34
+    },
+    {
+      "id": "q28",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 202,
+      "ratio": 55
+    },
+    {
+      "id": "q29",
+      "routed": true,
+      "firstHit": false,
+      "facts": 2,
+      "found": 0,
+      "forbidden": 0,
+      "tokens": 611,
+      "ratio": 18
+    },
+    {
+      "id": "q30",
+      "routed": true,
+      "firstHit": true,
+      "facts": 1,
+      "found": 1,
+      "forbidden": 0,
+      "tokens": 266,
+      "ratio": 42
+    }
+  ]
+}

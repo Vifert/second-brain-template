@@ -1,0 +1,17 @@
+# Normalise line endings in the repo to LF; check out native on each platform.
+# Without this, every commit from Windows prints a CRLF warning per file.
+* text=auto eol=lf
+
+# Generated index layer — always LF, and mark as generated so diffs collapse.
+wiki/_index.tsv     text eol=lf linguist-generated=true
+wiki/_cards.tsv     text eol=lf linguist-generated=true
+wiki/_sections.tsv  text eol=lf linguist-generated=true
+wiki/_links.tsv     text eol=lf linguist-generated=true
+wiki/_mentions.tsv  text eol=lf linguist-generated=true
+wiki/profile/now.md text eol=lf linguist-generated=true
+
+# Binary sources — never touch.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary

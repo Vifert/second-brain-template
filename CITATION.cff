@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this architecture or build on it, please cite it as below."
+title: "second-brain-template: a token-efficient Obsidian knowledge graph run by Claude Code"
+authors:
+  - name: "Vifert"
+    website: "https://github.com/Vifert"
+repository-code: "https://github.com/Vifert/second-brain-template"
+license: MIT
+version: 1.0.0 # x-release-please-version
+date-released: "2026-10-01"
+keywords: [obsidian, second-brain, claude-code, knowledge-graph, pkm]

@@ -1,0 +1,49 @@
+name: Improvement Proposal
+description: A change to the method — cheaper answers, more faithful compiles, better links, tags or nodes — measured on the benchmark.
+labels: [proposal]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposals are settled on numbers. Discuss here first; then open a pull request with the change, the benchmark recompiled with it, and its scorecard. **An improvement must never lower fidelity or bring back a forbidden value, whatever it saves.**
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What the method does badly today — ideally a benchmark question it gets wrong, or pays too much for.
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Your hypothesis
+      description: Why your change would help.
+    validations:
+      required: true
+  - type: textarea
+    id: changes
+    attributes:
+      label: What changes
+      description: Which rules, tools, skills or templates.
+    validations:
+      required: true
+  - type: textarea
+    id: numbers
+    attributes:
+      label: Which scorecard numbers should move, and by roughly how much
+      description: Cost, routing, fidelity, forbidden values, graph health.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: What might get worse
+    validations:
+      required: true
+  - type: checkboxes
+    id: read
+    attributes:
+      label: Before you submit
+      options:
+        - label: I have read ROADMAP.md and bench/README.md
+          required: true

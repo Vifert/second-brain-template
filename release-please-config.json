@@ -1,0 +1,11 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "version-file": "VERSION",
+      "changelog-path": "CHANGELOG.md",
+      "include-component-in-tag": false,
+      "extra-files": [{ "type": "generic", "path": "CITATION.cff" }]
+    }
+  }
+}

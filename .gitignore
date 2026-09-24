@@ -1,0 +1,24 @@
+# --- Obsidian ---------------------------------------------------------------
+# Only settings travel with the repo: the core settings and the data.json of
+# the four plugins the vault uses (Excalidraw, Calendar, Iconize, Templater).
+# Plugin code is installed per machine — Excalidraw by
+# node tools/install-excalidraw.js, the others from Obsidian's community
+# browser — and is never committed. The builder fails a plugin setting that
+# holds a secret (D66), because every data.json is committed.
+
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/plugins/*/manifest.json
+.obsidian/themes/
+.obsidian/icons/
+
+# Obsidian's local trash — deleted notes, never worth versioning
+.trash/
+
+# --- OS noise ---------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
