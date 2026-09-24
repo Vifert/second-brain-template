@@ -132,7 +132,7 @@ node tools/audit.js
 11 sections, on request ^6FIRLFZZ
 
 tools/DEFECTS.md
-D01–D79 inherited, each
+every defect, each
 with a guard in code ^vfV3esKW
 
 git — private repo
@@ -141,7 +141,7 @@ Obsidian setup versioned ^HNeWn1Xw
 
 Nothing is committed until the self-test and the build pass;
 the audit runs when you type /vault-audit. Every defect is fixed,
-root-caused, guarded in code, written into CLAUDE.md and ledgered. ^grdNote1
+root-caused, guarded in code, written into the rules and ledgered. ^grdNote1
 
 The audit replays the benchmark queries and fails if answering stops being 30× cheaper than the sources. ^grdNote2
 
@@ -153,9 +153,44 @@ verify ^TY6aILcy
 triage ^UaqsPp3l
 
 Dashed border — a skill only you start, by typing it:
-/vault-compile, /vault-audit, /vault-deep-audit.
-Claude may start vault-excalidraw on its own. Captures,
-the build and the self-test are never gated. ^skLegend
+/vault-compile, /vault-audit, /vault-deep-audit,
+/vault-handoff. Claude may start vault-excalidraw and
+vault-tailor. Captures, the build and the self-test
+are never gated. ^skLegend
+
+6 — What Claude loads, and when ^zoneCtxT
+
+Budgets warn, never fail: past its
+token budget, CLAUDE.md or HANDOFF.md
+warns, and detail moves to a rules
+file, a skill or a node — never deleted. ^ctxNote1
+
+CLAUDE.md — always-on core
+query protocol · judgement rules ^tYqKJTXH
+
+.claude/rules/ — load by path
+wiki · images · obsidian · tooling ^kpGTotfB
+
+Skills you start, by typing
+/vault-compile · /vault-audit
+/vault-deep-audit · /vault-handoff ^r9bTOI5y
+
+Skills Claude may start
+vault-excalidraw · vault-tailor ^sTOv1i3Z
+
+Hooks — enforced, not remembered
+block bash that runs backticks
+refuse CRLF and control bytes
+rebuild a stale index at Stop ^GpbWMnyr
+
+Read-only agents, skip CLAUDE.md
+vault-fidelity-verifier
+vault-gap-auditor ^Ccokp5P1
+
+vault-tailor — fits the vault to you
+study → interview in rounds →
+propose → build your own
+skills · agents · rules ^WX67adUY
 
 %%
 ## Drawing
@@ -3655,8 +3690,8 @@ the build and the self-test are never gated. ^skLegend
 				"type": 3
 			},
 			"seed": 544232089,
-			"version": 9,
-			"versionNonce": 586719296,
+			"version": 11,
+			"versionNonce": 1678166256,
 			"isDeleted": false,
 			"boundElements": [
 				{
@@ -3668,7 +3703,7 @@ the build and the self-test are never gated. ^skLegend
 					"type": "arrow"
 				}
 			],
-			"updated": 1790189646926,
+			"updated": 1790247205787,
 			"link": null,
 			"locked": false,
 			"customData": {
@@ -3679,9 +3714,9 @@ the build and the self-test are never gated. ^skLegend
 		{
 			"id": "vfV3esKW",
 			"type": "text",
-			"x": 1393.7920684814453,
+			"x": 1410.440071105957,
 			"y": 965,
-			"width": 192.41586303710938,
+			"width": 159.11985778808594,
 			"height": 60,
 			"angle": 0,
 			"strokeColor": "#e03131",
@@ -3696,21 +3731,21 @@ the build and the self-test are never gated. ^skLegend
 			"index": "b0EV",
 			"roundness": null,
 			"seed": 973041879,
-			"version": 9,
-			"versionNonce": 491407820,
+			"version": 11,
+			"versionNonce": 770300263,
 			"isDeleted": false,
 			"boundElements": [],
-			"updated": 1790189646931,
+			"updated": 1790247205791,
 			"link": null,
 			"locked": false,
-			"text": "tools/DEFECTS.md\nD01–D79 inherited, each\nwith a guard in code",
-			"rawText": "tools/DEFECTS.md\nD01–D79 inherited, each\nwith a guard in code",
+			"text": "tools/DEFECTS.md\nevery defect, each\nwith a guard in code",
+			"rawText": "tools/DEFECTS.md\nevery defect, each\nwith a guard in code",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "defects",
-			"originalText": "tools/DEFECTS.md\nD01–D79 inherited, each\nwith a guard in code",
+			"originalText": "tools/DEFECTS.md\nevery defect, each\nwith a guard in code",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null,
@@ -3800,7 +3835,7 @@ the build and the self-test are never gated. ^skLegend
 			"type": "text",
 			"x": 40,
 			"y": 1110,
-			"width": 535.9835815429688,
+			"width": 515.423583984375,
 			"height": 60,
 			"angle": 0,
 			"strokeColor": "#868e96",
@@ -3815,21 +3850,21 @@ the build and the self-test are never gated. ^skLegend
 			"index": "b0G",
 			"roundness": null,
 			"seed": 333223801,
-			"version": 5,
-			"versionNonce": 1411126488,
+			"version": 7,
+			"versionNonce": 843964710,
 			"isDeleted": false,
 			"boundElements": [],
-			"updated": 1789829869669,
+			"updated": 1790247152538,
 			"link": null,
 			"locked": false,
-			"text": "Nothing is committed until the self-test and the build pass;\nthe audit runs when you type /vault-audit. Every defect is fixed,\nroot-caused, guarded in code, written into CLAUDE.md and ledgered.",
-			"rawText": "Nothing is committed until the self-test and the build pass;\nthe audit runs when you type /vault-audit. Every defect is fixed,\nroot-caused, guarded in code, written into CLAUDE.md and ledgered.",
+			"text": "Nothing is committed until the self-test and the build pass;\nthe audit runs when you type /vault-audit. Every defect is fixed,\nroot-caused, guarded in code, written into the rules and ledgered.",
+			"rawText": "Nothing is committed until the self-test and the build pass;\nthe audit runs when you type /vault-audit. Every defect is fixed,\nroot-caused, guarded in code, written into the rules and ledgered.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Nothing is committed until the self-test and the build pass;\nthe audit runs when you type /vault-audit. Every defect is fixed,\nroot-caused, guarded in code, written into CLAUDE.md and ledgered.",
+			"originalText": "Nothing is committed until the self-test and the build pass;\nthe audit runs when you type /vault-audit. Every defect is fixed,\nroot-caused, guarded in code, written into the rules and ledgered.",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null,
@@ -4737,8 +4772,8 @@ the build and the self-test are never gated. ^skLegend
 			"type": "text",
 			"x": 900,
 			"y": 1110,
-			"width": 435.48760986328125,
-			"height": 80,
+			"width": 422.62359619140625,
+			"height": 100,
 			"angle": 0,
 			"strokeColor": "#868e96",
 			"backgroundColor": "transparent",
@@ -4752,24 +4787,845 @@ the build and the self-test are never gated. ^skLegend
 			"index": "b0j",
 			"roundness": null,
 			"seed": 555009453,
-			"version": 3,
-			"versionNonce": 538741571,
+			"version": 5,
+			"versionNonce": 1687552457,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1789829869669,
+			"updated": 1790247152538,
 			"link": null,
 			"locked": false,
-			"text": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit.\nClaude may start vault-excalidraw on its own. Captures,\nthe build and the self-test are never gated.",
-			"rawText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit.\nClaude may start vault-excalidraw on its own. Captures,\nthe build and the self-test are never gated.",
+			"text": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. Claude may start vault-excalidraw and\nvault-tailor. Captures, the build and the self-test\nare never gated.",
+			"rawText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. Claude may start vault-excalidraw and\nvault-tailor. Captures, the build and the self-test\nare never gated.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit.\nClaude may start vault-excalidraw on its own. Captures,\nthe build and the self-test are never gated.",
+			"originalText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. Claude may start vault-excalidraw and\nvault-tailor. Captures, the build and the self-test\nare never gated.",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null
+		},
+		{
+			"id": "zoneCtx",
+			"type": "rectangle",
+			"x": 0,
+			"y": 1360,
+			"width": 2100,
+			"height": 460,
+			"angle": 0,
+			"strokeColor": "#868e96",
+			"backgroundColor": "#e9ecef",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "dashed",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0k",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 1968692490,
+			"version": 3,
+			"versionNonce": 1892963606,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247152538,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "zoneCtxT",
+			"type": "text",
+			"x": 20,
+			"y": 1376,
+			"width": 328.2597961425781,
+			"height": 25,
+			"angle": 0,
+			"strokeColor": "#868e96",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0l",
+			"roundness": null,
+			"seed": 308793494,
+			"version": 3,
+			"versionNonce": 1964486474,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247152538,
+			"link": null,
+			"locked": false,
+			"text": "6 — What Claude loads, and when",
+			"rawText": "6 — What Claude loads, and when",
+			"fontSize": 20,
+			"fontFamily": 5,
+			"textAlign": "left",
+			"verticalAlign": "top",
+			"containerId": null,
+			"originalText": "6 — What Claude loads, and when",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "coreBox",
+			"type": "rectangle",
+			"x": 40,
+			"y": 1440,
+			"width": 460,
+			"height": 110,
+			"angle": 0,
+			"strokeColor": "#1971c2",
+			"backgroundColor": "#a5d8ff",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0m",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 86748106,
+			"version": 5,
+			"versionNonce": 1138785681,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "tYqKJTXH"
+				},
+				{
+					"id": "acorer",
+					"type": "arrow"
+				}
+			],
+			"updated": 1790247175053,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "rulesBox",
+			"type": "rectangle",
+			"x": 560,
+			"y": 1440,
+			"width": 460,
+			"height": 110,
+			"angle": 0,
+			"strokeColor": "#1971c2",
+			"backgroundColor": "#a5d8ff",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0n",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 1972194774,
+			"version": 5,
+			"versionNonce": 1522955496,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "kpGTotfB"
+				},
+				{
+					"id": "acorer",
+					"type": "arrow"
+				}
+			],
+			"updated": 1790247175058,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "skGated",
+			"type": "rectangle",
+			"x": 1080,
+			"y": 1440,
+			"width": 460,
+			"height": 110,
+			"angle": 0,
+			"strokeColor": "#9c36b5",
+			"backgroundColor": "#eebefa",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "dashed",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0o",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 1863819914,
+			"version": 5,
+			"versionNonce": 1768655982,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "r9bTOI5y"
+				},
+				{
+					"id": "askag",
+					"type": "arrow"
+				}
+			],
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "skOpen",
+			"type": "rectangle",
+			"x": 1600,
+			"y": 1440,
+			"width": 460,
+			"height": 110,
+			"angle": 0,
+			"strokeColor": "#9c36b5",
+			"backgroundColor": "#eebefa",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0p",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 1771119382,
+			"version": 5,
+			"versionNonce": 1547066446,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "sTOv1i3Z"
+				},
+				{
+					"id": "asktl",
+					"type": "arrow"
+				}
+			],
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "ctxNote1",
+			"type": "text",
+			"x": 40,
+			"y": 1620,
+			"width": 332.3197326660156,
+			"height": 80,
+			"angle": 0,
+			"strokeColor": "#868e96",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0q",
+			"roundness": null,
+			"seed": 232177994,
+			"version": 5,
+			"versionNonce": 657442268,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247205792,
+			"link": null,
+			"locked": false,
+			"text": "Budgets warn, never fail: past its\ntoken budget, CLAUDE.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
+			"rawText": "Budgets warn, never fail: past its\ntoken budget, CLAUDE.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "left",
+			"verticalAlign": "top",
+			"containerId": null,
+			"originalText": "Budgets warn, never fail: past its\ntoken budget, CLAUDE.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "hooksBox",
+			"type": "rectangle",
+			"x": 560,
+			"y": 1620,
+			"width": 460,
+			"height": 150,
+			"angle": 0,
+			"strokeColor": "#e03131",
+			"backgroundColor": "#ffc9c9",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0r",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 1894273110,
+			"version": 4,
+			"versionNonce": 30140898,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "GpbWMnyr"
+				}
+			],
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "agentsBx",
+			"type": "rectangle",
+			"x": 1080,
+			"y": 1620,
+			"width": 460,
+			"height": 150,
+			"angle": 0,
+			"strokeColor": "#6741d9",
+			"backgroundColor": "#d0bfff",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0s",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 751044618,
+			"version": 5,
+			"versionNonce": 2080053619,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "Ccokp5P1"
+				},
+				{
+					"id": "askag",
+					"type": "arrow"
+				}
+			],
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "tailorBx",
+			"type": "rectangle",
+			"x": 1600,
+			"y": 1620,
+			"width": 460,
+			"height": 150,
+			"angle": 0,
+			"strokeColor": "#2f9e44",
+			"backgroundColor": "#b2f2bb",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0t",
+			"roundness": {
+				"type": 3
+			},
+			"seed": 2003293590,
+			"version": 5,
+			"versionNonce": 110401173,
+			"isDeleted": false,
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "WX67adUY"
+				},
+				{
+					"id": "asktl",
+					"type": "arrow"
+				}
+			],
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false
+		},
+		{
+			"id": "tYqKJTXH",
+			"type": "text",
+			"x": 145.88811492919922,
+			"y": 1475,
+			"width": 248.22377014160156,
+			"height": 40,
+			"angle": 0,
+			"strokeColor": "#1971c2",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0u",
+			"roundness": null,
+			"seed": 814492950,
+			"version": 5,
+			"versionNonce": 1706261858,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175058,
+			"link": null,
+			"locked": false,
+			"text": "CLAUDE.md — always-on core\nquery protocol · judgement rules",
+			"rawText": "CLAUDE.md — always-on core\nquery protocol · judgement rules",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "coreBox",
+			"originalText": "CLAUDE.md — always-on core\nquery protocol · judgement rules",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "kpGTotfB",
+			"type": "text",
+			"x": 669.776123046875,
+			"y": 1475,
+			"width": 240.44775390625,
+			"height": 40,
+			"angle": 0,
+			"strokeColor": "#1971c2",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0v",
+			"roundness": null,
+			"seed": 2012355158,
+			"version": 5,
+			"versionNonce": 1212435142,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175058,
+			"link": null,
+			"locked": false,
+			"text": ".claude/rules/ — load by path\nwiki · images · obsidian · tooling",
+			"rawText": ".claude/rules/ — load by path\nwiki · images · obsidian · tooling",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "rulesBox",
+			"originalText": ".claude/rules/ — load by path\nwiki · images · obsidian · tooling",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "r9bTOI5y",
+			"type": "text",
+			"x": 1176.6561279296875,
+			"y": 1465,
+			"width": 266.687744140625,
+			"height": 60,
+			"angle": 0,
+			"strokeColor": "#9c36b5",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0w",
+			"roundness": null,
+			"seed": 1319657366,
+			"version": 5,
+			"versionNonce": 186656552,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false,
+			"text": "Skills you start, by typing\n/vault-compile · /vault-audit\n/vault-deep-audit · /vault-handoff",
+			"rawText": "Skills you start, by typing\n/vault-compile · /vault-audit\n/vault-deep-audit · /vault-handoff",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "skGated",
+			"originalText": "Skills you start, by typing\n/vault-compile · /vault-audit\n/vault-deep-audit · /vault-handoff",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "sTOv1i3Z",
+			"type": "text",
+			"x": 1716.808120727539,
+			"y": 1475,
+			"width": 226.38375854492188,
+			"height": 40,
+			"angle": 0,
+			"strokeColor": "#9c36b5",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0x",
+			"roundness": null,
+			"seed": 417594582,
+			"version": 5,
+			"versionNonce": 87286547,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false,
+			"text": "Skills Claude may start\nvault-excalidraw · vault-tailor",
+			"rawText": "Skills Claude may start\nvault-excalidraw · vault-tailor",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "skOpen",
+			"originalText": "Skills Claude may start\nvault-excalidraw · vault-tailor",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "GpbWMnyr",
+			"type": "text",
+			"x": 654.3521118164062,
+			"y": 1655,
+			"width": 271.2957763671875,
+			"height": 80,
+			"angle": 0,
+			"strokeColor": "#e03131",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0y",
+			"roundness": null,
+			"seed": 1815736854,
+			"version": 5,
+			"versionNonce": 1924636746,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false,
+			"text": "Hooks — enforced, not remembered\nblock bash that runs backticks\nrefuse CRLF and control bytes\nrebuild a stale index at Stop",
+			"rawText": "Hooks — enforced, not remembered\nblock bash that runs backticks\nrefuse CRLF and control bytes\nrebuild a stale index at Stop",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "hooksBox",
+			"originalText": "Hooks — enforced, not remembered\nblock bash that runs backticks\nrefuse CRLF and control bytes\nrebuild a stale index at Stop",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "Ccokp5P1",
+			"type": "text",
+			"x": 1174.3441162109375,
+			"y": 1665,
+			"width": 271.311767578125,
+			"height": 60,
+			"angle": 0,
+			"strokeColor": "#6741d9",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b0z",
+			"roundness": null,
+			"seed": 1671380822,
+			"version": 5,
+			"versionNonce": 869074851,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175059,
+			"link": null,
+			"locked": false,
+			"text": "Read-only agents, skip CLAUDE.md\nvault-fidelity-verifier\nvault-gap-auditor",
+			"rawText": "Read-only agents, skip CLAUDE.md\nvault-fidelity-verifier\nvault-gap-auditor",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "agentsBx",
+			"originalText": "Read-only agents, skip CLAUDE.md\nvault-fidelity-verifier\nvault-gap-auditor",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "WX67adUY",
+			"type": "text",
+			"x": 1690.2001342773438,
+			"y": 1655,
+			"width": 279.5997314453125,
+			"height": 80,
+			"angle": 0,
+			"strokeColor": "#2f9e44",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b10",
+			"roundness": null,
+			"seed": 1936254102,
+			"version": 5,
+			"versionNonce": 66875893,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175061,
+			"link": null,
+			"locked": false,
+			"text": "vault-tailor — fits the vault to you\nstudy → interview in rounds →\npropose → build your own\nskills · agents · rules",
+			"rawText": "vault-tailor — fits the vault to you\nstudy → interview in rounds →\npropose → build your own\nskills · agents · rules",
+			"fontSize": 16,
+			"fontFamily": 5,
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "tailorBx",
+			"originalText": "vault-tailor — fits the vault to you\nstudy → interview in rounds →\npropose → build your own\nskills · agents · rules",
+			"autoResize": true,
+			"lineHeight": 1.25,
+			"labelPosition": null
+		},
+		{
+			"id": "askag",
+			"type": "arrow",
+			"x": 1310,
+			"y": 1556,
+			"width": 0,
+			"height": 58,
+			"angle": 0,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b11",
+			"roundness": null,
+			"seed": 452353802,
+			"version": 6,
+			"versionNonce": 987373423,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175062,
+			"link": null,
+			"locked": false,
+			"points": [
+				[
+					0,
+					0
+				],
+				[
+					0,
+					58
+				]
+			],
+			"startBinding": {
+				"elementId": "skGated",
+				"mode": "orbit",
+				"fixedPoint": [
+					0.5,
+					1.0545454545454545
+				]
+			},
+			"endBinding": {
+				"elementId": "agentsBx",
+				"mode": "orbit",
+				"fixedPoint": [
+					0.5,
+					-0.04
+				]
+			},
+			"startArrowhead": null,
+			"endArrowhead": "arrow",
+			"elbowed": false
+		},
+		{
+			"id": "asktl",
+			"type": "arrow",
+			"x": 1830,
+			"y": 1556,
+			"width": 0,
+			"height": 58,
+			"angle": 0,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b12",
+			"roundness": null,
+			"seed": 2104127126,
+			"version": 6,
+			"versionNonce": 1440467774,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175062,
+			"link": null,
+			"locked": false,
+			"points": [
+				[
+					0,
+					0
+				],
+				[
+					0,
+					58
+				]
+			],
+			"startBinding": {
+				"elementId": "skOpen",
+				"mode": "orbit",
+				"fixedPoint": [
+					0.5,
+					1.0545454545454545
+				]
+			},
+			"endBinding": {
+				"elementId": "tailorBx",
+				"mode": "orbit",
+				"fixedPoint": [
+					0.5,
+					-0.04
+				]
+			},
+			"startArrowhead": null,
+			"endArrowhead": "arrow",
+			"elbowed": false
+		},
+		{
+			"id": "acorer",
+			"type": "arrow",
+			"x": 506,
+			"y": 1495,
+			"width": 48,
+			"height": 0,
+			"angle": 0,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "transparent",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"frameId": null,
+			"index": "b13",
+			"roundness": null,
+			"seed": 933883338,
+			"version": 6,
+			"versionNonce": 1123799677,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1790247175062,
+			"link": null,
+			"locked": false,
+			"points": [
+				[
+					0,
+					0
+				],
+				[
+					48,
+					0
+				]
+			],
+			"startBinding": {
+				"elementId": "coreBox",
+				"mode": "orbit",
+				"fixedPoint": [
+					1.0130434782608695,
+					0.5
+				]
+			},
+			"endBinding": {
+				"elementId": "rulesBox",
+				"mode": "orbit",
+				"fixedPoint": [
+					-0.013043478260869565,
+					0.5
+				]
+			},
+			"startArrowhead": null,
+			"endArrowhead": "arrow",
+			"elbowed": false
 		}
 	],
 	"appState": {
