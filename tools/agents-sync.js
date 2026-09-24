@@ -10,7 +10,8 @@ const A = require('./lib/agents');
 
 const VAULT = process.env.VAULT_ROOT ? path.resolve(process.env.VAULT_ROOT) : path.resolve(__dirname, '..');
 const check = process.argv.includes('--check');
-const files = A.render(VAULT);
+let files;
+try { files = A.render(VAULT); } catch (e) { console.log(`agents-sync: ${e.message}`); process.exit(1); }
 const { changed, stale } = A.drift(VAULT, files);
 
 if (check) {
@@ -26,5 +27,6 @@ for (const p of changed) {
   fs.writeFileSync(abs, files.get(p));
 }
 console.log(`agents-sync: wrote ${changed.length} of ${files.size} generated files (D91)`);
-// Deleting is left to a person: a generated folder may hold something of theirs.
-if (stale.length) console.log(`agents-sync: ${stale.length} file(s) nothing in .claude/ generates any more — delete them by hand:\n  ${stale.join('\n  ')}`);
+// Deleting is left to a person. Only files carrying the generator's header are
+// listed; an owner's own skill, agent or hook entry is never claimed (D91).
+if (stale.length) console.log(`agents-sync: ${stale.length} generated file(s) nothing in .claude/ generates any more — delete them by hand:\n  ${stale.join('\n  ')}`);

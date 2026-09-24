@@ -299,7 +299,9 @@ const inbox = V.walk(path.join(VAULT, 'raw'), ['.md', '.pdf', '.docx', '.pptx', 
 }
 // The layer other agents read is generated from .claude/ (D91).
 {
-  const { changed, stale } = A.drift(VAULT);
+  let d;
+  try { d = A.drift(VAULT); } catch (e) { d = { changed: [], stale: [] }; warnings.push(`${e.message}`); }
+  const { changed, stale } = d;
   if (changed.length || stale.length) warnings.push(`${changed.length + stale.length} file(s) in .agents/ or .codex/ no longer match .claude/, so Codex and Gemini see an older vault — run node tools/agents-sync.js (D91): ${[...changed, ...stale].slice(0, 6).join(', ')}`);
 }
 for (const o of V.overBudget(VAULT, R.CONTEXT_BUDGET_TOKENS)) {

@@ -294,7 +294,9 @@ function creditCount(text, rows) {
  */
 function shimProblems(claudeText, agentsText) {
   const out = [];
-  if (!/^@AGENTS\.md\s*$/m.test(String(claudeText))) out.push('CLAUDE.md does not import the manual — its first line must be @AGENTS.md');
+  // Anchored to the start of the file, not any line: text above the import would
+  // make CLAUDE.md more than the entry point (D90).
+  if (!/^﻿?\s*@AGENTS\.md[ \t]*(?:\r?\n|$)/.test(String(claudeText))) out.push('CLAUDE.md does not import the manual — its first line must be @AGENTS.md');
   const heads = t => new Set(blankFences(String(t).split('\n')).filter(l => /^#{1,3} /.test(l)).map(l => l.replace(/^#+\s*/, '').trim()));
   const manual = heads(agentsText);
   const dup = [...heads(claudeText)].filter(h => manual.has(h));

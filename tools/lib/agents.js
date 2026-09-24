@@ -8,7 +8,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const HEADER = src => `Generated from ${src} by node tools/agents-sync.js — edit that file, not this one.`;
+const GENERATED_BY = 'by node tools/agents-sync.js';
+const HEADER = src => `Generated from ${src} ${GENERATED_BY} — edit that file, not this one.`;
+/** What every generated hook command runs; an entry without it is the owner's own. */
+const HOOK_SCRIPTS = '$(git rev-parse --show-toplevel)/tools/hooks/';
 /** The frontmatter fields the Agent Skills standard defines; Claude-only ones (disable-model-invocation, argument-hint) stay behind. */
 const SKILL_FIELDS = ['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools'];
 const GATED_NOTE = ' Explicit only: start it when the owner invokes it by name, never on your own.';
@@ -69,9 +72,14 @@ function renderAgent(file, text) {
     `developer_instructions = ${tomlBlock(body)}\n`;
 }
 
-/** `.claude/settings.json` hooks as Codex hooks: git-root commands, since Codex runs them from the session cwd. */
-function renderHooks(settingsText) {
-  const hooks = (JSON.parse(settingsText).hooks) || {};
+/**
+ * `.claude/settings.json` hooks as Codex hooks: git-root commands, since Codex
+ * runs them from the session cwd — merged into `existingText`, the current
+ * `.codex/hooks.json`, keeping the owner's own entries. Null when nothing would
+ * be left in the file.
+ */
+function renderHooks(settingsText, existingText = null) {
+  const hooks = (settingsText != null && JSON.parse(settingsText).hooks) || {};
   const out = {};
   for (const [event, entries] of Object.entries(hooks)) {
     out[event] = entries.map(e => {
@@ -91,8 +99,29 @@ function renderHooks(settingsText) {
       return entry;
     });
   }
-  return JSON.stringify({ hooks: out }, null, 2) + '\n';
+  // An owner may have Codex hooks of their own in the same file (SETUP § 4A.4
+  // says to merge them in). Only entries that run one of our scripts are the
+  // generator's; every other entry is kept, after ours, as it was (D91).
+  let existing = {};
+  if (existingText != null) {
+    try { existing = JSON.parse(existingText); } catch { throw new Error('.codex/hooks.json is not valid JSON — fix it by hand before syncing; nothing was written (D91)'); }
+  }
+  const theirs = {};
+  for (const [event, entries] of Object.entries((existing && existing.hooks) || {})) {
+    for (const e of Array.isArray(entries) ? entries : []) {
+      const kept = (e.hooks || []).filter(h => !isGeneratedHook(h));
+      if (kept.length) (theirs[event] = theirs[event] || []).push({ ...e, hooks: kept });
+    }
+  }
+  const merged = { ...existing, hooks: {} };
+  for (const event of new Set([...Object.keys(out), ...Object.keys(theirs)])) merged.hooks[event] = [...(out[event] || []), ...(theirs[event] || [])];
+  if (!Object.keys(merged.hooks).length && Object.keys(merged).length === 1) return null;
+  return JSON.stringify(merged, null, 2) + '\n';
 }
+/** A hook entry the generator wrote: it runs one of the vault's own scripts from the git root. */
+function isGeneratedHook(h) { return !!h && typeof h.command === 'string' && h.command.includes(HOOK_SCRIPTS); }
+/** A generated file carries this in its header; a file without it is someone's own and is never claimed (D91). */
+function isGeneratedFile(abs) { return fs.existsSync(abs) && fs.readFileSync(abs, 'utf8').includes(GENERATED_BY); }
 
 /** Every generated file, as a Map from its vault-relative path to its content. */
 function render(vaultAbs) {
@@ -125,25 +154,39 @@ function render(vaultAbs) {
     }
   }
   const settings = path.join(vaultAbs, '.claude', 'settings.json');
-  if (fs.existsSync(settings)) files.set('.codex/hooks.json', renderHooks(fs.readFileSync(settings, 'utf8')));
+  const hooksFile = path.join(vaultAbs, '.codex', 'hooks.json');
+  const hooks = renderHooks(fs.existsSync(settings) ? fs.readFileSync(settings, 'utf8') : null, fs.existsSync(hooksFile) ? fs.readFileSync(hooksFile, 'utf8') : null);
+  if (hooks !== null) files.set('.codex/hooks.json', hooks);
   return files;
 }
 
-/** Generated files that are missing or differ, and files in the generated folders nothing generates any more. */
+/**
+ * Generated files that are missing or differ, and generated files nothing
+ * generates any more. Only what carries the generator's header is claimed: a
+ * skill folder whose SKILL.md has it, a Codex agent file that has it, and
+ * `.codex/hooks.json` once no entry of ours or theirs is left in it. An owner's
+ * own skill or agent written straight into these folders is never reported (D91).
+ */
 function drift(vaultAbs, files = render(vaultAbs)) {
   const changed = [...files].filter(([p, c]) => {
     const abs = path.join(vaultAbs, p);
     return !fs.existsSync(abs) || lf(fs.readFileSync(abs, 'utf8')) !== c;
   }).map(([p]) => p);
   const stale = [];
-  const scan = (d, prefix) => fs.existsSync(d) && fs.readdirSync(d, { withFileTypes: true }).forEach(e => {
-    const r = `${prefix}/${e.name}`;
-    if (e.isDirectory()) scan(path.join(d, e.name), r);
-    else if (!files.has(r)) stale.push(r);
-  });
-  scan(path.join(vaultAbs, '.agents', 'skills'), '.agents/skills');
-  scan(path.join(vaultAbs, '.codex', 'agents'), '.codex/agents');
+  const walk = (d, prefix) => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => (e.isDirectory() ? walk(path.join(d, e.name), `${prefix}/${e.name}`) : [`${prefix}/${e.name}`]));
+  const skills = path.join(vaultAbs, '.agents', 'skills');
+  if (fs.existsSync(skills)) {
+    for (const e of fs.readdirSync(skills, { withFileTypes: true })) {
+      if (!e.isDirectory() || !isGeneratedFile(path.join(skills, e.name, 'SKILL.md'))) continue;
+      stale.push(...walk(path.join(skills, e.name), `.agents/skills/${e.name}`).filter(r => !files.has(r)));
+    }
+  }
+  const agents = path.join(vaultAbs, '.codex', 'agents');
+  if (fs.existsSync(agents)) {
+    for (const f of fs.readdirSync(agents)) if (f.endsWith('.toml') && isGeneratedFile(path.join(agents, f)) && !files.has(`.codex/agents/${f}`)) stale.push(`.codex/agents/${f}`);
+  }
+  if (fs.existsSync(path.join(vaultAbs, '.codex', 'hooks.json')) && !files.has('.codex/hooks.json')) stale.push('.codex/hooks.json');
   return { changed, stale };
 }
 
-module.exports = { render, drift, renderSkill, renderAgent, renderHooks, splitFm, GATED_NOTE };
+module.exports = { render, drift, renderSkill, renderAgent, renderHooks, splitFm, isGeneratedHook, GATED_NOTE };

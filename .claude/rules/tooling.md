@@ -88,8 +88,12 @@ others, `node tools/agents-sync.js` writes:
 - **Edit `.claude/`, never a generated file**, then run the sync and commit
   both. The build warns and the self-test fails while a generated file differs
   from its source; `node tools/agents-sync.js --check` says which.
-- **The sync never deletes.** A skill removed from `.claude/` leaves its old
-  copy behind; `--check` names it, and a person deletes it.
+- **The sync never deletes, and claims only what it wrote.** A skill removed
+  from `.claude/` leaves its old copy behind; `--check` names it, and a person
+  deletes it. Only files carrying the generator's header are ever named, so a
+  skill or agent written by hand for another agent is left alone; in
+  `.codex/hooks.json` the owner's own entries are kept through every sync, and
+  only entries that run `tools/hooks/` are rewritten.
 - **The manual is `AGENTS.md`** (D90); `CLAUDE.md` holds only `@AGENTS.md` and
   Claude-only lines, and the build fails a `CLAUDE.md` that repeats a section of
   the manual.

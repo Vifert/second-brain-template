@@ -773,6 +773,9 @@ ok('D78: the manual keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && 
   const shim = fs.readFileSync(path.join(VAULT, 'CLAUDE.md'), 'utf8');
   eq('D90: the shipped CLAUDE.md imports AGENTS.md and repeats none of it', V.shimProblems(shim, manual).length, 0);
   eq('D90: a CLAUDE.md without the import is reported', V.shimProblems('## Claude Code Only\n- x', manual).length, 1);
+  const IMPORT = '@AGENTS.md'; // joined below, so no "text@AGENTS.md" reads as an email to scan-private
+  eq('D90: text above the import is reported — the import must open the file', V.shimProblems(['# My notes', '', IMPORT, ''].join('\n'), manual).length, 1);
+  eq('D90: blank lines above the import are fine', V.shimProblems(['', IMPORT, ''].join('\n'), manual).length, 0);
   ok('D90: a CLAUDE.md that repeats a section of the manual is reported', V.shimProblems('@AGENTS.md\n\n## Query Protocol\n', manual).some(p => /Query Protocol/.test(p)));
   ok('D90: the manual names no single agent as the one that runs it', !/Claude Code carries no memory/.test(manual) && /every coding agent/.test(manual));
   ok('D90: CLAUDE.md, AGENTS.md and HANDOFF.md all have a budget', ['AGENTS.md', 'CLAUDE.md', 'HANDOFF.md'].every(f => R.CONTEXT_BUDGET_TOKENS[f] > 0));
@@ -788,6 +791,27 @@ ok('D78: the manual keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && 
   eq('D91: an edit hook matches Codex\'s apply_patch', hooks.hooks.PostToolUse[0].matcher, 'apply_patch|Write|Edit');
   eq('D91: a hook runs from the git root, since Codex starts in the session cwd', hooks.hooks.PostToolUse[0].hooks[0].command, 'node "$(git rev-parse --show-toplevel)/tools/hooks/post-write-check.js"');
   eq('D92: on Windows a hook passes its exit code through PowerShell, which would turn a block (2) into a failure (1)', hooks.hooks.PostToolUse[0].hooks[0].commandWindows, 'node "$(git rev-parse --show-toplevel)/tools/hooks/post-write-check.js"; exit $LASTEXITCODE');
+  const settingsJson = '{"hooks":{"Stop":[{"hooks":[{"type":"command","command":"node","args":["${CLAUDE_PROJECT_DIR}/tools/hooks/stop-rebuild.js"]}]}]}}';
+  const theirs = { hooks: { Stop: [{ hooks: [{ type: 'command', command: 'node my-notify.js' }] }], PreToolUse: [{ matcher: 'Bash', hooks: [{ type: 'command', command: 'node my-guard.js' }] }] } };
+  const firstSync = JSON.parse(A.renderHooks(settingsJson, JSON.stringify(theirs)));
+  eq('D91: the owner\'s own Codex hooks survive a sync, after ours', JSON.stringify(firstSync.hooks.Stop.map(e => e.hooks[0].command.includes('stop-rebuild') ? 'ours' : e.hooks[0].command)), JSON.stringify(['ours', 'node my-notify.js']));
+  eq('D91: a sync is stable — running it twice changes nothing', A.renderHooks(settingsJson, JSON.stringify(firstSync)), JSON.stringify(firstSync, null, 2) + '\n');
+  eq('D91: a hooks file with only our entries, and no hooks left in .claude/, is stale', A.renderHooks(null, A.renderHooks(settingsJson)), null);
+  {
+    const os = require('os');
+    const vx = fs.mkdtempSync(path.join(os.tmpdir(), 'agents-'));
+    const put = (p, t) => { fs.mkdirSync(path.dirname(path.join(vx, p)), { recursive: true }); fs.writeFileSync(path.join(vx, p), t); };
+    put('.claude/skills/kept/SKILL.md', '---\nname: kept\ndescription: Kept.\n---\nbody\n');
+    for (const [p, c] of A.render(vx)) put(p, c);
+    put('.agents/skills/gone/SKILL.md', A.renderSkill('gone', '---\nname: gone\ndescription: Gone.\n---\nx\n').skill);
+    put('.agents/skills/mine/SKILL.md', '---\nname: mine\ndescription: Written for Codex by hand.\n---\nx\n');
+    put('.codex/agents/mine.toml', 'name = "mine"\n');
+    put('.codex/hooks.json', A.renderHooks(settingsJson));
+    const dd = A.drift(vx);
+    eq('D91: only generated files are stale — a skill or agent the owner wrote by hand is never claimed', dd.stale.sort().join(), ['.agents/skills/gone/SKILL.md', '.codex/hooks.json'].join());
+    put('.codex/hooks.json', '{ not json');
+    ok('D91: a hooks file that is not JSON stops the sync instead of being overwritten', (() => { try { A.render(vx); return false; } catch (e) { return /not valid JSON/.test(e.message); } })());
+  }
   ok('D91: a Codex agent is read-only', /^sandbox_mode = "read-only"$/m.test(A.renderAgent('a.md', '---\nname: a\ndescription: A.\n---\nDo a.\n')));
 
   const cwd = path.join(VAULT, 'wiki');

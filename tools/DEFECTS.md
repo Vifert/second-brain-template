@@ -1,8 +1,9 @@
 # Defect Ledger
 
 Every defect the vault has had, why it happened, and **what now stops it
-recurring**. The procedure is in `CLAUDE.md` § Defect Discipline: fix the
-instance, find the root cause, prevent the class, record it here.
+recurring**. The procedure is in the manual every coding agent reads,
+`AGENTS.md` § Defect Discipline: fix the instance, find the root cause, prevent
+the class, record it here.
 
 **Guard** says where the prevention lives:
 
@@ -10,10 +11,11 @@ instance, find the root cause, prevent the class, record it here.
   `tools/selftest.js`, `tools/build-index.js` + `tools/lib/`, or `tools/audit.js`
   cites the ID in a problem message or a test name — in code, not just a
   comment, because comments are stripped before the check (D39).
-- `rule:<Section>` — a rule in that section of `CLAUDE.md` or of a
-  `.claude/rules/` file.
-- `hook` — a Claude Code hook registered in `.claude/settings.json`; its code
-  in `tools/hooks/` or `tools/lib/hooks.js` cites the ID.
+- `rule:<Section>` — a rule in that section of `AGENTS.md` (or of the
+  Claude-only lines in `CLAUDE.md`) or of a `.claude/rules/` file.
+- `hook` — a hook registered in `.claude/settings.json`, and generated into
+  `.codex/hooks.json` for Codex (D91); its code in `tools/hooks/` or
+  `tools/lib/hooks.js` cites the ID.
 - `skill:<name>` — the procedure in `.claude/skills/<name>/SKILL.md`, a skill
   only the owner starts; the self-test checks the skill exists and its text
   cites the ID.
@@ -126,6 +128,6 @@ designed in alongside a new feature.
 | D88 | 2026-09-24 | *Found in the original vault (its D82) by the eval of the split.* Asked to file a pasted image in a journal entry, a session followed the figure rule literally and wrote `### Figure 1` inside the log. In a log every `###` opens a day, so the day's `_sections.tsv` range ended at the figure and a dated question would have missed it; the build passed. | The figure rule was written for articles and never said what a figure inside a log looks like; the builder checked only log headings that start with a date. | The builder fails a non-date `###` in a log; the figure rule and the log rule both say figures and other subsections in a log use `####` (the vault's D82). | build, selftest |
 | D89 | 2026-09-24 | *Found by the maintainer, porting D86–D88.* The credit block at the top of `CLAUDE.md` said "seventy-seven mechanically guarded defects" while the ledger held 88 rows; nothing tied the number to the ledger. | The count was typed by hand into prose that says "keep this credit", so no one edits it, and no check read it. | The build sets the count, in words, to the number of rows the template ships — those below `OWNER_DEFECTS_FROM` in `rules.js`, never the owner's own, a scope the setup eval showed was needed — on every run, and warns if the credit phrase is gone; the credit's wording is otherwise untouched (Vifert, 24 September 2026). | build, selftest |
 | D90 | 2026-09-25 | *Found by the maintainer, who asked why the template assumed one agent.* The manual lived only in `CLAUDE.md`, which only Claude Code reads. Codex, Cursor, Copilot and other agents read `AGENTS.md`, and the template's `AGENTS.md` was a contributor brief, so a vault run under any of them started with no rules at all. | The vault grew up in Claude Code; nothing asked which file other agents read, and keeping two copies of the manual would have drifted. | `AGENTS.md` is the manual, reworded so it names no one agent; `CLAUDE.md` is `@AGENTS.md` plus Claude-only lines, the import Claude Code documents for sharing one file. The builder fails a `CLAUDE.md` beside an `AGENTS.md` that lacks the import or repeats a section of the manual, and warns while a vault's manual is still in `CLAUDE.md` (a 1.0 vault still works under Claude Code); a folder with neither, like the benchmark's vault, has nothing to check. | build, selftest |
-| D91 | 2026-09-25 | *Found with D90.* The skills, the read-only agents and the hooks existed only in `.claude/`, which no other agent reads; Codex looks in `.agents/skills/`, `.codex/agents/` and `.codex/hooks.json`. The four gated skills would also have lost their gate: `disable-model-invocation` is Claude Code's alone. | The same as D90: the agent layer was written for one harness. | `tools/agents-sync.js` generates the other agents' layer from `.claude/` — skills trimmed to the Agent Skills fields, `agents/openai.yaml` with `allow_implicit_invocation: false` on each gated skill, read-only Codex agents, git-root hook commands. The build warns and the self-test fails while a generated file differs from its source. | build, selftest |
+| D91 | 2026-09-25 | *Found with D90.* The skills, the read-only agents and the hooks existed only in `.claude/`, which no other agent reads; Codex looks in `.agents/skills/`, `.codex/agents/` and `.codex/hooks.json`. The four gated skills would also have lost their gate: `disable-model-invocation` is Claude Code's alone. | The same as D90: the agent layer was written for one harness. | `tools/agents-sync.js` generates the other agents' layer from `.claude/` — skills trimmed to the Agent Skills fields, `agents/openai.yaml` with `allow_implicit_invocation: false` on each gated skill, read-only Codex agents, git-root hook commands. The build warns and the self-test fails while a generated file differs from its source. The generator claims only what it wrote: the owner's own entries in `.codex/hooks.json` are kept through every sync, and only files carrying its header are ever reported as stale, `.codex/hooks.json` included (review of PR #14). | build, selftest |
 | D92 | 2026-09-25 | *Found with D91.* The hook scripts assumed Claude Code's input. Codex edits files through `apply_patch`, with the patch in `tool_input.command` and no `file_path`, so the markdown check would never have run; and a Codex Stop hook that exits 0 must print JSON, which the rebuild hook did not. Run live through the generated commands, a third: PowerShell reports a hook's exit 2 as 1, which Codex reads as a failed hook, not a block, so on Windows nothing would have been blocked. | The hooks were tested only against Claude Code's payloads, and only called directly, never through a shell. | `editedFiles()` reads the files an `apply_patch` names, resolved against the session's `cwd`; the Stop hook prints JSON on every exit 0; each generated hook carries a `commandWindows` ending `; exit $LASTEXITCODE`. Unit tests cover both payloads and the Windows command. | selftest |
 | D93 | 2026-09-25 | *Found with D90.* A Claude Code session contributing to the template loaded the product manual as its instructions, never the contributor brief: with both files present Claude Code reads `CLAUDE.md` only. | The brief sat in the one file Claude Code skips when `CLAUDE.md` exists. | The brief moved to `docs/for-ai-agents.md`; the manual carries a marked template-only note pointing there, which setup removes. The builder fails a vault whose manual still holds the note once the owner's name is filled in. | build, selftest |
