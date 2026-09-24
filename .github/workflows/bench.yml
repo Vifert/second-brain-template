@@ -1,7 +1,7 @@
 name: bench
 on:
   pull_request:
-    paths: ['bench/**', 'tools/**', 'CLAUDE.md', '.claude/**']
+    paths: ['bench/**', 'tools/**', 'AGENTS.md', 'CLAUDE.md', '.claude/**']
 permissions:
   contents: read
 concurrency:

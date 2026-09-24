@@ -36,7 +36,8 @@ updated: 2026-09-18
 | `output/` | Query results, reports, generated canvases |
 | `tools/` | Builder/validator, audit, self-test, probe corpus, defect ledger — versioned |
 | `templates/` | Templater templates, kept in step with the frontmatter rules |
-| `CLAUDE.md` | The operating manual — query protocol, capture protocol, caps |
+| `AGENTS.md` | The operating manual, for every coding agent — query protocol, capture protocol, caps |
+| `CLAUDE.md` | Claude Code's entry point: imports `AGENTS.md` whole, plus Claude-only lines |
 | `HANDOFF.md` | Cross-session memory, read at the start of every session |
 
 ## Why subfolders do not change query cost

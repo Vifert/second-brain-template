@@ -1,0 +1,4 @@
+# Generated from .claude/skills/vault-handoff/SKILL.md by node tools/agents-sync.js — edit that file, not this one.
+# disable-model-invocation there; here the same gate for Codex: $vault-handoff only.
+policy:
+  allow_implicit_invocation: false

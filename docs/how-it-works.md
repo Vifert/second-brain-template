@@ -1,7 +1,7 @@
 # How it works
 
 Each section below is the short version of a rule; the link goes to the section
-of `CLAUDE.md` that holds the full rule, which is what the agent running a
+of `AGENTS.md` that holds the full rule, which is what the agent running a
 vault actually reads.
 
 ## The problem: loading notes costs tokens
@@ -15,7 +15,7 @@ This vault takes neither route. **Capture may be slow and thorough; answering
 must be cheap.** Compiling a source into the vault can take as long and as many
 tokens as it needs. Answering a question should cost a few hundred tokens of
 file reading — 30–50× less than loading the sources — with nothing summarised
-away. → [CLAUDE.md § Prime Directive](../CLAUDE.md#prime-directive--query-cost-is-the-metric)
+away. → [AGENTS.md § Prime Directive](../AGENTS.md#prime-directive--query-cost-is-the-metric)
 
 ## The answer surface and the body
 
@@ -31,7 +31,7 @@ node:
   needs.
 
 So detail is never dropped to hit a size target: it moves into the body, a
-`detail` node beside the hub, or a dated log. → [CLAUDE.md § Write-Side Rules](../CLAUDE.md#write-side-rules-that-buy-read-side-cheapness)
+`detail` node beside the hub, or a dated log. → [AGENTS.md § Write-Side Rules](../AGENTS.md#write-side-rules-that-buy-read-side-cheapness)
 
 ## The five index files
 
@@ -48,7 +48,7 @@ question starts from them rather than from the notes:
 
 It also generates `wiki/profile/now.md`, the one card that answers "what is
 going on?", built from every open status log. None of these files is ever read
-whole. → [CLAUDE.md § The Index Layer](../CLAUDE.md#the-index-layer)
+whole. → [AGENTS.md § The Index Layer](../AGENTS.md#the-index-layer)
 
 ## The query ladder
 
@@ -65,7 +65,7 @@ Dated questions go straight to `_sections.tsv`, where every log heading
 carries the date in two spellings. In the vault this method was built in, L0
 and L1 together answer at a median of about 44× cheaper than loading its
 ~16,800 tokens of sources; on the fictional benchmark in `bench/`, the first
-scorecard is 27× on an ~11,000-token corpus. → [CLAUDE.md § Query Protocol](../CLAUDE.md#query-protocol)
+scorecard is 27× on an ~11,000-token corpus. → [AGENTS.md § Query Protocol](../AGENTS.md#query-protocol)
 
 ## Node kinds
 
@@ -87,7 +87,7 @@ The answer-surface cap is the same for every kind. → [`.claude/rules/wiki-writ
 Once a source is compiled it moves to `raw/_compiled/`, which may be deleted
 at any time. The vault must answer every question without it: day-level
 records live in logs, a document's full text lives in a `verbatim` node, and
-every figure is transcribed as text. → [CLAUDE.md § Source Independence](../CLAUDE.md#source-independence)
+every figure is transcribed as text. → [AGENTS.md § Source Independence](../AGENTS.md#source-independence)
 
 ## The build is the validator
 
@@ -102,7 +102,7 @@ content, never later.
 
 The two expensive operations — compiling `raw/` and the full audit — run only
 when the owner types `/vault-compile`, `/vault-audit` or `/vault-deep-audit`.
-→ [CLAUDE.md § Compile and Audit](../CLAUDE.md#compile-and-audit--only-when-i-invoke-them)
+→ [AGENTS.md § Compile and Audit](../AGENTS.md#compile-and-audit--only-when-i-invoke-them)
 
 ## The defect discipline
 
@@ -111,4 +111,4 @@ add a mechanical guard that stops the whole class, and record it in
 `tools/DEFECTS.md` with its ID cited in the guard's code. `node tools/selftest.js`
 fails if a ledger row names a guard that does not exist. The ledger ships with
 the 79 defects found while this method was built, so a new vault starts with
-every guard in place. → [CLAUDE.md § Defect Discipline](../CLAUDE.md#defect-discipline)
+every guard in place. → [AGENTS.md § Defect Discipline](../AGENTS.md#defect-discipline)

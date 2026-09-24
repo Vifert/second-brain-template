@@ -7,7 +7,7 @@ disable-model-invocation: true
 # Audit the vault
 
 The owner typed `/vault-audit`, so running the audit is authorised for this run
-(`CLAUDE.md` § Compile and Audit, D78). Keep it cheap: the tools' output goes
+(`AGENTS.md` § Compile and Audit, D78). Keep it cheap: the tools' output goes
 into a file, and only the summary enters the conversation.
 
 ## 1. Run the tools
@@ -56,7 +56,7 @@ Always say where the full output is.
 
 ## 4. Fix what they pick
 
-Every fix follows `CLAUDE.md` § Defect Discipline: fix the instance, find the
+Every fix follows `AGENTS.md` § Defect Discipline: fix the instance, find the
 root cause, prevent the class, ledger it. Rebuild after content fixes; run the
 self-test after tooling fixes. To confirm the fixes, re-run the three commands
 into the same folder and report the one-line verdict.

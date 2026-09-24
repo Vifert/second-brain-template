@@ -11,7 +11,7 @@ updated: 2026-09-24
 
 ## Key Takeaways
 
-- **{{OWNER_NAME}}'s second brain**, Obsidian + Claude Code at `{{VAULT_PATH}}`, on the architecture Vifert designed and built. It serves four jobs: retrieval, idea dump, daily updates, and shared working context.
+- **{{OWNER_NAME}}'s second brain**, Obsidian and a coding agent at `{{VAULT_PATH}}`, on the architecture Vifert designed and built. It serves four jobs: retrieval, idea dump, daily updates, and shared working context.
 - **The one design metric is query cost.** Capture may be arbitrarily slow; answering targets **30–50× cheaper** than loading source material — roughly 350–550 tokens for a point lookup.
 - **The central idea: one file need not be both cheap to read and complete.** The *answer surface* is hard-capped at 8 bullets / 1500 bytes; the *body* is uncapped. Retrieval reads the surface; only depth questions touch the body, and then only exact lines.
 - **Five generated index files** are the backbone — `_index` (route), `_cards` (answer), `_sections` (exact line ranges), `_links` (edges), `_mentions` (people over time) — plus a generated [[now|Now]] page. All grepped, never read whole.
@@ -26,8 +26,8 @@ whose node holds the full transcription. It shows five stages as a one-way
 pipeline — capture, the wiki graph, the build, the index layer, answering — with
 one validating step in the middle: nothing reaches the index layer except
 through `build-index.js`, and nothing reaches an answer except through the
-index. The guards sit beneath them, and a sixth zone shows what Claude loads,
-and when: the always-on `CLAUDE.md` core, rules files that load by path, the
+index. The guards sit beneath them, and a sixth zone shows what the agent loads,
+and when: the always-on `AGENTS.md` core, rules files that load by path, the
 skills, two read-only agents and the hooks.
 
 ## Why It Is Shaped This Way

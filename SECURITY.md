@@ -13,7 +13,8 @@ Say what you found, how to reproduce it, and what it could expose.
 ## What is in scope
 
 - the tools in `tools/`;
-- the Claude Code skills in `.claude/skills/`;
+- the skills, agents and hooks in `.claude/`, and the copies generated from
+  them in `.agents/` and `.codex/`;
 - the setup instructions in `SETUP.md`, which an agent follows on someone's
   machine;
 - the GitHub workflows in `.github/`.
@@ -35,8 +36,8 @@ leaves that machine is what makes a report here judgeable:
 - **The optional NotebookLM step** of `/vault-compile` uploads only the sources
   its owner chooses, to their own Google account, and only if they turned it on
   at setup.
-- **Claude Code itself** sends what it reads to the model provider, as it does
-  in any folder. The vault's query protocol keeps that to a few hundred tokens a
+- **The coding agent itself** — Claude Code, Codex or another — sends what it
+  reads to its model provider, as it does in any folder. The vault's query protocol keeps that to a few hundred tokens a
   question.
 
 ## Response

@@ -1,7 +1,7 @@
 ---
 title: Vault Operations
 summary: How this vault is run day to day — the query ladder, the five index files, version control, the audit and defect routine, the Obsidian trap, and the machine's tooling.
-aliases: [vault operations, query protocol, query ladder, how to query, retrieval protocol, git repo, gitignore, version control, commit, push, obsidian trap, frontmatter trap, audit, lint, how do I audit, working notes, environment, pdftotext, PyMuPDF, pdfplumber, pdfminer, python-pptx, heredoc, tooling quirks, how does retrieval work, defect ledger, defects, defect discipline, probes.json, forbidden claims, fences, how are defects handled, mentions, people timeline, obsidian CLI, where do the rules live, .claude/rules, rules folder, path-scoped rules, CLAUDE.md core, hooks, token budget, build-index.js]
+aliases: [vault operations, query protocol, query ladder, how to query, retrieval protocol, git repo, gitignore, version control, commit, push, obsidian trap, frontmatter trap, audit, lint, how do I audit, working notes, environment, pdftotext, PyMuPDF, pdfplumber, pdfminer, python-pptx, heredoc, tooling quirks, how does retrieval work, defect ledger, defects, defect discipline, probes.json, forbidden claims, fences, how are defects handled, mentions, people timeline, obsidian CLI, where do the rules live, .claude/rules, rules folder, path-scoped rules, CLAUDE.md core, AGENTS.md, AGENTS.md core, manual for every agent, hooks, token budget, build-index.js]
 topic: tooling
 kind: hub
 tags: [subject/operations, subject/retrieval, tech/git, subject/audit, subject/workflow]
@@ -69,7 +69,7 @@ on**, because the audit runs only when the owner asks (D78).
 
 Every defect is closed in four steps, in the same session: **fix** the
 instance; find the **root cause**; **prevent the class** — a mechanical guard
-first, a `CLAUDE.md` rule second; and **record** it in `tools/DEFECTS.md`. The
+first, an `AGENTS.md` rule second; and **record** it in `tools/DEFECTS.md`. The
 guard's code — its problem message or test name, not a comment — cites the ID,
 and the self-test fails if the ledger names a guard that does not exist.
 The ledger ships with the 79 defects (D01–D79) found and fixed in Vifert's
@@ -79,8 +79,8 @@ day, D54–D64 from a gap audit, D65–D71 from work on tags and Obsidian plugin
 D72–D77 from drawings, NotebookLM and the drawing tool's browser, and D78–D79
 from gating the compile and audit and from making plugins optional. D80–D85
 were found preparing this template for release, and D86–D88 are the original
-vault's D80–D82, ported; D89 came from the template's own upkeep. This vault's
-own defects start at D90.
+vault's D80–D82, ported; D89 came from the template's own upkeep, and D90–D93 from making it run
+under any coding agent. This vault's own defects start at D200.
 
 **A correction is swept, then fenced**: when the owner corrects a fact, the wrong
 version is fixed everywhere and added to `_forbidden`, so the build fails if it
@@ -106,7 +106,8 @@ build, so a fence can be neither hollow nor so broad it blocks the truth.
 
 ## Where The Rules Live
 
-`CLAUDE.md` is an always-on core: every session and every subagent loads it, so
+`AGENTS.md` is an always-on core: every session and every subagent loads it —
+Claude Code through `CLAUDE.md`, which imports it whole — so
 its size is paid again and again (D87). The rest of the rules are in
 `.claude/rules/`, and Claude Code loads each file only when a file its `paths:`
 match is read:
@@ -130,7 +131,7 @@ execute backticks (D13), CRLF line endings (D76) and control bytes from a typed
 `\u` escape (D03) — and a Stop hook rebuilds a stale index at the end of every
 turn.
 
-**Budgets warn; they never fail.** The build warns when `CLAUDE.md` passes about
+**Budgets warn; they never fail.** The build warns when `AGENTS.md` passes about
 6,000 tokens, or HANDOFF.md 3,000, and names the only remedy: move detail out,
 never delete or compress it. A hard cap applied to content is how D01 lost 78
 dated entries. The one strict check is correctness, not size: the self-test

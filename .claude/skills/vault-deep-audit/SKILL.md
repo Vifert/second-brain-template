@@ -8,7 +8,7 @@ disable-model-invocation: true
 # Deep audit
 
 The owner typed `/vault-deep-audit`, which includes `/vault-audit`: both are
-authorised for this run (`CLAUDE.md` § Compile and Audit, D78). Topic:
+authorised for this run (`AGENTS.md` § Compile and Audit, D78). Topic:
 `$ARGUMENTS` (empty means the whole vault).
 
 ## 1. The cheap audit first
@@ -18,7 +18,7 @@ read the summary). Hold the report for the end.
 
 ## 2. Source independence
 
-`raw/_compiled/` may be deleted at any time (`CLAUDE.md` § Source
+`raw/_compiled/` may be deleted at any time (`AGENTS.md` § Source
 Independence). Reading it is legitimate here: the owner asked for this check.
 
 For each compiled document — every file under `raw/_compiled/`, or those
@@ -39,7 +39,7 @@ inventing biography.
 Tell the owner in one line how many agents will run and what they cover, then
 proceed. Run agents in waves of two, never more — wide runs hit the usage
 limit and lose everything. Split the topics (or the one topic) across agents.
-Dispatch each as the `vault-gap-auditor` agent — read-only, it skips `CLAUDE.md`
+Dispatch each as the `vault-gap-auditor` agent — read-only, it skips the manual
 and carries the query ladder in its own instructions (D87) — and give it the
 vault path, its topics, and this brief:
 
@@ -80,7 +80,7 @@ End with "Which should I fix — numbers, "all", or "none"?"
 ## 6. Fix what they pick
 
 As `/vault-audit` § 4. A routing miss gets its alias and its term goes into
-`tools/probes.json`, so the failure can never silently return (`CLAUDE.md`
+`tools/probes.json`, so the failure can never silently return (`AGENTS.md`
 § Query Protocol). A compile gap waits for the owner: capture it only if the fact
 is in the vault's own words elsewhere; if it needs `raw/`, list it for
 `/vault-compile`.

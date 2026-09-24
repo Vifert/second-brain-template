@@ -33,7 +33,7 @@ function route(idx, terms) {
   return hits.sort((a, b) => b.score - a.score || a.i - b.i);
 }
 
-// The dated rung (CLAUDE.md § Query Protocol): a question carrying a date goes
+// The dated rung (AGENTS.md § Query Protocol): a question carrying a date goes
 // to _sections.tsv, whose log headings hold both date spellings, and reads the
 // matching ranges within budget — never the node table (D82).
 const DATE_TERM = /^(\d{4}-\d{2}-\d{2}|\d{1,2}-[A-Za-z]{3}-\d{2})$/;
@@ -62,7 +62,7 @@ function ladder(q, { idx, cards, sections, readLines }) {
   const firstCard = cards.get(best) || '';
   bytes += Buffer.byteLength(firstCard);
   let text = firstCard;
-  // Stop at the first rung that answers (CLAUDE.md § Query Protocol, D81).
+  // Stop at the first rung that answers (AGENTS.md § Query Protocol, D81).
   const facts = q.facts || [];
   if (facts.length && facts.every(f => hasFact(firstCard, f))) return { bytes, text, firstCard, routed: true };
   const budget = (q.budget || 600) * 4;

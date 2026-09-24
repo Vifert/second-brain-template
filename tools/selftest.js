@@ -133,7 +133,7 @@ eq('D03: controlCharLines finds a 0x01 byte', V.controlCharLines('ok\nbad \x01 h
 ok('D03: controlCharLines allows tab and CR', V.controlCharLines('a\tb\r\n').length === 0);
 const RULES_DIR = path.join(VAULT, '.claude', 'rules');
 const ruleFiles = fs.existsSync(RULES_DIR) ? fs.readdirSync(RULES_DIR).filter(n => n.endsWith('.md')).map(n => path.join(RULES_DIR, n)) : [];
-const mdEverywhere = [path.join(VAULT, 'CLAUDE.md'), path.join(VAULT, 'HANDOFF.md'), ...ruleFiles,
+const mdEverywhere = [path.join(VAULT, 'AGENTS.md'), path.join(VAULT, 'CLAUDE.md'), path.join(VAULT, 'HANDOFF.md'), ...ruleFiles,
   ...V.walk(TOOLS), ...V.walk(path.join(VAULT, 'output')), ...V.walk(path.join(VAULT, 'wiki'))].filter(fs.existsSync);
 const ctrl = mdEverywhere.filter(p => V.controlCharLines(fs.readFileSync(p, 'utf8')).length).map(p => path.relative(VAULT, p));
 ok('D03: no control bytes in any markdown file in the repo', ctrl.length === 0, ctrl.join(', '));
@@ -200,7 +200,8 @@ eq('D89: numbers read as prose', ['0', '7', '19', '20', '77', '88', '100', '215'
 eq('D89: the credit block\'s count follows the ledger, across a line break too',
   V.creditCount('> the defect discipline with its seventy-seven\n> mechanically guarded defects,', 88), '> the defect discipline with its eighty-eight\n> mechanically guarded defects,');
 eq('D89: a credit without its count is reported, not rewritten', V.creditCount('> Designed and built by Vifert.', 88), null);
-eq('D89: the shipped credit names the count of the template\'s own ledger rows', V.creditCount(fs.readFileSync(path.join(VAULT, 'CLAUDE.md'), 'utf8'), V.templateDefects(fs.readFileSync(path.join(VAULT, 'tools', 'DEFECTS.md'), 'utf8'), R.OWNER_DEFECTS_FROM)) === fs.readFileSync(path.join(VAULT, 'CLAUDE.md'), 'utf8'), true);
+eq('D89: the shipped credit names the count of the template\'s own ledger rows', V.creditCount(fs.readFileSync(path.join(VAULT, 'AGENTS.md'), 'utf8'), V.templateDefects(fs.readFileSync(path.join(VAULT, 'tools', 'DEFECTS.md'), 'utf8'), R.OWNER_DEFECTS_FROM)) === fs.readFileSync(path.join(VAULT, 'AGENTS.md'), 'utf8'), true);
+ok('D89: every template row sits below the owner boundary', V.templateDefects(fs.readFileSync(path.join(VAULT, 'tools', 'DEFECTS.md'), 'utf8'), R.OWNER_DEFECTS_FROM) === V.templateDefects(fs.readFileSync(path.join(VAULT, 'tools', 'DEFECTS.md'), 'utf8')));
 eq('D89: an owner\'s own defects are not counted in the credit', V.templateDefects('| D01 | a |\n| D89 | b |\n| D90 | mine |\n| D91 | mine |', 90), 2);
 eq('D88: a non-date ### in a log is reported; dates and #### subsections are not',
   JSON.stringify(V.strayLogHeadings([{ lvl: 3, title: '2026-09-24 (24-Sep-26)' }, { lvl: 3, title: 'Figure 1 — Sunday reset' }, { lvl: 4, title: 'Figure 2 — x' }, { lvl: 2, title: 'Related' }]).map(h => h.title)),
@@ -533,10 +534,11 @@ const ledger = fs.readFileSync(path.join(TOOLS, 'DEFECTS.md'), 'utf8');
 const ledgerHead = ledger.split('\n| ID |')[0];
 ok('D20: the ledger header states the rule the checker enforces — IDs in code, not just a comment',
   !/cites the ID in a comment\./.test(ledgerHead) && /not just a\s+comment/.test(ledgerHead));
-// A rule guard names a section of CLAUDE.md or of a path-scoped rules file (D87).
-const heads = new Set([path.join(VAULT, 'CLAUDE.md'), ...ruleFiles].flatMap(p => V.blankFences(fs.readFileSync(p, 'utf8').split('\n'))
+// A rule guard names a section of the manual (AGENTS.md, and CLAUDE.md's
+// Claude-only lines) or of a path-scoped rules file (D87, D90).
+const heads = new Set([path.join(VAULT, 'AGENTS.md'), path.join(VAULT, 'CLAUDE.md'), ...ruleFiles].filter(fs.existsSync).flatMap(p => V.blankFences(fs.readFileSync(p, 'utf8').split('\n'))
   .filter(l => /^##\s/.test(l)).map(l => l.replace(/^##\s+/, '').trim())));
-ok('D39: CLAUDE.md headings inside code examples are not sections', !heads.has('<body sections>'));
+ok('D39: the manual\'s headings inside code examples are not sections', !heads.has('<body sections>'));
 const src = {
   selftest: stripComments(fs.readFileSync(__filename, 'utf8')),
   build: ['build-index.js', 'lib/vault.js', 'lib/text.js', 'lib/rules.js', 'lib/writechecks.js'].map(codeOf).join('\n'),
@@ -566,7 +568,7 @@ const broken = [];
 for (const r of rows) {
   if (r.length !== 6) { broken.push(`${r[0]}: expected 6 cells, got ${r.length}`); continue; }
   for (const g of r[5].split(',').map(s => s.trim()).filter(Boolean)) {
-    if (g.startsWith('rule:')) { if (!heads.has(g.slice(5).trim())) broken.push(`${r[0]}: no section "${g.slice(5)}" in CLAUDE.md or .claude/rules/`); }
+    if (g.startsWith('rule:')) { if (!heads.has(g.slice(5).trim())) broken.push(`${r[0]}: no section "${g.slice(5)}" in AGENTS.md, CLAUDE.md or .claude/rules/`); }
     else if (g.startsWith('skill:')) { const p = skillGuardProblem(r[0], g.slice(6).trim()); if (p) broken.push(p); }
     else if (src[g] === undefined) broken.push(`${r[0]}: unknown guard "${g}"`);
     else if (!new RegExp(`\\b${r[0]}\\b`).test(src[g])) broken.push(`${r[0]}: ${g} code (comments stripped) does not cite ${r[0]}`);
@@ -751,13 +753,57 @@ for (const a of ['vault-fidelity-verifier', 'vault-gap-auditor']) {
   ok(`D87: the ${a} agent skips CLAUDE.md — omitClaudeMd: true`, /^omitClaudeMd:\s*true\s*$/m.test(fmBlock(t)));
   ok(`D87: the ${a} agent is read-only`, /^tools:/m.test(fmBlock(t)) && !/\b(Write|Edit)\b/.test((fmBlock(t).match(/^tools:.*$/m) || [''])[0]));
 }
-const claudeLines = V.blankFences(fs.readFileSync(path.join(VAULT, 'CLAUDE.md'), 'utf8').split('\n'));
-ok('D78: CLAUDE.md states the gate', heads.has('Compile and Audit — Only When I Invoke Them'));
-ok('D78: the compile procedure lives in /vault-compile, not CLAUDE.md', !claudeLines.some(l => /^###\s+Compile Procedure/.test(l)));
-ok('D78: the audit procedure lives in /vault-audit, not CLAUDE.md', !heads.has('Audit'));
-const nlmAt = claudeLines.findIndex(l => /^##\s+NotebookLM\s*$/.test(l));
-const nlmLen = nlmAt < 0 ? -1 : claudeLines.slice(nlmAt + 1).findIndex(l => /^##\s/.test(l));
-ok('D78: CLAUDE.md keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && nlmLen <= 10, `${nlmLen} lines`);
+const manualLines = V.blankFences(fs.readFileSync(path.join(VAULT, 'AGENTS.md'), 'utf8').split('\n'));
+ok('D78: the manual states the gate', heads.has('Compile and Audit — Only When I Invoke Them'));
+ok('D78: the compile procedure lives in /vault-compile, not the manual', !manualLines.some(l => /^###\s+Compile Procedure/.test(l)));
+ok('D78: the audit procedure lives in /vault-audit, not the manual', !heads.has('Audit'));
+const nlmAt = manualLines.findIndex(l => /^##\s+NotebookLM\s*$/.test(l));
+const nlmLen = nlmAt < 0 ? -1 : manualLines.slice(nlmAt + 1).findIndex(l => /^##\s/.test(l));
+ok('D78: the manual keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && nlmLen <= 10, `${nlmLen} lines`);
+
+// ---------------------------------------------------------------------------
+// EVERY AGENT (D90–D93). One manual, AGENTS.md, which CLAUDE.md imports; the
+// layer other agents read generated from .claude/; hooks that read either
+// agent's payload; a contributor note that never reaches a vault.
+// ---------------------------------------------------------------------------
+{
+  const A = require('./lib/agents');
+  const H = require('./lib/hooks');
+  const manual = fs.readFileSync(path.join(VAULT, 'AGENTS.md'), 'utf8');
+  const shim = fs.readFileSync(path.join(VAULT, 'CLAUDE.md'), 'utf8');
+  eq('D90: the shipped CLAUDE.md imports AGENTS.md and repeats none of it', V.shimProblems(shim, manual).length, 0);
+  eq('D90: a CLAUDE.md without the import is reported', V.shimProblems('## Claude Code Only\n- x', manual).length, 1);
+  ok('D90: a CLAUDE.md that repeats a section of the manual is reported', V.shimProblems('@AGENTS.md\n\n## Query Protocol\n', manual).some(p => /Query Protocol/.test(p)));
+  ok('D90: the manual names no single agent as the one that runs it', !/Claude Code carries no memory/.test(manual) && /every coding agent/.test(manual));
+  ok('D90: CLAUDE.md, AGENTS.md and HANDOFF.md all have a budget', ['AGENTS.md', 'CLAUDE.md', 'HANDOFF.md'].every(f => R.CONTEXT_BUDGET_TOKENS[f] > 0));
+
+  const d = A.drift(VAULT);
+  eq('D91: every generated file matches .claude/ — run node tools/agents-sync.js', [...d.changed, ...d.stale].join(', '), '');
+  const gated = A.renderSkill('x', '---\nname: x\ndescription: Does x: carefully.\nargument-hint: "[a]"\ndisable-model-invocation: true\n---\n\n# X\n');
+  ok('D91: a gated skill keeps its gate for Codex', /allow_implicit_invocation: false/.test(gated.openai));
+  ok('D91: a generated skill carries only Agent Skills fields', !/disable-model-invocation|argument-hint/.test(gated.skill.split('---')[1]));
+  ok('D91: a gated skill says in words that it is explicit only, quoted as YAML', gated.skill.includes(`description: "Does x: carefully.${A.GATED_NOTE}"`));
+  eq('D91: an open skill gets no openai.yaml', A.renderSkill('y', '---\nname: y\ndescription: Does y.\n---\nbody\n').openai, null);
+  const hooks = JSON.parse(A.renderHooks('{"hooks":{"PostToolUse":[{"matcher":"Write|Edit|MultiEdit","hooks":[{"type":"command","command":"node","args":["${CLAUDE_PROJECT_DIR}/tools/hooks/post-write-check.js"]}]}]}}'));
+  eq('D91: an edit hook matches Codex\'s apply_patch', hooks.hooks.PostToolUse[0].matcher, 'apply_patch|Write|Edit');
+  eq('D91: a hook runs from the git root, since Codex starts in the session cwd', hooks.hooks.PostToolUse[0].hooks[0].command, 'node "$(git rev-parse --show-toplevel)/tools/hooks/post-write-check.js"');
+  eq('D92: on Windows a hook passes its exit code through PowerShell, which would turn a block (2) into a failure (1)', hooks.hooks.PostToolUse[0].hooks[0].commandWindows, 'node "$(git rev-parse --show-toplevel)/tools/hooks/post-write-check.js"; exit $LASTEXITCODE');
+  ok('D91: a Codex agent is read-only', /^sandbox_mode = "read-only"$/m.test(A.renderAgent('a.md', '---\nname: a\ndescription: A.\n---\nDo a.\n')));
+
+  const cwd = path.join(VAULT, 'wiki');
+  eq('D92: a Claude Code edit names its file', H.editedFiles({ cwd, tool_input: { file_path: 'x.md' } }).join(), path.join(cwd, 'x.md'));
+  eq('D92: a Codex apply_patch names every file it adds, updates or moves to',
+    H.editedFiles({ cwd, tool_input: { command: '*** Begin Patch\n*** Update File: a.md\n@@\n-x\n+y\n*** Add File: b/c.md\n+z\n*** Update File: d.md\n*** Move to: e.md\n*** End Patch' } }).map(p => path.relative(cwd, p)).join(),
+    ['a.md', path.join('b', 'c.md'), 'd.md', 'e.md'].join());
+  const stop = require('child_process').spawnSync(process.execPath, [path.join(TOOLS, 'hooks', 'stop-rebuild.js')], { input: '{}', encoding: 'utf8' });
+  ok('D92: the Stop hook answers with JSON when it lets the agent finish', stop.status !== 0 || (() => { try { JSON.parse(stop.stdout); return true; } catch { return false; } })(), stop.stdout);
+
+  const filled = manual.replace(/\{\{OWNER_NAME\}\}/g, 'Mira');
+  ok('D93: the template ships the contributor note in the manual', V.TEMPLATE_ONLY.test(manual) && !V.templateOnlyLeft(manual));
+  ok('D93: a vault whose manual keeps the note is reported', V.templateOnlyLeft(filled));
+  ok('D93: a vault with the note removed passes', !V.templateOnlyLeft(filled.replace(V.TEMPLATE_ONLY, '')));
+  ok('D93: the note points to a brief that exists', fs.existsSync(path.join(VAULT, 'docs', 'for-ai-agents.md')) && /docs\/for-ai-agents\.md/.test(manual));
+}
 eq('D58: a log keeps names as written', W.unlinkedPeople([person, wnode('wiki/journal/journal-2026-09.md', { kind: 'log' }, '---\ntitle: J\n---\n\n## Key Takeaways\n- Priya Shah called.\n')], R.OWNER.slug).length, 0);
 
 // ---------------------------------------------------------------------------
@@ -773,7 +819,7 @@ eq('D58: a log keeps names as written', W.unlinkedPeople([person, wnode('wiki/jo
   eq('D87: a file over its token budget is reported, one under it is not', JSON.stringify(V.overBudget(bx, { 'CLAUDE.md': 500, 'HANDOFF.md': 500, 'MISSING.md': 1 })), JSON.stringify([{ file: 'CLAUDE.md', tokens: 1000, budget: 500 }]));
 }
 ok('D87: over budget warns and names the only remedy — move, never delete (D01)', /never delete or compress it to fit/.test(codeOf('build-index.js')) && !/problems\.push\([^\n]*over its/.test(codeOf('build-index.js')));
-ok('D87: both always-loaded files have a budget', ['CLAUDE.md', 'HANDOFF.md'].every(f => R.CONTEXT_BUDGET_TOKENS[f] > 0));
+ok('D87: the always-loaded files have a budget', ['AGENTS.md', 'HANDOFF.md'].every(f => R.CONTEXT_BUDGET_TOKENS[f] > 0));
 const unscoped = ruleFiles.filter(p => { const fm = V.parseFm(fs.readFileSync(p, 'utf8')); return !fm || !Array.isArray(fm.fm.paths) || !fm.fm.paths.length; }).map(p => path.basename(p));
 ok('D87: every rules file is path-scoped — one without paths: loads at launch and undoes the split', unscoped.length === 0, unscoped.join(', '));
 ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} found`);

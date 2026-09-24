@@ -154,19 +154,20 @@ triage ^UaqsPp3l
 
 Dashed border — a skill only you start, by typing it:
 /vault-compile, /vault-audit, /vault-deep-audit,
-/vault-handoff. Claude may start vault-excalidraw and
-vault-tailor. Captures, the build and the self-test
-are never gated. ^skLegend
+/vault-handoff. The agent may start vault-excalidraw
+and vault-tailor. Captures, the build and the
+self-test are never gated. ^skLegend
 
-6 — What Claude loads, and when ^zoneCtxT
+6 — What the agent loads, and when ^zoneCtxT
 
 Budgets warn, never fail: past its
-token budget, CLAUDE.md or HANDOFF.md
+token budget, AGENTS.md or HANDOFF.md
 warns, and detail moves to a rules
 file, a skill or a node — never deleted. ^ctxNote1
 
-CLAUDE.md — always-on core
-query protocol · judgement rules ^tYqKJTXH
+AGENTS.md — always-on core
+query protocol · judgement rules
+Claude Code reads it via CLAUDE.md ^tYqKJTXH
 
 .claude/rules/ — load by path
 wiki · images · obsidian · tooling ^kpGTotfB
@@ -175,7 +176,7 @@ Skills you start, by typing
 /vault-compile · /vault-audit
 /vault-deep-audit · /vault-handoff ^r9bTOI5y
 
-Skills Claude may start
+Skills the agent may start
 vault-excalidraw · vault-tailor ^sTOv1i3Z
 
 Hooks — enforced, not remembered
@@ -183,7 +184,7 @@ block bash that runs backticks
 refuse CRLF and control bytes
 rebuild a stale index at Stop ^GpbWMnyr
 
-Read-only agents, skip CLAUDE.md
+Read-only agents, skip the manual
 vault-fidelity-verifier
 vault-gap-auditor ^Ccokp5P1
 
@@ -4772,7 +4773,7 @@ skills · agents · rules ^WX67adUY
 			"type": "text",
 			"x": 900,
 			"y": 1110,
-			"width": 422.62359619140625,
+			"width": 420.7196044921875,
 			"height": 100,
 			"angle": 0,
 			"strokeColor": "#868e96",
@@ -4787,21 +4788,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b0j",
 			"roundness": null,
 			"seed": 555009453,
-			"version": 5,
-			"versionNonce": 1687552457,
+			"version": 7,
+			"versionNonce": 534557481,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247152538,
+			"updated": 1790276461489,
 			"link": null,
 			"locked": false,
-			"text": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. Claude may start vault-excalidraw and\nvault-tailor. Captures, the build and the self-test\nare never gated.",
-			"rawText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. Claude may start vault-excalidraw and\nvault-tailor. Captures, the build and the self-test\nare never gated.",
+			"text": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. The agent may start vault-excalidraw\nand vault-tailor. Captures, the build and the\nself-test are never gated.",
+			"rawText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. The agent may start vault-excalidraw\nand vault-tailor. Captures, the build and the\nself-test are never gated.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. Claude may start vault-excalidraw and\nvault-tailor. Captures, the build and the self-test\nare never gated.",
+			"originalText": "Dashed border — a skill only you start, by typing it:\n/vault-compile, /vault-audit, /vault-deep-audit,\n/vault-handoff. The agent may start vault-excalidraw\nand vault-tailor. Captures, the build and the\nself-test are never gated.",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null
@@ -4841,7 +4842,7 @@ skills · agents · rules ^WX67adUY
 			"type": "text",
 			"x": 20,
 			"y": 1376,
-			"width": 328.2597961425781,
+			"width": 361.93975830078125,
 			"height": 25,
 			"angle": 0,
 			"strokeColor": "#868e96",
@@ -4856,21 +4857,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b0l",
 			"roundness": null,
 			"seed": 308793494,
-			"version": 3,
-			"versionNonce": 1964486474,
+			"version": 5,
+			"versionNonce": 370125621,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247152538,
+			"updated": 1790276461486,
 			"link": null,
 			"locked": false,
-			"text": "6 — What Claude loads, and when",
-			"rawText": "6 — What Claude loads, and when",
+			"text": "6 — What the agent loads, and when",
+			"rawText": "6 — What the agent loads, and when",
 			"fontSize": 20,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "6 — What Claude loads, and when",
+			"originalText": "6 — What the agent loads, and when",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null
@@ -4897,8 +4898,8 @@ skills · agents · rules ^WX67adUY
 				"type": 3
 			},
 			"seed": 86748106,
-			"version": 5,
-			"versionNonce": 1138785681,
+			"version": 6,
+			"versionNonce": 896462601,
 			"isDeleted": false,
 			"boundElements": [
 				{
@@ -4910,7 +4911,7 @@ skills · agents · rules ^WX67adUY
 					"type": "arrow"
 				}
 			],
-			"updated": 1790247175053,
+			"updated": 1790276461486,
 			"link": null,
 			"locked": false
 		},
@@ -5014,8 +5015,8 @@ skills · agents · rules ^WX67adUY
 				"type": 3
 			},
 			"seed": 1771119382,
-			"version": 5,
-			"versionNonce": 1547066446,
+			"version": 6,
+			"versionNonce": 1075201418,
 			"isDeleted": false,
 			"boundElements": [
 				{
@@ -5027,7 +5028,7 @@ skills · agents · rules ^WX67adUY
 					"type": "arrow"
 				}
 			],
-			"updated": 1790247175059,
+			"updated": 1790276461488,
 			"link": null,
 			"locked": false
 		},
@@ -5036,7 +5037,7 @@ skills · agents · rules ^WX67adUY
 			"type": "text",
 			"x": 40,
 			"y": 1620,
-			"width": 332.3197326660156,
+			"width": 335.66375732421875,
 			"height": 80,
 			"angle": 0,
 			"strokeColor": "#868e96",
@@ -5051,21 +5052,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b0q",
 			"roundness": null,
 			"seed": 232177994,
-			"version": 5,
-			"versionNonce": 657442268,
+			"version": 7,
+			"versionNonce": 408428707,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247205792,
+			"updated": 1790276461489,
 			"link": null,
 			"locked": false,
-			"text": "Budgets warn, never fail: past its\ntoken budget, CLAUDE.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
-			"rawText": "Budgets warn, never fail: past its\ntoken budget, CLAUDE.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
+			"text": "Budgets warn, never fail: past its\ntoken budget, AGENTS.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
+			"rawText": "Budgets warn, never fail: past its\ntoken budget, AGENTS.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "Budgets warn, never fail: past its\ntoken budget, CLAUDE.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
+			"originalText": "Budgets warn, never fail: past its\ntoken budget, AGENTS.md or HANDOFF.md\nwarns, and detail moves to a rules\nfile, a skill or a node — never deleted.",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null
@@ -5127,8 +5128,8 @@ skills · agents · rules ^WX67adUY
 				"type": 3
 			},
 			"seed": 751044618,
-			"version": 5,
-			"versionNonce": 2080053619,
+			"version": 6,
+			"versionNonce": 1256493766,
 			"isDeleted": false,
 			"boundElements": [
 				{
@@ -5140,7 +5141,7 @@ skills · agents · rules ^WX67adUY
 					"type": "arrow"
 				}
 			],
-			"updated": 1790247175059,
+			"updated": 1790276461489,
 			"link": null,
 			"locked": false
 		},
@@ -5186,10 +5187,10 @@ skills · agents · rules ^WX67adUY
 		{
 			"id": "tYqKJTXH",
 			"type": "text",
-			"x": 145.88811492919922,
-			"y": 1475,
-			"width": 248.22377014160156,
-			"height": 40,
+			"x": 126.85614013671875,
+			"y": 1465,
+			"width": 286.2877197265625,
+			"height": 60,
 			"angle": 0,
 			"strokeColor": "#1971c2",
 			"backgroundColor": "transparent",
@@ -5203,21 +5204,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b0u",
 			"roundness": null,
 			"seed": 814492950,
-			"version": 5,
-			"versionNonce": 1706261858,
+			"version": 6,
+			"versionNonce": 78742806,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247175058,
+			"updated": 1790276461488,
 			"link": null,
 			"locked": false,
-			"text": "CLAUDE.md — always-on core\nquery protocol · judgement rules",
-			"rawText": "CLAUDE.md — always-on core\nquery protocol · judgement rules",
+			"text": "AGENTS.md — always-on core\nquery protocol · judgement rules\nClaude Code reads it via CLAUDE.md",
+			"rawText": "AGENTS.md — always-on core\nquery protocol · judgement rules\nClaude Code reads it via CLAUDE.md",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "coreBox",
-			"originalText": "CLAUDE.md — always-on core\nquery protocol · judgement rules",
+			"originalText": "AGENTS.md — always-on core\nquery protocol · judgement rules\nClaude Code reads it via CLAUDE.md",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null
@@ -5320,21 +5321,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b0x",
 			"roundness": null,
 			"seed": 417594582,
-			"version": 5,
-			"versionNonce": 87286547,
+			"version": 6,
+			"versionNonce": 800446705,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247175059,
+			"updated": 1790276461488,
 			"link": null,
 			"locked": false,
-			"text": "Skills Claude may start\nvault-excalidraw · vault-tailor",
-			"rawText": "Skills Claude may start\nvault-excalidraw · vault-tailor",
+			"text": "Skills the agent may start\nvault-excalidraw · vault-tailor",
+			"rawText": "Skills the agent may start\nvault-excalidraw · vault-tailor",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "skOpen",
-			"originalText": "Skills Claude may start\nvault-excalidraw · vault-tailor",
+			"originalText": "Skills the agent may start\nvault-excalidraw · vault-tailor",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null
@@ -5381,9 +5382,9 @@ skills · agents · rules ^WX67adUY
 		{
 			"id": "Ccokp5P1",
 			"type": "text",
-			"x": 1174.3441162109375,
+			"x": 1177.8321228027344,
 			"y": 1665,
-			"width": 271.311767578125,
+			"width": 264.33575439453125,
 			"height": 60,
 			"angle": 0,
 			"strokeColor": "#6741d9",
@@ -5398,21 +5399,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b0z",
 			"roundness": null,
 			"seed": 1671380822,
-			"version": 5,
-			"versionNonce": 869074851,
+			"version": 6,
+			"versionNonce": 214905984,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247175059,
+			"updated": 1790276461489,
 			"link": null,
 			"locked": false,
-			"text": "Read-only agents, skip CLAUDE.md\nvault-fidelity-verifier\nvault-gap-auditor",
-			"rawText": "Read-only agents, skip CLAUDE.md\nvault-fidelity-verifier\nvault-gap-auditor",
+			"text": "Read-only agents, skip the manual\nvault-fidelity-verifier\nvault-gap-auditor",
+			"rawText": "Read-only agents, skip the manual\nvault-fidelity-verifier\nvault-gap-auditor",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "agentsBx",
-			"originalText": "Read-only agents, skip CLAUDE.md\nvault-fidelity-verifier\nvault-gap-auditor",
+			"originalText": "Read-only agents, skip the manual\nvault-fidelity-verifier\nvault-gap-auditor",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null

@@ -8,8 +8,8 @@ disable-model-invocation: true
 # Compile raw/ into the wiki
 
 The owner typed `/vault-compile`, so compiling is authorised for this run
-(`CLAUDE.md` § Compile and Audit, D78). Compile cost is never the metric;
-fidelity is. If this session has not read `CLAUDE.md` and `HANDOFF.md`, read
+(`AGENTS.md` § Compile and Audit, D78). Compile cost is never the metric;
+fidelity is. If this session has not read `AGENTS.md` and `HANDOFF.md`, read
 them first.
 
 Arguments: `$ARGUMENTS`
@@ -83,7 +83,7 @@ routed to the wrong topic. Optional, and it shapes only the plan.
    compares the full text, every figure transcription and every hub claim
    with the original, and a skeptic tries to refute each finding; fix what
    survives. Dispatch the pass as the `vault-fidelity-verifier` agent, with the
-   source path and the node paths: it is read-only and skips `CLAUDE.md`,
+   source path and the node paths: it is read-only and skips the manual,
    carrying only its own brief (D87). A paper compile in Vifert's vault passed the builder and still carried
    27 fidelity defects that only this pass found. **NotebookLM may be one of the
    readers in this pass** (§ 4): it is grounded and cites, so it is good
@@ -173,12 +173,12 @@ is the retrievable version of this part of the skill.
   and how many batches remain.
 - Do not run `node tools/audit.js`, and do not start the next batch: each is
   the owner's to start (D78).
-- Anything found broken during the compile is a defect: `CLAUDE.md` § Defect
+- Anything found broken during the compile is a defect: `AGENTS.md` § Defect
   Discipline.
 
 ## 6. Machine notes for compiling
 
-Moved here from `CLAUDE.md` § Working Notes, since only a compile needs them
+Moved here from `AGENTS.md` § Working Notes, since only a compile needs them
 (D87). Rewrite any that stops being true on this machine.
 
 - **PDF and image tooling** (`pip install --user pymupdf pdfplumber pdfminer.six

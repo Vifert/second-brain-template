@@ -1,6 +1,6 @@
 # tools/
 
-The vault's maintenance tooling. **This is not disposable** — `CLAUDE.md` says
+The vault's maintenance tooling. **This is not disposable** — `AGENTS.md` says
 one-off scripts belong in the session scratchpad, and that rule still holds for
 migrations, but these files are the mechanism the operating manual depends on.
 They live here, in git, deliberately.
@@ -10,7 +10,7 @@ They live here, in git, deliberately.
 Until 2026-09-09 the index builder lived only in a session-scoped temp
 directory (D11). That meant:
 
-- the **validator CLAUDE.md mandates on every capture** vanished at session end;
+- the **validator the manual mandates on every capture** vanished at session end;
 - each new session reconstructed it from prose, so the logic could drift;
 - the audit probe was never a file at all, only inline throwaway code — which is
   how a probe shipped that lowercased the index but not the query, and reported
@@ -31,12 +31,13 @@ kept tested.
 | `bench.js`, `lib/bench.js` | Scores a compiled benchmark vault — cost, routing, fidelity, forbidden values, graph health — deterministically, without an LLM; `--prepare <dir>` sets up a copy for a benchmark compile (see `bench/README.md`) |
 | `probes.json` | The probe corpus: routing terms, `_must_route` (term → nodes it must reach), `_forbidden` (corrected claims that must never return, each with `catches` and `passes` examples), `_benchmark` (cost queries), `us_spelling`. **Data, not code — grow it.** |
 | `excalidraw.js` | Creates, patches, inspects, lints, transcribes and renders Excalidraw drawings — the engine of the `vault-excalidraw` skill (`.claude/skills/vault-excalidraw/`). Rendering and text measurement run the Excalidraw build bundled in the Obsidian plugin, in a headless Chromium browser with the network blocked — every installed browser is tried in turn, and `check` names the one that answered (D77). `save` brings a live-canvas scene back without losing a drawing's links or embedded files. |
+| `agents-sync.js`, `lib/agents.js` | Generates the layer other coding agents read from `.claude/`, the one source (D91): `.agents/skills/` (skills trimmed to the Agent Skills fields; `agents/openai.yaml` keeps each gated skill explicit-only in Codex), `.codex/agents/*.toml` (read-only) and `.codex/hooks.json` (git-root commands). `--check` writes nothing and exits 1 while a generated file differs; it never deletes. |
 | `selftest.js` | Regression tests for the tooling itself, including the check that `DEFECTS.md` only claims guards that exist. |
 | `DEFECTS.md` | **The defect ledger** — every defect, its root cause, fix and guard. |
 | `lib/text.js` | The single normaliser — comparisons go through `matches()` — plus `grepI()` (what the L0 query really does), `spellingVariants()` and `hyphenVariants()` for routing, and `fenceProblems()`, which replays a fence's examples. |
 | `lib/vault.js` | Pure helpers shared by all three tools: frontmatter (every YAML list form), CommonMark fences and code spans, links, anchors and media, the one takeaways parser, status logs and real-date checks, volatile markers, mention finding, the pronoun heuristic, the transcription check, the `[sic]` side-taking check, `codeIdentifiers()`, `openingPronoun()`, and the Obsidian-era checks: `tagProblems()`, `nearDuplicateTags()`, `inlineTags()`, `secretSettings()`, `rewrittenLines()`, `strayNote()`, `settingDrift()`, `iconlessFolders()` and `referenceBlocks()`. |
 | `lib/writechecks.js` | The checks a single write can break, run by every build (D78): `forbiddenClaims()`, `fenceExampleIssues()`, `sidedSic()`, `unlinkedPeople()`. |
-| `hooks/`, `lib/hooks.js` | Claude Code hooks, registered in `.claude/settings.json`: `stop-rebuild.js` (Stop) rebuilds a stale index at the end of a turn and keeps Claude working on any problem (D87); `post-write-check.js` (after Write or Edit) refuses a `.md` with CRLF or control bytes (D76, D03); `pre-bash-guard.js` (before Bash) blocks Python `write_text` and bash that would execute backticks (D76, D13). The checks are pure functions in `lib/hooks.js`, unit-tested by the self-test |
+| `hooks/`, `lib/hooks.js` | The hooks, registered in `.claude/settings.json` for Claude Code and generated into `.codex/hooks.json` for Codex: `stop-rebuild.js` (Stop) rebuilds a stale index at the end of a turn and keeps the agent working on any problem, always answering with JSON (D87, D92); `post-write-check.js` (after Write, Edit or Codex's `apply_patch`, whose files `editedFiles()` reads, D92) refuses a `.md` with CRLF or control bytes (D76, D03); `pre-bash-guard.js` (before Bash) blocks Python `write_text` and bash that would execute backticks (D76, D13). The checks are pure functions in `lib/hooks.js`, unit-tested by the self-test |
 | `graph-colours.js`, `lib/graphcolours.js` | Assigns each folder its colour in Obsidian's graph and writes the colour groups to `.obsidian/graph.json` (the tool owns the list), and the tag and attachment node colours through Style Settings (`GRAPH.themeNodes`): every colour at least `GRAPH.minContrast` against the theme background in `rules.js`, every pair at least `GRAPH.minDeltaE` apart (CIEDE2000), the most interlinked folders farthest apart, existing colours kept. `--dry` prints without writing. The build warns on a missing, stale or failing group (D86) |
 | `lib/excalidraw.js` | The plugin's `.excalidraw.md` format read and written section by section (compressed or plain, LF or CRLF), `sceneHash()` for drawing transcriptions (D72), `describe()`, `lint()`, `transcribe()` and the connector geometry. Loads in node and in the render page. |
 | `lib/rules.js` | **The only copy of the vault's rules** — and of whose vault it is: `OWNER` (name, stated pronouns, own person node, identity node), read by the pronoun check, the people timeline, the Now page and the master index. Then caps, body caps by kind, near-cap margin, cost target, source baseline, allowed subfolders, media rules, statuses, volatile markers, the registered tag facets and synonyms, secret-setting patterns, where notes may live, and the Obsidian settings the rules depend on. |
@@ -74,6 +75,7 @@ kept tested.
 node tools/selftest.js      # tooling is sound
 node tools/build-index.js   # rebuild + validate  (run after ANY content change)
 node tools/audit.js         # full audit — only through /vault-audit
+node tools/agents-sync.js   # after changing a skill, agent or hook in .claude/
 ```
 
 Order matters: `build-index.js` regenerates the TSVs that `audit.js` reads, so a
@@ -81,7 +83,7 @@ stale index would make the audit report nonsense.
 
 ## When you find a defect
 
-Follow `CLAUDE.md` § Defect Discipline: fix it, find the root cause, add the
+Follow `AGENTS.md` § Defect Discipline: fix it, find the root cause, add the
 cheapest guard that stops the class, then append a row to `DEFECTS.md` and cite
 its ID in the guard's code. `selftest.js` holds the two in step.
 

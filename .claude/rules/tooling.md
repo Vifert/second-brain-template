@@ -1,9 +1,10 @@
 ---
 paths:
   - "tools/**"
+  - ".claude/**"
 ---
 
-Notes for working on `tools/`. They load when a tool is read. Moved out of `CLAUDE.md` so they load only when needed (D87).
+Notes for working on `tools/` and `.claude/`. They load when a file in either is read. Moved out of the manual (`AGENTS.md`) so they load only when needed (D87).
 
 ## Version Control
 
@@ -34,9 +35,12 @@ bash that would execute backticks (D13), CRLF from Python's `write_text`
 (D76), and control bytes from a `\u` escape typed into Write or Edit (D03).
 A Stop hook rebuilds a stale index at the end of every turn and keeps working
 until the build is clean (D87). A blocked command says why; fix the command,
-never the hook, unless the hook is wrong — then it is a defect.
+never the hook, unless the hook is wrong — then it is a defect. The same
+scripts serve Codex through `.codex/hooks.json`: they read Codex's
+`apply_patch` edits as well as Claude Code's Write and Edit, and a Stop hook
+always answers with JSON (D92).
 
-What each hook guards, in full (moved from CLAUDE.md § Working Notes):
+What each hook guards, in full (moved from AGENTS.md § Working Notes):
 
 - **Long heredocs fail on this Windows shell.** Use the Write tool for file
   content, or a script file. This has bitten repeatedly — it is not a maybe.
@@ -55,3 +59,37 @@ What each hook guards, in full (moved from CLAUDE.md § Working Notes):
   happened in `tools/DEFECTS.md` (D03). To put an escape sequence
   in a file as text, write it from a script (`chr(92) + "u0001"`). The self-test
   scans every markdown file for control bytes.
+
+## Fences
+
+A correction is swept, then fenced in `tools/probes.json` `_forbidden`
+(AGENTS.md § Capture Protocol, D37). **A fence proves itself both ways** (D50).
+Every `_forbidden` entry carries `catches` — the wrong claims it must match —
+and `passes` — the nearby true claims it must let through; the build replays
+both. Fence the error, not the topic: the first such fence forbade "is his
+manager" when only the employer was wrong — and a later, true statement about
+that same person's role would have failed. **When a new fact touches a fenced
+claim, add it to `passes` first.** Moved here from the manual (D87), since a
+fence is written in `tools/`.
+
+## Every Agent
+
+The vault runs under any coding agent, and `.claude/` is the one source of its
+skills, agents and hooks (D91). Claude Code reads `.claude/` directly; for the
+others, `node tools/agents-sync.js` writes:
+
+| Generated | From | Read by |
+| --- | --- | --- |
+| `.agents/skills/<name>/` | `.claude/skills/<name>/`, with the frontmatter cut to the Agent Skills fields | Codex, Gemini CLI and other Agent Skills readers |
+| `.agents/skills/<name>/agents/openai.yaml` | `disable-model-invocation: true` — `allow_implicit_invocation: false`, so Codex starts it only on `$name` | Codex |
+| `.codex/agents/<name>.toml` | `.claude/agents/<name>.md`, in a read-only sandbox | Codex |
+| `.codex/hooks.json` | the hooks in `.claude/settings.json`, run from the git root | Codex, once the project and each hook are trusted in `/hooks` |
+
+- **Edit `.claude/`, never a generated file**, then run the sync and commit
+  both. The build warns and the self-test fails while a generated file differs
+  from its source; `node tools/agents-sync.js --check` says which.
+- **The sync never deletes.** A skill removed from `.claude/` leaves its old
+  copy behind; `--check` names it, and a person deletes it.
+- **The manual is `AGENTS.md`** (D90); `CLAUDE.md` holds only `@AGENTS.md` and
+  Claude-only lines, and the build fails a `CLAUDE.md` that repeats a section of
+  the manual.

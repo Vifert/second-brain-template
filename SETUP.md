@@ -1,25 +1,27 @@
-# SETUP — instructions for the Claude agent
+# SETUP — instructions for the setup agent
 
-> **You are the reader of this file, not your user.** It tells you, the Claude
-> Code agent, how to set up a second-brain vault for the person you are working
+> **You are the reader of this file, not your user.** It tells you, the coding
+> agent — Claude Code, Codex, or any other that reads `AGENTS.md` — how to set
+> up a second-brain vault for the person you are working
 > with and how to guide them through every step. They should never need to
 > read it. Talk to them in plain language; explain what each step is for in a
 > sentence; ask whenever a decision is theirs.
 >
 > **The architecture and workflow you are installing were designed and built by
 > Vifert.** Whatever else you change, the credit block at the top of
-> `CLAUDE.md` stays exactly as it is, in every vault you set up (§ 11).
+> `AGENTS.md` stays exactly as it is, in every vault you set up (§ 11).
 
 ---
 
 ## 0. Read this first
 
-**Read, in order**: this whole file, then `CLAUDE.md` (the rules the vault runs
-by), then `tools/README.md` (what each tool guarantees), then
+**Read, in order**: this whole file, then `AGENTS.md` (the rules the vault runs
+by; Claude Code has it already, through `CLAUDE.md`), then `tools/README.md` (what each tool guarantees), then
 `wiki/tooling/second-brain-architecture.md` (the design in one page; its
 drawing is transcribed in `second-brain-architecture-figure.md`, beside it). Do not start work until you have read
-all four, and the four files in `.claude/rules/` that `CLAUDE.md` points to —
-Claude Code loads them only when a matching file is read, but you will touch
+all four, and the four files in `.claude/rules/` that `AGENTS.md` points to —
+Claude Code loads them only when a matching file is read, and other agents
+not at all, but you will touch
 every part of the vault. The rules are long on purpose; every one exists
 because something broke — `tools/DEFECTS.md` says what, and why.
 
@@ -54,12 +56,12 @@ themselves.
    pushing, uploading anything to NotebookLM, installing software, changing
    system settings or PATH.
 4. **Never guess a personal fact.** Name, pronouns, work, family, location —
-   only what your user states. Unknown stays absent (`CLAUDE.md` § People).
+   only what your user states. Unknown stays absent (`AGENTS.md` § People).
    Refer to your user by their name, or as "they", until they state pronouns.
-5. **Edit files with the Edit tool, or with a script that writes bytes.** Never
+5. **Edit files with your agent's edit tool, or with a script that writes bytes.** Never
    let a scripted edit rewrite a file's line endings (D76) — Python's
    `pathlib.write_text` does that on Windows. Anything containing backticks or
-   backslashes goes through the Write tool, never a shell heredoc (D13).
+   backslashes goes through a file-writing tool, never a shell heredoc (D13).
 6. **Obsidian should be closed while you edit anything in `.obsidian/`.** A
    running Obsidian writes its in-memory settings back over your edits (D69).
    When you need it closed, ask; when you are done, ask your user to reopen it.
@@ -67,7 +69,7 @@ themselves.
    phase is not done until its checks pass.
 8. **Record progress in `HANDOFF.md` as you go.** Setup can take more than one
    session — your user may hit a usage limit, or you may ask them to restart
-   Claude Code in another folder. A later session must be able to continue from
+   their agent in another folder. A later session must be able to continue from
    `HANDOFF.md` alone. Put interview answers and "next step: § …" under
    `**Setup**:` in its Current State.
 9. **The template folder is read-only.** Your user may have downloaded it
@@ -78,6 +80,11 @@ themselves.
    with your user the full path of the vault this setup is for — normally the
    folder this session runs in. If you were started inside the template folder,
    ask for their vault's path and say you will work there.
+10. **Know which agent you are, and say it.** The vault runs under any coding
+   agent, but a few steps differ: restarting (§ 4A.5), hooks and trust (§ 4C),
+   memory (§ 10). Record it in `HANDOFF.md` under `**Setup**:` as
+   `Agent: Claude Code` (or `Codex`, or the agent's name). A step marked for
+   one agent applies to that agent only; every other step applies to all.
 
 ---
 
@@ -98,7 +105,7 @@ the command.
 | GitHub MCP | Look for tools named like `mcp__github__create_repository` | Creating the private repo | Ask your user to set it up, or create the repo on github.com (§ 9) |
 | Python 3.10+ (optional) | `python --version` or `python3 --version` | PDF, Word and PowerPoint extraction during compiles | python.org |
 | uv (optional) | `uv --version` | Installs the NotebookLM CLI | § 7 |
-| ripgrep (optional) | `rg --version` | Fast index greps | The Grep tool works without it |
+| ripgrep (optional) | `rg --version` | Fast index greps | Claude Code's Grep tool works without it; other agents use `grep` |
 
 The tools run in the vault this setup is for, never in the template folder
 (ground rule 9): in § 4A once they are copied in (§ 4A.4), in § 4B in the
@@ -112,7 +119,7 @@ node tools/excalidraw.js check
 
 If any fails on this machine, stop and fix that first (§ 14). You never run
 `node tools/audit.js` yourself: the audit is gated behind `/vault-audit`, which
-only your user starts (`CLAUDE.md` § Compile and Audit).
+only your user starts (`AGENTS.md` § Compile and Audit).
 
 **Plugins.** Excalidraw is required: ask your user, then run
 `node tools/install-excalidraw.js`, then `node tools/excalidraw.js check`, and
@@ -126,7 +133,8 @@ add its id (`calendar`, `obsidian-icon-folder`, `templater-obsidian`) to
 Restricted mode must be off for any community plugin to load.
 
 **Platform notes.** Claude Code on Windows runs its shell through Git Bash:
-use forward slashes and `/dev/null`. Paths with spaces need quotes. On Windows
+use forward slashes and `/dev/null`. Other agents may use PowerShell there;
+every tool is a plain `node` command and runs in either. Paths with spaces need quotes. On Windows
 you cannot rename a folder that a running program is using as its working
 directory — § 4B.2 plans around that.
 
@@ -181,7 +189,7 @@ they decline to answer stays out.
    rename, drop or add. Suggest from what you learn: research papers →
    `research`; a band, a sport, a garden → its own topic. In § 4A, their
    existing folders are the best hint. Keep `profile`, `people`, `journal` and
-   `tooling`: the tools and CLAUDE.md depend on them.
+   `tooling`: the tools and AGENTS.md depend on them.
 6. **How answers should read.** Short or detailed? Code only for coding
    questions? Tables or prose? This goes on their identity card.
 7. **Anything about themselves they want on the identity card** — what they do,
@@ -193,7 +201,7 @@ they decline to answer stays out.
    is written into `.claude/skills/vault-compile/SKILL.md` § 4 as
    `{{NOTEBOOKLM_POLICY}}`.
 10. **Drawing share links.** May a drawing go to excalidraw.com as an encrypted
-    share link when they ask for one? (CLAUDE.md already says "only when I ask".)
+    share link when they ask for one? (AGENTS.md already says "only when I ask".)
 11. **GitHub.** Their GitHub username, and a name for the private repository —
     suggest the vault's folder name.
 
@@ -229,7 +237,7 @@ Report to your user, before changing anything:
 - an existing templates folder, and existing `CLAUDE.md`, `AGENTS.md` or
   `HANDOFF.md`;
 - any top-level names that collide with ours: `wiki/`, `raw/`, `tools/`,
-  `output/`, `templates/`, `Excalidraw/`, `.claude/`. A collision is a
+  `output/`, `templates/`, `Excalidraw/`, `.claude/`, `.agents/`, `.codex/`. A collision is a
   question for your user, never a silent merge.
 
 ### 4A.2 Back up — never skip this
@@ -255,10 +263,12 @@ without asking:
 | --- | --- | --- |
 | `tools/` | `tools/` | Whole folder |
 | `.claude/skills/` — all six: `vault-excalidraw`, `vault-tailor`, `vault-compile`, `vault-audit`, `vault-deep-audit`, `vault-handoff` | same | If they already have `.claude/`, add beside what is there |
-| `.claude/rules/` | same | The four path-scoped rules files the core `CLAUDE.md` points to; each loads only when a file it covers is read |
+| `.claude/rules/` | same | The four path-scoped rules files `AGENTS.md` points to; Claude Code loads each when a file it covers is read, other agents read one when the manual says |
 | `.claude/agents/` | same | `vault-fidelity-verifier` and `vault-gap-auditor`, the read-only agents `/vault-compile` and `/vault-deep-audit` dispatch |
 | `.claude/settings.json` | same | The hooks (`tools/hooks/`). If they already have one, add its `hooks` entries to theirs and leave their other settings alone |
-| `CLAUDE.md` | `CLAUDE.md` | If they already had one, save theirs as `raw/their-previous-CLAUDE.md`, show them its rules, and add the ones they still want to the end of the new `CLAUDE.md` under `## My Additions` |
+| `AGENTS.md` | `AGENTS.md` | The manual every agent reads. Remove the block from `<!-- template-only` to `<!-- /template-only -->`: it is for contributors to the template, and the build fails a vault that keeps it (D93). If they already had an `AGENTS.md`, save theirs as `raw/their-previous-AGENTS.md`, show them its rules, and add the ones they still want to the end of the new one under `## My Additions` |
+| `CLAUDE.md` | `CLAUDE.md` | Claude Code's entry point: it imports `AGENTS.md`. If they already had one, save theirs as `raw/their-previous-CLAUDE.md` and treat its rules the same way — into `AGENTS.md` § My Additions, so every agent sees them; only a line that is true for Claude Code alone stays in `CLAUDE.md` (D90) |
+| `.agents/`, `.codex/` | same | The skills, agents and hooks other agents read, generated from `.claude/` (`node tools/agents-sync.js`, D91). Copy them whatever agent your user runs today: they cost nothing and let them switch later. If they already have `.codex/hooks.json`, merge its `hooks` entries with theirs |
 | `HANDOFF.md` | `HANDOFF.md` | If they had one, compile it like any source |
 | `SETUP.md` | `SETUP.md` | A working copy so the next session can continue; removed in § 12 |
 | `templates/` | `templates/` | Merge with theirs (§ 8); on a name clash, keep theirs and ask |
@@ -266,22 +276,23 @@ without asking:
 | `wiki/` | `wiki/` | Only the `.md` nodes under `wiki/tooling/` and `wiki/profile/owner-identity.md`. Never the `_*.tsv` or `_index.md` files: the builder generates those |
 | `.gitignore`, `.gitattributes` | same | Merge line by line with theirs |
 | `.obsidian/` settings | — | **Never copy the folder.** § 5 merges only the settings the rules depend on, and only for the plugins your user installs |
-| `bench/`, `docs/`, `.github/`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `CHANGELOG.md`, `MAINTAINING.md`, `UPGRADING.md`, `ROADMAP.md`, `AGENTS.md`, `CITATION.cff`, `release-please-config.json`, `.release-please-manifest.json` | — | **Never copy** — they belong to the template's repository, not to a vault |
+| `bench/`, `docs/`, `.github/`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `CHANGELOG.md`, `MAINTAINING.md`, `UPGRADING.md`, `ROADMAP.md`, `CITATION.cff`, `release-please-config.json`, `.release-please-manifest.json` | — | **Never copy** — they belong to the template's repository, not to a vault |
 
 Then create the empty folders `raw/`, `raw/daily/`, `raw/_compiled/` and
 `output/`, each with an empty `.gitkeep`, and run the § 1 tool check here, in
 their vault.
 
-### 4A.5 Restart Claude Code in their vault
+### 4A.5 Restart the agent in their vault
 
-A session loads `CLAUDE.md` and new skills only when it starts, so Claude Code
+A session loads the manual and new skills only when it starts, so your agent
 must restart before the rest of the setup. Write to their `HANDOFF.md`, under
 `**Setup**:` in Current State, "Setup in progress — converting an existing
-vault; next step: § 4A.6", with the interview answers. Then ask your user to
-quit Claude Code and start it again **in their vault folder** — the same folder
-if you were already started there — and say **"Continue the setup in
-SETUP.md."** The next session reads `CLAUDE.md`, then `HANDOFF.md`, then the
-working copy of this file in their vault, and picks up at § 4A.6.
+vault; next step: § 4C, then § 4A.6", with the interview answers. Then ask
+your user to quit their agent and start it again **in their vault folder** —
+the same folder if you were already started there — and say **"Continue the
+setup in SETUP.md."** The next session reads `AGENTS.md` (Claude Code:
+through `CLAUDE.md`), then `HANDOFF.md`, then the working copy of this file in
+their vault, does § 4C for its agent, and picks up at § 4A.6.
 
 ### 4A.6 Configure
 
@@ -310,9 +321,9 @@ from — PDFs, documents, exports, links?"**
 - **If no**: create `raw/import/` and move their whole knowledge base into it,
   keeping its folder structure. It becomes the source.
 
-Either way, everything moves except what the system owns (`CLAUDE.md`,
+Either way, everything moves except what the system owns (`AGENTS.md`, `CLAUDE.md`,
 `HANDOFF.md`, `README.md`, `SETUP.md`, `tools/`, `templates/`, `Excalidraw/`,
-`raw/`, `output/`, `.claude/`). An existing `wiki/` folder of theirs is a
+`raw/`, `output/`, `.claude/`, `.agents/`, `.codex/`). An existing `wiki/` folder of theirs is a
 collision (§ 4A.1): it moves into `raw/import/` with the rest. `raw/sources/`
 and `raw/import/` do not ship with the template — they exist only during a
 conversion and empty as batches compile.
@@ -349,7 +360,7 @@ cheaper.
 ### 4A.9 Hand the compile to your user
 
 You cannot compile: `/vault-compile` carries `disable-model-invocation: true`,
-so only your user can start it (`CLAUDE.md` § Compile and Audit). Tell them:
+so only your user can start it (`AGENTS.md` § Compile and Audit). Tell them:
 
 > Type **`/vault-compile`**. The first run sees how much is waiting, groups it
 > into batches of about one session each — sources first — writes that plan
@@ -360,11 +371,11 @@ so only your user can start it (`CLAUDE.md` § Compile and Audit). Tell them:
 ### 4A.10 While the batches run
 
 A vault of a few hundred notes takes several sessions. That is fine: compile
-cost is never the metric (`CLAUDE.md` § Prime Directive), fidelity is. Every
+cost is never the metric (`AGENTS.md` § Prime Directive), fidelity is. Every
 batch ends with a clean build and a short report; commit and push after each
 (§ 9, once the repository exists).
 
-`raw/_compiled/` holds their original notes after compiling. `CLAUDE.md` says
+`raw/_compiled/` holds their original notes after compiling. `AGENTS.md` says
 it is disposable, meaning the vault must never *need* it. Whether to delete it
 is always your user's decision, never yours.
 
@@ -399,16 +410,20 @@ choice. The vault's name appears nowhere in the tools.
 3. Rename the folder from its parent directory, e.g.
    `mv "<parent>/second-brain-template" "<parent>/<name>"` (keep whatever the
    folder is currently called; it may not be `second-brain-template`). **On
-   Windows this usually fails** while Claude Code is running inside the folder;
-   if it does, ask your user to exit Claude Code and rename the folder in
-   Explorer or Finder.
-4. Either way, ask your user to open Claude Code **in the renamed folder** and
-   say **"Continue the setup in SETUP.md."** The new session starts at § 4B.3
-   with the right project path, which the memory folder and `CLAUDE.md` depend on.
+   Windows this usually fails** while the agent is running inside the folder;
+   if it does, ask your user to exit it and rename the folder in Explorer or
+   Finder.
+4. Either way, ask your user to start their agent **in the renamed folder**
+   and say **"Continue the setup in SETUP.md."** The new session does § 4C for
+   its agent, then § 4B.3, with the right project path, which the memory
+   folder (§ 10) and `AGENTS.md` depend on.
 
 ### 4B.3 Configure
 
-Do § 6 (owner, topics, tokens, icons, probes) and § 8 (templates). § 5 needs no
+Remove the block from `<!-- template-only` to `<!-- /template-only -->` in
+`AGENTS.md`: it is for contributors to the template, and the build fails a
+vault that keeps it once § 6 fills in their name (D93). Then do § 6 (owner,
+topics, tokens, icons, probes) and § 8 (templates). § 5 needs no
 merging here: the settings in this template's `.obsidian/` are already the
 right ones. Check them anyway: `node tools/build-index.js` reports any setting
 that drifted.
@@ -435,6 +450,59 @@ one-line trace (`path: index → 1 card`). This teaches the vault better than an
 explanation.
 
 Then § 9, § 7 (if wanted), § 10, § 11, § 12.
+
+---
+
+## 4C. Your user's agent
+
+The vault runs under any coding agent. `AGENTS.md` is the manual for all of
+them; `.claude/` is the one source of the skills, agents and hooks, and
+`node tools/agents-sync.js` generates the copies other agents read
+(`.claude/rules/tooling.md` § Every Agent). Do the part for the agent your
+user runs (ground rule 10), then tell them in two lines what their agent
+enforces and what it only reads as a rule.
+
+### Claude Code
+
+Nothing more to do: `CLAUDE.md` imports `AGENTS.md`, and the rules, skills,
+agents and hooks in `.claude/` load on their own. The four gated skills refuse
+to start unless your user types them.
+
+### Codex
+
+1. **Trust the project.** Codex loads a project's `.codex/` folder — the two
+   read-only agents and the hooks — only once the project is trusted. When
+   Codex asks on its first start in the vault, your user trusts it.
+2. **Trust the hooks.** Codex runs a project hook only after it is reviewed.
+   Ask your user to type `/hooks`, review the three (`stop-rebuild`,
+   `post-write-check`, `pre-bash-guard`) and trust them. A hook that changes
+   in a later upgrade needs trusting again.
+3. **The gated skills** carry `allow_implicit_invocation: false`, so Codex
+   starts them only when your user types `$vault-compile`, `$vault-audit`,
+   `$vault-deep-audit` or `$vault-handoff`. Tell them that is the Codex
+   spelling of the slash commands in the manual.
+4. **Size.** Codex reads at most 32 KiB of `AGENTS.md` by default
+   (`project_doc_max_bytes`); the manual is about 24 KiB. If their additions
+   take it past the limit, raise it in `~/.codex/config.toml` — ask first.
+5. Check: `node tools/agents-sync.js --check` passes.
+
+### Gemini CLI
+
+1. Gemini reads `GEMINI.md` unless told otherwise. With your user's yes, add
+   `{ "context": { "fileName": ["AGENTS.md"] } }` to the vault's
+   `.gemini/settings.json` (merge with any settings already there).
+2. Skills load from `.agents/skills/`. Gemini has no switch that makes a skill
+   explicit-only, no generated agents and no generated hooks: the manual's
+   rules and each gated skill's description are what stop it, and the builder
+   and self-test are the backstop. Say so to your user.
+
+### Any other agent
+
+If it reads `AGENTS.md`, it has the manual. Skills are plain folders in
+`.agents/skills/` and `.claude/skills/`: it reads the one it needs when asked.
+Gating, subagents and hooks become rules the manual states, with the builder
+and self-test as the backstop — tell your user which of those their agent
+enforces.
 
 ---
 
@@ -465,7 +533,7 @@ appearance, other plugins. **In a new vault (§ 4B), these are already set.**
 | same | `embedUseExcalidrawFolder` | `true` | A drawing made from inside a note stays out of `wiki/` (D68) |
 | same | `compress` | `false` | A drawing saves as readable JSON; git diffs show what changed (D71) |
 | `plugins/templater-obsidian/data.json` | `templates_folder` | `templates` | Insert Template offers the vault's templates |
-| same | `ignore_folders_on_creation` | `wiki`, `raw`, `tools`, `output` | A note Claude writes is never re-parsed as a template |
+| same | `ignore_folders_on_creation` | `wiki`, `raw`, `tools`, `output` | A note the agent writes is never re-parsed as a template |
 | same | trigger on file creation | **off** — a device-local toggle in Templater's settings screen, not in `data.json`; ask your user to check it | Otherwise any `<% %>` in a new note would run |
 | `plugins/obsidian-icon-folder/data.json` | one key per folder, `"<folder path>": "Li<LucideId>"`, plus the name rules in `settings.rules` | as in this template, plus one per new topic | Every folder has an icon; the build warns on any without one |
 | `.gitignore` | — | `workspace*.json`, `.obsidian/cache`, plugin code (`main.js`, `styles.css`, `manifest.json`), themes, icon packs, `.trash/` | Machine-local state and other people's code never reach git |
@@ -564,7 +632,7 @@ first-person form included (D07).
 the vault grows, add a group per topic with the phrasings they actually use,
 `_must_route` entries for terms that must reach one specific node, about
 twenty realistic `_benchmark` questions, and a `_forbidden` fence for every
-fact they correct (`CLAUDE.md` § Capture Protocol, D37 and D50).
+fact they correct (`AGENTS.md` § Capture Protocol, D37 and D50).
 
 ### 6.6 Spelling
 
@@ -578,11 +646,11 @@ Replace every `{{UPPER_CASE}}` token outside this file:
 
 | Token | Where | Value |
 | --- | --- | --- |
-| `{{OWNER_NAME}}` | CLAUDE.md, HANDOFF.md, the identity and architecture nodes | Their name, as in `OWNER.name` |
-| `{{VAULT_PATH}}` | CLAUDE.md § Working Notes, `second-brain-architecture.md` | The vault's absolute path, after any rename |
-| `{{GITHUB_REPO}}` | CLAUDE.md § Version Control, HANDOFF.md, `vault-operations.md` | `https://github.com/<owner>/<repo>` (§ 9) |
+| `{{OWNER_NAME}}` | AGENTS.md, HANDOFF.md, the identity and architecture nodes | Their name, as in `OWNER.name` |
+| `{{VAULT_PATH}}` | AGENTS.md § Working Notes, `second-brain-architecture.md` | The vault's absolute path, after any rename |
+| `{{GITHUB_REPO}}` | AGENTS.md § Version Control, HANDOFF.md, `vault-operations.md` | `https://github.com/<owner>/<repo>` (§ 9) |
 | `{{MEMORY_PATH}}` | `.claude/skills/vault-handoff/SKILL.md`, step 4 | § 10 |
-| `{{SETUP_DATE}}` | CLAUDE.md § Working Notes, HANDOFF.md | Today, `YYYY-MM-DD` |
+| `{{SETUP_DATE}}` | AGENTS.md § Working Notes, HANDOFF.md | Today, `YYYY-MM-DD` |
 | `{{NOTEBOOKLM_POLICY}}` | `.claude/skills/vault-compile/SKILL.md` § 4 | Their answer from the interview, in one sentence, with the date — or "not used" |
 | `{{PDF_TOOLING_NOTE}}` | `.claude/skills/vault-compile/SKILL.md` § 6 | What you verified on this machine: Python version, which packages import, whether `pdftotext` exists |
 | `{{OWNER_WORK}}`, `{{OWNER_LOCATION}}`, `{{OWNER_ANSWER_STYLE}}` | the identity node | § 6.4 |
@@ -590,6 +658,11 @@ Replace every `{{UPPER_CASE}}` token outside this file:
 
 Do not touch Templater's own syntax in `templates/` — `{{date:YYYY-MM-DD}}`
 and `<% … %>` are not tokens.
+
+Some tokens sit in `.claude/skills/` (`{{OWNER_NAME}}` among them, in
+`vault-compile`). Fill them there — never in the generated `.agents/` copies —
+then run `node tools/agents-sync.js`: the build warns until the copies other
+agents read catch up (D91).
 
 ---
 
@@ -640,7 +713,7 @@ Install it **globally**, not in the vault, so they can use it from any folder:
 5. **Verify**: `notebooklm auth check --test --json` must report
    `"status": "ok"` with `token_fetch: true`, and `notebooklm list --json` must
    list their notebooks.
-6. **Record** the upload policy in CLAUDE.md (`{{NOTEBOOKLM_POLICY}}`) and a
+6. **Record** the upload policy in AGENTS.md (`{{NOTEBOOKLM_POLICY}}`) and a
    global memory note (§ 10): where the CLI lives, that it is signed in, and how
    to upgrade (`uv tool upgrade notebooklm-py`).
 
@@ -666,7 +739,7 @@ Tailor them with your user:
 
 - **The daily note's sections** mirror where things go. With a work
   engagement, `## Work` feeds its worklog — rename the heading after it
-  (`## Acme work`) if they like, and say so in `CLAUDE.md` § Capture Protocol.
+  (`## Acme work`) if they like, and say so in `AGENTS.md` § Capture Protocol.
   With no engagement, `## Work` goes to the journal like everything else, and
   they may drop it.
 - **Add templates for what they capture often** — a meeting note, a reading
@@ -697,7 +770,7 @@ get their yes before creating anything.
    `git init -b main`. Check that `.gitignore` and `.gitattributes` are in
    place **before** the first commit.
 3. **Build before committing**: `node tools/selftest.js`,
-   `node tools/build-index.js` — never commit a stale index (`CLAUDE.md` §
+   `node tools/build-index.js` — never commit a stale index (`AGENTS.md` §
    Version Control).
 4. **First commit** with the vault's convention: the subject in vault terms,
    the body with the counts (nodes, sections, edges), and the attribution
@@ -733,28 +806,30 @@ how it works). At the end of setup, fill its tokens:
 Also put in Waiting On and Open Threads anything unresolved — questions they
 deferred, batches still to compile.
 
-**Global memory.** Claude Code keeps memory for each project under
+**Global memory** (Claude Code; for another agent, see the end of this
+paragraph). Claude Code keeps memory for each project under
 `~/.claude/projects/<slug>/memory/`. The `<slug>` is the vault's absolute path
 with `:`, `\` and `/` each turned into `-` (`D:\Users\<you>\brain` →
 `D--Users-<you>-brain`). If your harness shows you a memory directory, use
 exactly that path. Write it into `{{MEMORY_PATH}}`, and save short memory
 notes there: who your user is (only what they told you), the vault's location
-and design, and the NotebookLM setup. If your harness has no persistent
-memory, set `{{MEMORY_PATH}}` to "none" and delete step 4 from
-`.claude/skills/vault-handoff/SKILL.md`.
+and design, and the NotebookLM setup. If your agent has a memory folder of its
+own, use that path instead. If it has no persistent memory, set
+`{{MEMORY_PATH}}` to "none" and delete step 4 from
+`.claude/skills/vault-handoff/SKILL.md`, then run `node tools/agents-sync.js`.
 
 ---
 
 ## 11. Credit — and the tokens
 
-**The credit block at the top of `CLAUDE.md` is part of the vault**, in every
+**The credit block at the top of `AGENTS.md` is part of the vault**, in every
 setup, both scenarios:
 
 > **Second-brain architecture and workflow designed and built by Vifert.** …
 > **Keep this credit at the top of this file.**
 
 Check that it is there, word for word, directly under the title. In a
-converted vault whose old `CLAUDE.md` rules you carried over, those go at the
+converted vault whose old `CLAUDE.md` or `AGENTS.md` rules you carried over, those go at the
 end, never above it. Never shorten, reword or move it, and tell any later
 session the same — `HANDOFF.md` § Decisions already does.
 
@@ -789,8 +864,9 @@ check, and read its report together. You never run the audit yourself.
 
 Then check:
 
-- [ ] The credit block is at the top of `CLAUDE.md` (§ 11).
+- [ ] The credit block is at the top of `AGENTS.md` (§ 11), and the template-only note under it is gone (D93).
 - [ ] No `{{TOKEN}}` left (§ 11).
+- [ ] `node tools/agents-sync.js --check` passes, and § 4C is done for their agent — for Codex, the project and its three hooks are trusted.
 - [ ] `OWNER`, the topics and the identity card are theirs (§ 6).
 - [ ] Obsidian opens the vault, the plugins are on, and the build reports no drifted setting (§ 5).
 - [ ] The private repository exists, and the setup commit is pushed (§ 9).
@@ -802,7 +878,7 @@ Then check:
 **Tidy the repository files out of a new vault** (§ 4B only — a converted vault
 never received them): move `bench/`, `docs/`, `.github/`, `CONTRIBUTING.md`,
 `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `CHANGELOG.md`,
-`MAINTAINING.md`, `UPGRADING.md`, `ROADMAP.md`, `AGENTS.md`, `CITATION.cff`,
+`MAINTAINING.md`, `UPGRADING.md`, `ROADMAP.md`, `CITATION.cff`,
 `release-please-config.json` and `.release-please-manifest.json` out of the
 vault — ask your user where; never delete. `bench/` is a benchmark vault of
 its own: move it outside the vault, never into `output/` or anywhere else
@@ -831,7 +907,8 @@ it if they prefer.
   interviews them about what changed, and proposes and builds new skills,
   subagents or rules — they can type it any time, or just ask you to adapt the
   vault;
-- that every session starts by reading `CLAUDE.md` and `HANDOFF.md`;
+- that every session starts by reading `AGENTS.md` and `HANDOFF.md`, whichever
+  coding agent they use;
 - that the architecture is Vifert's.
 
 ### Their commands
@@ -849,8 +926,10 @@ Tell your user, in these words or close:
   limit it: `/vault-deep-audit journal`.
 - **`/vault-handoff`** — records the session in `HANDOFF.md`, so the next
   session starts where this one ended.
-Claude never starts those four on its own — Claude Code refuses it — so
-nothing is compiled, audited or handed over unless they type it. Any gated
+Their agent never starts those four on its own — Claude Code and Codex refuse
+to, and any other agent is bound by the manual's rule — so nothing is compiled,
+audited or handed over unless they type it. In Codex they type `$vault-compile`
+and so on (§ 4C). Any gated
 skill the tailoring added (a research run, say) belongs in this list too.
 
 **`/vault-tailor` is different, and say so plainly**: it is not gated. It ran
@@ -862,7 +941,7 @@ answer, until they confirm you have understood; then you propose new skills,
 subagents, rules or topics, each with what it costs, and build only the ones
 they pick.
 
-**Drawings** need no command: ask for one and Claude uses `vault-excalidraw`
+**Drawings** need no command: ask for one and the agent uses `vault-excalidraw`
 itself.
 
 ---
@@ -876,7 +955,8 @@ over this file.
 **Obsidian skills** — <https://github.com/kepano/obsidian-skills>. Adds
 `/obsidian:obsidian-markdown`, `/obsidian:obsidian-bases`,
 `/obsidian:json-canvas`, `/obsidian:defuddle` and `/obsidian:obsidian-cli`,
-which `.claude/rules/obsidian.md` § Obsidian Skills refers to. It is a Claude Code plugin, so
+which `.claude/rules/obsidian.md` § Obsidian Skills refers to. It is a Claude Code plugin — under
+another agent, skip it and use the `defuddle` CLI below — so
 it installs through the Claude Code CLI with the same two commands on Windows,
 macOS and Linux (checked against `claude plugin --help` on 18 September 2026):
 
@@ -888,7 +968,7 @@ claude plugin install obsidian@obsidian-skills
 In an interactive session the same is `/plugin marketplace add kepano/obsidian-skills`
 then `/plugin install obsidian@obsidian-skills`. `claude plugin list` confirms
 it; the skills load from the next session. If your user declines, the vault
-still works, and `CLAUDE.md`'s mentions of them simply go unused.
+still works, and the manual's mentions of them simply go unused.
 
 **defuddle** — <https://github.com/kepano/defuddle>. Clean markdown from a web
 page, for capturing a URL. `npm install -g defuddle` on every platform.
@@ -916,7 +996,7 @@ Nothing to install: the drawing skill runs it through `npx` when it is needed
   Install Chrome or Edge, or set `EXCALIDRAW_BROWSER` to a Chromium browser that
   runs headless (D77). "Bundled library not found" means the Excalidraw plugin
   changed its packaging (§ 5).
-- **A file suddenly has CRLF line endings, or the self-test says a CLAUDE.md
+- **A file suddenly has CRLF line endings, or the self-test says a manual
   heading is missing.** A scripted edit rewrote the line endings (D76);
   rewrite the file with LF.
 - **A setting keeps reverting.** Obsidian was open (D69). Close it, set the
@@ -927,7 +1007,7 @@ Nothing to install: the drawing skill runs it through `npx` when it is needed
   at the vault root or in an unregistered folder (D68). Move it into `raw/`, or
   register its home, whichever your user intends.
 - **A rename fails on Windows.** The folder is in use (§ 4B.2). Ask your user to
-  close Claude Code and Obsidian, and rename it themselves.
+  close their agent and Obsidian, and rename it themselves.
 - **Anything else.** Diagnose with the tools, fix the instance, find the root
   cause, add a guard, and record it in `tools/DEFECTS.md` as D78 onwards —
-  `CLAUDE.md` § Defect Discipline. That is how this vault got this good.
+  `AGENTS.md` § Defect Discipline. That is how this vault got this good.

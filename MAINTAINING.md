@@ -42,8 +42,12 @@ first is reviewed here, and ported back to the vault once merged.
 ## Reviewing a pull request
 
 - The checklist in the PR template, all of it.
-- **Does a rule come with its guard?** A rule in `CLAUDE.md` with no code that
+- **Does a rule come with its guard?** A rule in `AGENTS.md` with no code that
   enforces it goes back.
+- **Does it work under every agent?** A change to `.claude/` comes with what
+  `node tools/agents-sync.js` regenerates in `.agents/` and `.codex/` (CI's
+  self-test fails without it); a rule goes in `AGENTS.md`, never in
+  `CLAUDE.md`, unless it is true for Claude Code alone.
 - **Is a benchmark claim reproducible?** CI recomputes the scorecard from the
   committed compile. For a large claim, also compile the bench yourself from
   the PR's branch (`node tools/bench.js --prepare`) and compare: the committed

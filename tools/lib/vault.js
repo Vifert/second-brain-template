@@ -286,6 +286,34 @@ function creditCount(text, rows) {
   return text.replace(CREDIT_COUNT, (m, a, w, b) => a + numberWords(rows) + b);
 }
 
+/**
+ * CLAUDE.md is Claude Code's entry point and nothing more (D90): it imports
+ * AGENTS.md, the manual every other agent reads, and adds only Claude-only
+ * lines. A second copy of the manual here would drift from the one Codex reads,
+ * so a heading that AGENTS.md also has is a problem, and so is a missing import.
+ */
+function shimProblems(claudeText, agentsText) {
+  const out = [];
+  if (!/^@AGENTS\.md\s*$/m.test(String(claudeText))) out.push('CLAUDE.md does not import the manual — its first line must be @AGENTS.md');
+  const heads = t => new Set(blankFences(String(t).split('\n')).filter(l => /^#{1,3} /.test(l)).map(l => l.replace(/^#+\s*/, '').trim()));
+  const manual = heads(agentsText);
+  const dup = [...heads(claudeText)].filter(h => manual.has(h));
+  if (dup.length) out.push(`CLAUDE.md repeats the manual's section(s) ${dup.map(h => `"${h}"`).join(', ')} — keep them only in AGENTS.md`);
+  return out;
+}
+
+/**
+ * The template's AGENTS.md carries a note for agents working on the template
+ * itself (D93). Setup removes it; left in a vault it would tell the owner's
+ * agent that the manual is not its brief. A vault is told apart from the
+ * template by its filled-in owner name.
+ */
+const TEMPLATE_ONLY = /<!-- template-only[\s\S]*?<!-- \/template-only -->\n?/;
+function templateOnlyLeft(agentsText) {
+  const t = String(agentsText);
+  return TEMPLATE_ONLY.test(t) && !t.includes('{{OWNER_NAME}}');
+}
+
 /** Does a takeaway carry this ISO date in any of the vault's forms — as a whole date, not a substring? (D40) */
 function mentionsDate(text, iso) {
   const t = norm(text);
@@ -656,7 +684,7 @@ function iconlessFolders(vaultAbs, icons, exempt = []) {
 }
 
 module.exports = {
-  iconlessFolders, overBudget, strayLogHeadings, numberWords, creditCount, templateDefects, sicTakesSide, codeIdentifiers, openingPronoun, tagProblems, nearDuplicateTags, inlineTags, secretSettings, rewrittenLines, strayNote, settingDrift, referenceBlocks,
+  iconlessFolders, overBudget, strayLogHeadings, numberWords, creditCount, templateDefects, shimProblems, templateOnlyLeft, TEMPLATE_ONLY, sicTakesSide, codeIdentifiers, openingPronoun, tagProblems, nearDuplicateTags, inlineTags, secretSettings, rewrittenLines, strayNote, settingDrift, referenceBlocks,
   walk, parseFm, blankFences, blankInlineCode, extractLinks, drawingEmbeds, mediaOwner, untranscribed, controlCharLines, lineCount,
   splitRow, isRealDate, parseStatusLog, dateForms, shortDate, logHeading, mentionsDate, volatileHits, takeaways,
   mentionNames, nameRegex, flattenLinks, findMentions, ownerOf, pronounHit, pronounSuspects, MONTHS, norm,

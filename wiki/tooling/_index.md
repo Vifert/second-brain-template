@@ -6,7 +6,7 @@ topic: tooling
 kind: index
 tags: []
 created: 2026-09-18
-updated: 2026-09-24
+updated: 2026-09-25
 ---
 
 ## Key Takeaways
@@ -29,7 +29,7 @@ updated: 2026-09-24
 
 ## Detail (deep reference)
 
-- [[second-brain-architecture-figure|Second Brain Architecture Drawing]] — The architecture drawing and its full transcription — every box, arrow and note, from capture to answering, the guards, and what Claude loads and when.
+- [[second-brain-architecture-figure|Second Brain Architecture Drawing]] — The architecture drawing and its full transcription — every box, arrow and note, from capture to answering, the guards, and what the agent loads and when.
 - [[second-brain-architecture-layout|Second Brain Folder Layout]] — Every top-level path in the vault and what it holds, and why nesting folders costs nothing at query time since queries grep the index rather than walk directories.
 
 ## Related

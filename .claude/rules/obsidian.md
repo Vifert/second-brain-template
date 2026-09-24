@@ -4,7 +4,7 @@ paths:
   - "templates/**"
 ---
 
-The Obsidian skills, plugins and settings. They load when a settings file or a template is read; the build checks every setting the rules depend on. Moved out of `CLAUDE.md` so they load only when needed (D87).
+The Obsidian skills, plugins and settings. They load when a settings file or a template is read; the build checks every setting the rules depend on. Moved out of the manual (`AGENTS.md`) so they load only when needed (D87).
 
 ## Obsidian Skills
 
