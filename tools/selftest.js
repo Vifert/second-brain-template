@@ -731,14 +731,14 @@ for (const s of ['vault-compile', 'vault-audit', 'vault-deep-audit', 'vault-hand
   ok(`D78: /${s} is gated — disable-model-invocation: true`, /^disable-model-invocation:\s*true\s*$/m.test(fmBlock(t)));
   ok(`D78: /${s} is named for its folder`, new RegExp(`^name:\\s*${s}\\s*$`, 'm').test(fmBlock(t)));
 }
-ok('D78: vault-excalidraw stays usable by Claude', !/^disable-model-invocation:\s*true/m.test(fmBlock(skillText('vault-excalidraw'))));
+ok('D78: vault-excalidraw stays usable by the agent', !/^disable-model-invocation:\s*true/m.test(fmBlock(skillText('vault-excalidraw'))));
 // vault-tailor: the setup agent starts it itself, so it must stay ungated; its
 // interview is adapted from MIT-licensed work, whose notice must travel with it.
 {
   const tailor = skillText('vault-tailor') || '';
   const notice = 'Copyright (c) 2026 Matt Pocock';
   const third = fs.existsSync(path.join(VAULT, 'THIRD_PARTY_NOTICES.md')) ? fs.readFileSync(path.join(VAULT, 'THIRD_PARTY_NOTICES.md'), 'utf8') : '';
-  ok('tailoring: vault-tailor stays usable by Claude, so setup can start it', tailor && !/^disable-model-invocation:\s*true/m.test(fmBlock(tailor)));
+  ok('tailoring: vault-tailor stays usable by the agent, so setup can start it', tailor && !/^disable-model-invocation:\s*true/m.test(fmBlock(tailor)));
   ok('tailoring: the interview credits Matt Pocock and carries the MIT notice', /Matt Pocock/.test(tailor) && tailor.includes(notice) && /Permission is hereby granted, free of charge/.test(tailor));
   ok('tailoring: THIRD_PARTY_NOTICES.md carries the same notice', third.includes(notice) && /vault-tailor/.test(third));
   ok('tailoring: the interview may not start until the agent understands how every part works', /Do not ask your owner a single question until you understand how every part\s+of this vault works/.test(tailor));
@@ -847,6 +847,40 @@ ok('D87: the always-loaded files have a budget', ['AGENTS.md', 'HANDOFF.md'].eve
 const unscoped = ruleFiles.filter(p => { const fm = V.parseFm(fs.readFileSync(p, 'utf8')); return !fm || !Array.isArray(fm.fm.paths) || !fm.fm.paths.length; }).map(p => path.basename(p));
 ok('D87: every rules file is path-scoped — one without paths: loads at launch and undoes the split', unscoped.length === 0, unscoped.join(', '));
 ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} found`);
+
+// ---------------------------------------------------------------------------
+// AGENT-NEUTRAL WORDING (D94). The template runs under any coding agent, so
+// its files never call the running agent by the name of one product: the v1.1
+// sweep searched for the file name, not the word, and left 30 lines telling a
+// Codex user what that product does. Claude Code, Claude-only and
+// the Claude desktop app name a product and pass. Only the template is scanned — an owner's own notes
+// may say what they like — and only what it ships, not the ledger's history.
+// ---------------------------------------------------------------------------
+{
+  const W = 'Cl' + 'aude'; // spelled apart so this file does not trip its own check
+  const BARE = new RegExp(`\\b${W}\\b(?! Code\\b)(?!-only\\b)(?! desktop app\\b)`);
+  const ALLOW = new RegExp(`claude\\.com|which plugins can ${W} use`); // a link; an owner's own phrasing kept as an alias
+  // The generated .agents/ and .codex/ are scanned too: they ship, and the text
+  // the generator adds (headers, the gated note) reaches no other check.
+  const SKIP = /^(CHANGELOG\.md|tools\/DEFECTS\.md)$|^(bench\/baseline|\.obsidian|node_modules|\.git)\//;
+  const bareAgent = line => BARE.test(line) && !ALLOW.test(line);
+  ok('D94: the running agent called by name is caught', bareAgent(`The next ${W} session compiles this note.`) && bareAgent(`${W} never types their credentials.`));
+  ok('D94: the product, a Claude-only line and the desktop app pass', !bareAgent(`${W} Code reads CLAUDE.md.`) && !bareAgent(`${W}-only lines`) && !bareAgent(`the ${W} desktop app`) && !bareAgent('CLAUDE.md imports it'));
+  const isTemplate = fs.readFileSync(path.join(VAULT, 'AGENTS.md'), 'utf8').includes('{{OWNER_NAME}}');
+  const hits = [];
+  if (isTemplate) {
+    (function walkAll(dir) {
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        const abs = path.join(dir, e.name);
+        const rel = path.relative(VAULT, abs).split(path.sep).join('/');
+        if (e.isDirectory()) { if (!SKIP.test(`${rel}/`)) walkAll(abs); continue; }
+        if (SKIP.test(rel) || !/\.(md|js|json|ya?ml|cff|toml)$/.test(e.name)) continue;
+        fs.readFileSync(abs, 'utf8').split('\n').forEach((l, i) => { if (bareAgent(l)) hits.push(`${rel}:${i + 1}`); });
+      }
+    })(VAULT);
+  }
+  ok('D94: no template file calls the running agent by name — say "the agent" (a vault is not scanned)', hits.length === 0, hits.slice(0, 10).join(', '));
+}
 
 // ---------------------------------------------------------------------------
 // GRAPH COLOURS (D86). One visible, distinct colour per folder, kept stable.

@@ -100,8 +100,8 @@ the vault.
 ## FAQ
 
 **Does this need Claude Code?** No. `AGENTS.md` is the manual every coding
-agent reads: Codex, Cursor, Copilot and others read it directly, and Claude
-Code reads it through `CLAUDE.md`, which imports it. The skills, read-only
+agent reads: Codex, Cursor, Copilot and others read it directly, and
+Claude Code reads it through `CLAUDE.md`, which imports it. The skills, read-only
 agents and hooks are written once in `.claude/` and generated for Codex and
 Gemini CLI (`.agents/`, `.codex/`). What each agent enforces, and what it only
 reads as a rule, is in [SETUP.md § 4C](SETUP.md#4c-your-users-agent). The

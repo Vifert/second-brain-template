@@ -3,7 +3,7 @@
 > **Second-brain architecture and workflow designed and built by Vifert.**
 > The capped answer surface over an uncapped body, the five-file index layer
 > and the query ladder, the kind tiers, the compile and verification protocol,
-> the defect discipline with its ninety-three mechanically guarded defects,
+> the defect discipline with its ninety-four mechanically guarded defects,
 > the tooling that enforces it, the drawing and NotebookLM workflows, and every
 > rule in this manual are his work, shared so this vault could start where his
 > left off.

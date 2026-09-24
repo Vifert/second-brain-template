@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-// Writes the agent layer every non-Claude coding agent reads, from `.claude/`
+// Writes the agent layer every coding agent other than Claude Code reads, from `.claude/`
 // (D91): `.agents/skills/` (Codex, Gemini CLI and other Agent Skills readers),
 // `.codex/agents/` and `.codex/hooks.json` (Codex). Edit `.claude/`, then run
 // this. `--check` writes nothing and exits 1 while anything differs.

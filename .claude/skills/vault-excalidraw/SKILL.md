@@ -65,7 +65,7 @@ Run from the vault root. `<drawing>` is a path or just a name found under
 renamed, the PNG path, the lint result, the new hash, and `embeddedIn` — each note that
 embeds the drawing and whether its transcription is now stale.
 
-Write spec and patch JSON with the Write tool into the session scratchpad and
+Write spec and patch JSON with your file-writing tool into the session scratchpad and
 pass the path. Long heredocs are fragile in some shells, Windows especially. The element and patch
 formats are in `references/spec.md`; read it before your first `new` or
 `apply` in a session.

@@ -6,12 +6,12 @@ topic: profile
 kind: index
 tags: []
 created: 2026-09-18
-updated: 2026-09-23
+updated: 2026-09-25
 ---
 
 ## Key Takeaways
 
-- Who the owner is: identity, current status (Now), and how they want Claude to respond.
+- Who the owner is: identity, current status (Now), and how they want their agent to respond.
 - Contains **2 nodes**.
 - Orientation only. To look something up, route on `wiki/_index.tsv`, then pull one card from `wiki/_cards.tsv`.
 

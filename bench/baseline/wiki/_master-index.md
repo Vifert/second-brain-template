@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-**41 nodes** across **8 topics**. Last updated 2026-09-23.
+**41 nodes** across **8 topics**. Last updated 2026-09-25.
 
 > [!tip] To look something up, route on `wiki/_index.tsv`, then pull one card from `wiki/_cards.tsv`.
 > This page is human orientation. It is not the routing layer.
@@ -33,7 +33,7 @@ Idea dump — anything the owner might build or pursue, each with a status from 
 
 ### [[wiki/profile/_index|Profile]] · 2 nodes
 
-Who the owner is: identity, current status (Now), and how they want Claude to respond.
+Who the owner is: identity, current status (Now), and how they want their agent to respond.
 
 ### [[wiki/tooling/_index|Tooling]] · 10 nodes
 

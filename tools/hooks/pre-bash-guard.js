@@ -1,6 +1,6 @@
 'use strict';
 // PreToolUse hook on Bash: refuse Python write_text (D76) and bash that would
-// execute backticks (D13). Exit 2 blocks the call and shows Claude why.
+// execute backticks (D13). Exit 2 blocks the call and shows the agent why.
 const fs = require('fs');
 const H = require('../lib/hooks');
 

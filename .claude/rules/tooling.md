@@ -42,7 +42,7 @@ always answers with JSON (D92).
 
 What each hook guards, in full (moved from AGENTS.md § Working Notes):
 
-- **Long heredocs fail on this Windows shell.** Use the Write tool for file
+- **Long heredocs fail on this Windows shell.** Use a file-writing tool for file
   content, or a script file. This has bitten repeatedly — it is not a maybe.
   **Never pass markdown containing backticks through bash**: it executes them
   and injects the output into the file (D13).

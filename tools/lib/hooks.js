@@ -1,5 +1,5 @@
 'use strict';
-// Pure checks behind the Claude Code hooks in tools/hooks/. A trap that bit
+// Pure checks behind the hooks in tools/hooks/ (Claude Code's, and Codex's generated from them). A trap that bit
 // more than once is enforced by the harness, not by memory: backticks bash
 // executes (D13), CRLF from Python's write_text (D76), control bytes (D03),
 // and a stale index at the end of a turn (D87).

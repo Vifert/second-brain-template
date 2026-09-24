@@ -96,7 +96,9 @@ A vault that does not build clean is refused, not scored.
    way the baseline was prepared, so the only difference is your change.
 2. **Use only the starter topics.** The benchmark must build with the
    template's own topic list, so do not register new ones.
-3. Start Claude Code in that folder and type `/vault-compile`.
+3. Start your coding agent in that folder and type `/vault-compile`
+   (`$vault-compile` in Codex). The baseline was compiled with Claude Code; say
+   which agent compiled yours, since an agent change moves the scorecard too.
 4. Copy its `wiki/` and `Excalidraw/` over the ones in `bench/baseline/`, then run
    `node tools/bench.js --write` and commit the scorecard with your change.
 

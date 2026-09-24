@@ -29,9 +29,9 @@ for `EXPRESS_SERVER_URL=http://127.0.0.1:3917 npx -y mcp-excalidraw-server@2.0.0
 The server listens on 127.0.0.1 only and keeps the scene in memory; stopping
 it loses anything not saved back.
 
-Open the canvas for the owner: in the Claude desktop app, open
-`http://127.0.0.1:3917` in the built-in browser pane (`preview_start` with that
-url); otherwise ask them to open it. Screenshots, image export and Mermaid
+Open the canvas for the owner: if your agent has a built-in browser pane (the
+Claude desktop app has one, opened with `preview_start` and that url), open
+`http://127.0.0.1:3917` there; otherwise ask them to open it. Screenshots, image export and Mermaid
 conversion only work while a tab is open.
 
 ## A session

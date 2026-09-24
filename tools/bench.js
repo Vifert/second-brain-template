@@ -25,7 +25,7 @@ const questions = JSON.parse(fs.readFileSync(path.join(BENCH, 'questions.json'),
 if (opt('--prepare')) {
   const dir = path.resolve(opt('--prepare'));
   B.prepare(REPO, dir, cfg);
-  console.log(`bench: ${dir} is ready — start Claude Code there and type /vault-compile`);
+  console.log(`bench: ${dir} is ready — start your coding agent there and type /vault-compile ($vault-compile in Codex)`);
   process.exit(0);
 }
 

@@ -557,14 +557,14 @@ function secretSettings(obj, at = '') {
  * `scope`: for a `log`, the dated entries — a `### YYYY-MM-DD` heading and
  * everything under it — since the takeaways and notes above them are a
  * summary that must change as entries arrive; for `verbatim`, the whole body
- * except `## Key Takeaways` and `## Related`, which Claude writes.
+ * except `## Key Takeaways` and `## Related`, which the agent writes.
  */
 function rewrittenLines(headText, curText, scope = 'verbatim') {
   const body = t => {
     const lines = String(t).split(/\r?\n/);
     const end = lines[0] === '---' ? lines.indexOf('---', 1) : -1;
     // A log protects only what sits under a dated heading; a verbatim node
-    // protects everything except its two Claude-written sections.
+    // protects everything except its two agent-written sections.
     let keep = scope !== 'log';
     return lines.map((l, i) => {
       const h = l.match(/^(#{1,3})\s+(.*?)\s*$/);

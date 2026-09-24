@@ -17,7 +17,7 @@ updated: 2026-09-23
 - **Ten facets are registered** in `tools/lib/rules.js`: org, rel, tech, field, method, domain, venue, activity, form, subject — plus one per self-contained work engagement, added when it is.
 - **A tag never restates its node's topic or kind** — no `acme` on nodes in the Acme engagement's topic, no `people` on person nodes, and an engagement's logs carry no tags.
 - **The builder fails tag drift** (D65): flat or unregistered tags, dates and statuses, listed synonyms such as `field/rl`, plural or hyphen near-duplicates, and inline `#tags` that break the same rules.
-- **Tags are renamed by script**: Claude migrates every node carrying a tag in one pass; a tag renamed by hand in Obsidian is re-validated by the next rebuild.
+- **Tags are renamed by script**: the agent migrates every node carrying a tag in one pass; a tag renamed by hand in Obsidian is re-validated by the next rebuild.
 
 ## Why Nested
 
