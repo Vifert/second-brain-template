@@ -773,7 +773,7 @@ ok('D78: the manual keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && 
   const shim = fs.readFileSync(path.join(VAULT, 'CLAUDE.md'), 'utf8');
   eq('D90: the shipped CLAUDE.md imports AGENTS.md and repeats none of it', V.shimProblems(shim, manual).length, 0);
   eq('D90: a CLAUDE.md without the import is reported', V.shimProblems('## Claude Code Only\n- x', manual).length, 1);
-  const IMPORT = '@AGENTS.md'; // joined below, so no "text@AGENTS.md" reads as an email to scan-private
+  const IMPORT = '@AGENTS.md'; // joined below, so no word runs into the at-sign and reads as an email to scan-private
   eq('D90: text above the import is reported — the import must open the file', V.shimProblems(['# My notes', '', IMPORT, ''].join('\n'), manual).length, 1);
   eq('D90: blank lines above the import are fine', V.shimProblems(['', IMPORT, ''].join('\n'), manual).length, 0);
   ok('D90: a CLAUDE.md that repeats a section of the manual is reported', V.shimProblems('@AGENTS.md\n\n## Query Protocol\n', manual).some(p => /Query Protocol/.test(p)));
