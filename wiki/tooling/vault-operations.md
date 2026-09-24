@@ -1,7 +1,7 @@
 ---
 title: Vault Operations
 summary: How this vault is run day to day — the query ladder, the five index files, version control, the audit and defect routine, the Obsidian trap, and the machine's tooling.
-aliases: [vault operations, query protocol, query ladder, how to query, retrieval protocol, git repo, gitignore, version control, commit, push, obsidian trap, frontmatter trap, audit, lint, how do I audit, working notes, environment, pdftotext, PyMuPDF, pdfplumber, pdfminer, python-pptx, heredoc, tooling quirks, how does retrieval work, defect ledger, defects, defect discipline, probes.json, forbidden claims, fences, how are defects handled, mentions, people timeline, obsidian CLI, where do the rules live, .claude/rules, rules folder, path-scoped rules, CLAUDE.md core, hooks, token budget]
+aliases: [vault operations, query protocol, query ladder, how to query, retrieval protocol, git repo, gitignore, version control, commit, push, obsidian trap, frontmatter trap, audit, lint, how do I audit, working notes, environment, pdftotext, PyMuPDF, pdfplumber, pdfminer, python-pptx, heredoc, tooling quirks, how does retrieval work, defect ledger, defects, defect discipline, probes.json, forbidden claims, fences, how are defects handled, mentions, people timeline, obsidian CLI, where do the rules live, .claude/rules, rules folder, path-scoped rules, CLAUDE.md core, hooks, token budget, build-index.js]
 topic: tooling
 kind: hub
 tags: [subject/operations, subject/retrieval, tech/git, subject/audit, subject/workflow]

@@ -66,4 +66,4 @@ each carries only the brief its job needs.
 - [[vault-capture-protocol|Vault capture protocol]] — what is captured directly, and what waits for `/vault-compile`.
 - [[notebooklm-compile-support|NotebookLM compile support]] — the instrument `/vault-compile` may use.
 - [[excalidraw-drawings|Excalidraw drawings]] — the one skill Claude may start itself.
-- [[second-brain-architecture|Second brain architecture]] — the drawing shows all four skills.
+- [[second-brain-architecture-figure|The architecture drawing]] — its sixth zone shows all six skills and the two agents.

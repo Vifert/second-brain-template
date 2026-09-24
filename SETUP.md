@@ -16,8 +16,8 @@
 
 **Read, in order**: this whole file, then `CLAUDE.md` (the rules the vault runs
 by), then `tools/README.md` (what each tool guarantees), then
-`wiki/tooling/second-brain-architecture.md` (the design in one page, with the
-architecture drawing's transcription). Do not start work until you have read
+`wiki/tooling/second-brain-architecture.md` (the design in one page; its
+drawing is transcribed in `second-brain-architecture-figure.md`, beside it). Do not start work until you have read
 all four, and the four files in `.claude/rules/` that `CLAUDE.md` points to —
 Claude Code loads them only when a matching file is read, but you will touch
 every part of the vault. The rules are long on purpose; every one exists

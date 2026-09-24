@@ -1,20 +1,35 @@
-# The architecture
+---
+title: Second Brain Architecture Drawing
+summary: The architecture drawing and its full transcription — every box, arrow and note, from capture to answering, the guards, and what Claude loads and when.
+aliases: [architecture drawing, architecture diagram, the drawing, figure 1, how the second brain works diagram, diagram of the vault, what does the architecture look like, excalidraw architecture, vault map, what does claude load, what loads when]
+topic: tooling
+kind: detail
+tags: [subject/second-brain, tech/obsidian]
+created: 2026-09-24
+updated: 2026-09-24
+---
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/architecture-dark.png">
-  <img alt="How the second brain works: capture, the wiki graph, the build, the index layer and the query ladder, with the guards beneath and what Claude loads, and when" src="assets/architecture.png">
-</picture>
+## Key Takeaways
 
-The drawing is `Excalidraw/tooling/second-brain-architecture.excalidraw.md`,
-editable in Obsidian. It argues that the five stages are a one-way pipeline
-with a single validating step in the middle: nothing reaches the index layer
-except through `tools/build-index.js`, and nothing reaches an answer except
-through the index. A sixth zone beneath shows what Claude itself loads, and
-when.
+- **The architecture drawing shows the whole machine** in five stages — capture, the wiki graph, the build, the index layer, answering — with the guards beneath and a sixth zone for what Claude loads, and when.
+- **The drawing argues a one-way pipeline** with one validating step: nothing reaches the index layer except through `build-index.js`, and nothing reaches an answer except through the index.
+- **Zone 6 shows the context cost**: an always-on `CLAUDE.md` core, rules files that load by path, gated and open skills, two read-only agents that skip `CLAUDE.md`, and hooks that enforce three traps.
+- **Colour carries meaning in the drawing**: orange is the owner's input, purple a process Claude runs, blue the main path, green generated output, red what refuses a mistake, violet a read-only agent, amber an outside adviser.
+- **The drawing carries no counts on purpose**, so it never goes stale; live figures come from `/vault-audit`. Edit it in Obsidian, then update the transcription and its drawing-hash.
 
-Below is the same drawing as text — the transcription the vault itself
-retrieves from, in `wiki/tooling/second-brain-architecture-figure.md` — so
-every box, arrow and label is searchable.
+## The Drawing
+
+### Figure 1 — How the second brain works
+
+![[second-brain-architecture.excalidraw|900]]
+
+*Figure 1: capture, graph, build, index, answering — with the guards under
+them, and what Claude loads beneath those.* The drawing is editable in
+Obsidian; this transcription is what retrieval reads. It argues that the five
+stages are a one-way pipeline with a single validating step in the middle:
+nothing reaches the index layer except through `build-index.js`, and nothing
+reaches an answer except through the index. Its bottom zone shows the other
+half of the cost story: what Claude itself loads, and when.
 
 ```mermaid
 flowchart LR
@@ -148,4 +163,10 @@ dashed boxes are stages, not files; a dashed purple box is a skill only the
 owner starts. The drawing carries no counts on purpose, so it never goes stale;
 live figures come from `/vault-audit`.
 
-For how each stage works and why, read [how-it-works.md](how-it-works.md).
+<!-- drawing-hash: debd47ea -->
+
+## Related
+
+- [[second-brain-architecture|Second brain architecture]] — the design the drawing shows, and why it is shaped this way.
+- [[excalidraw-drawings|Excalidraw drawings]] — how drawings stay editable and still retrievable.
+- [[vault-skills|Vault skills]] — the six skills and the two agents in zone 6.
