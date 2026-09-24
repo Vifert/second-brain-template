@@ -860,7 +860,9 @@ ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} fou
   const W = 'Cl' + 'aude'; // spelled apart so this file does not trip its own check
   const BARE = new RegExp(`\\b${W}\\b(?! Code\\b)(?!-only\\b)(?! desktop app\\b)`);
   const ALLOW = new RegExp(`claude\\.com|which plugins can ${W} use`); // a link; an owner's own phrasing kept as an alias
-  const SKIP = /^(CHANGELOG\.md|tools\/DEFECTS\.md)$|^(bench\/baseline|\.obsidian|\.agents|\.codex|node_modules|\.git)\//;
+  // The generated .agents/ and .codex/ are scanned too: they ship, and the text
+  // the generator adds (headers, the gated note) reaches no other check.
+  const SKIP = /^(CHANGELOG\.md|tools\/DEFECTS\.md)$|^(bench\/baseline|\.obsidian|node_modules|\.git)\//;
   const bareAgent = line => BARE.test(line) && !ALLOW.test(line);
   ok('D94: the running agent called by name is caught', bareAgent(`The next ${W} session compiles this note.`) && bareAgent(`${W} never types their credentials.`));
   ok('D94: the product, a Claude-only line and the desktop app pass', !bareAgent(`${W} Code reads CLAUDE.md.`) && !bareAgent(`${W}-only lines`) && !bareAgent(`the ${W} desktop app`) && !bareAgent('CLAUDE.md imports it'));
