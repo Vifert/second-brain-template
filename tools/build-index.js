@@ -61,7 +61,7 @@ const TOPICS = {
   // No top-level `decisions` topic yet. Project decisions live in their
   // project's decisions/ subfolder. A top-level decisions/ topic is reserved for
   // significant personal decisions — register it here when the first arrives.
-  profile: 'Who the owner is: identity, current status (Now), and how they want Claude to respond.',
+  profile: 'Who the owner is: identity, current status (Now), and how they want their agent to respond.',
   tooling: 'The knowledge system itself — how this vault is built, how to capture into it, query it, draw in it and audit it.',
 };
 const KIND_ORDER = ['hub', 'detail', 'idea', 'decision', 'person', 'log'];

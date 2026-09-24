@@ -99,7 +99,7 @@ build, so a fence can be neither hollow nor so broad it blocks the truth.
 - **The Obsidian CLI is not used**: it only works while Obsidian is open, and
   edits through it pass the frontmatter rewriter that has dropped aliases.
 - **Long heredocs fail on this Windows shell**, and bash executes backticks in
-  markdown — file content goes through the Write tool or a script file.
+  markdown — file content goes through a file-writing tool or a script file.
 - **The file-writing tool decodes `\uXXXX` escapes** into real characters; write
   literal escapes from a script.
 - One-off scripts are disposable; `tools/` is versioned and is not.

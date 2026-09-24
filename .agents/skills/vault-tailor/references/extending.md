@@ -53,7 +53,7 @@ Look at the six that ship. Each teaches a pattern:
 | `vault-audit` | runs tools into a file and reports in a fixed short shape |
 | `vault-deep-audit` | a superset of another skill; dispatches read-only subagents in waves of two |
 | `vault-handoff` | end-of-session upkeep; records reasoning, not just actions |
-| `vault-excalidraw` | a tool-driven, round-by-round skill Claude may start itself |
+| `vault-excalidraw` | a tool-driven, round-by-round skill the agent may start itself |
 | `vault-tailor` | an interview in rounds, then a proposal, then building what was chosen |
 
 A skill is `.claude/skills/<name>/SKILL.md`:
@@ -86,7 +86,9 @@ The decisions a later session must not undo.
 
 ## Writing a subagent
 
-A subagent is `.claude/agents/<name>.md`:
+A subagent is `.claude/agents/<name>.md`, in Claude Code's format (`tools:` names
+its tools); `node tools/agents-sync.js` turns it into a read-only Codex agent in
+`.codex/agents/`:
 
 ```markdown
 ---

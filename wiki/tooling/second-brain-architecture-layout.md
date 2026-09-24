@@ -25,7 +25,7 @@ updated: 2026-09-18
 | `raw/` | Inbox for source documents; anything sitting here is uncompiled by definition |
 | `raw/daily/` | Daily notes written in Obsidian, waiting to be compiled into the monthly logs |
 | `raw/_compiled/` | Processed sources — **disposable**, never in the query path |
-| `wiki/` | The graph. Claude-maintained. Level 1 is the topic |
+| `wiki/` | The graph, maintained by the agent. Level 1 is the topic |
 | `wiki/<engagement>/` | *Optional.* A client or employer engagement kept self-contained: concepts at the root, `decisions/`, `worklog/` (`<prefix>-YYYY-MM`), and `assets/` for images |
 | `wiki/journal/` | Personal dated log — everything outside a self-contained engagement, `journal-YYYY-MM` |
 | `wiki/people/` | One node per person mentioned anywhere; they outlive any single project |

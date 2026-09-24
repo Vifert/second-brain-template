@@ -80,9 +80,10 @@ only the question did.
 
 The `notebooklm` skill and CLI are global, not part of this vault: teng-lin's
 [notebooklm-py](https://github.com/teng-lin/notebooklm-py) (MIT), installed as a
-`uv tool` with its `browser` extra, and its skill installed into the user-level
-skills folder with `notebooklm skill install`. Sign-in is a browser window the
-owner completes; Claude never types their credentials.
+`uv tool` with its `browser` extra, and its skill installed with `notebooklm skill install` into the user-level
+skill folders every agent reads — Claude Code's `~/.claude/skills/` and the
+shared `~/.agents/skills/` (Codex, Gemini CLI). Sign-in is a browser window the
+owner completes; the agent never types their credentials.
 
 ## Related
 

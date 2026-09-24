@@ -5,7 +5,7 @@
 
 ## How This File Works
 
-- **Claude Code carries no memory between sessions, so this file is the
+- **A coding agent carries no memory between sessions, so this file is the
   memory**: what exists, what was decided and why, what was deliberately left
   alone, and what is still open. Read it at the start of every session,
   straight after AGENTS.md. Where it disagrees with an assumption, it wins — or
@@ -87,14 +87,14 @@ them; add this vault's own below them.
   edit on exact text, so a concurrent change fails loudly instead of being
   overwritten. Obsidian also writes its in-memory settings back over edited
   `.obsidian/` files — ask for a reload after any settings edit.
-- **A scripted edit must not rewrite line endings** (D76). Use the Edit tool, or
+- **A scripted edit must not rewrite line endings** (D76). Use your agent's edit tool, or
   a script that writes bytes; Python's `pathlib.write_text` silently turns LF
   into CRLF on Windows. Hooks now refuse the call and the file.
 - **The file-writing tool decodes `\uXXXX` escapes** into real characters.
   Write a literal escape sequence from a script.
 - **Long heredocs fail in some shells, bash executes backticks in markdown, and
   backslashes in shell-quoted scripts get mangled.** Anything with a backtick or
-  a backslash goes through the Write tool or a script file. A hook blocks bash
+  a backslash goes through a file-writing tool or a script file. A hook blocks bash
   that would execute a backtick; it cannot catch a mangled backslash.
 - **A script that inserts into a file must recompute positions after each
   insert**, or it reverses entries and splits others.

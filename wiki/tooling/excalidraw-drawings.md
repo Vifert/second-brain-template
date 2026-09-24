@@ -54,7 +54,7 @@ The skill treats a drawing as ongoing work, not a one-off export:
    that mirrors the idea (a pipeline is a line, a decision a diamond), then
    `new` from element skeletons.
 2. Every round is one `apply` patch — `delete`, `create`, `update`, `move` —
-   followed by a render Claude looks at and a lint. Moving a shape re-routes its
+   followed by a render the agent looks at and a lint. Moving a shape re-routes its
    connectors and keeps bent ones at right angles.
 3. The owner keeps the drawing open in Obsidian, which reloads it when the file
    changes. His own edits are the new baseline: the next round starts from
@@ -108,7 +108,7 @@ downloaded or installed.
 
 - `npx -y mcp-excalidraw-server@2.0.0` (MIT, yctimlin) starts a canvas on a
   local port — 3917 by convention — that the owner can open in a browser and draw
-  on while Claude edits elements from the terminal.
+  on while the agent edits elements from the terminal.
 - It adds Mermaid-to-Excalidraw conversion and `share`, which encrypts a drawing
   and uploads it to excalidraw.com; anyone with the full link can view it. Share
   links are made only when the owner asks, and never written into a note or commit.

@@ -8,7 +8,7 @@ description: "End-of-session upkeep for the vault — HANDOFF.md and its session
 # Hand the session over
 
 The owner typed `/vault-handoff`, so updating the cross-session record is
-authorised for this run. Claude Code carries no memory between sessions:
+authorised for this run. A coding agent carries no memory between sessions:
 HANDOFF.md is that memory, and a future session trusts it over its own
 assumptions. Do each step; skip one that has nothing to do.
 
@@ -42,7 +42,7 @@ assumptions. Do each step; skip one that has nothing to do.
 ## Why this is gated
 
 The session record is the owner's to start, like the compile and the audits
-(inherited from Vifert's vault, 24 September 2026, D87). Claude still commits
+(inherited from Vifert's vault, 24 September 2026, D87). The agent still commits
 and pushes its own work once the build is clean, and at the end of a session
 that changed the vault reminds the owner once, in one line, to type
 `/vault-handoff`.

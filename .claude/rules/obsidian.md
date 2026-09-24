@@ -19,8 +19,8 @@ Five are installed. Use them rather than improvising Obsidian syntax.
   **Deliberately not used** — see Working Notes.
 - **`/obsidian:json-canvas`** — `.canvas` files for visual maps of the graph.
   Write canvases into `output/` unless I say otherwise.
-- **`/obsidian:defuddle`** — clean markdown from web pages. **Prefer over
-  WebFetch** for any URL I drop in. Installed and working.
+- **`/obsidian:defuddle`** — clean markdown from web pages. **Prefer over a
+  plain fetch** for any URL I drop in. Installed and working.
 
 Four live in the vault itself, at `.claude/skills/`:
 

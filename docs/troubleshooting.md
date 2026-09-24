@@ -49,7 +49,8 @@ rewriting off for that command:
 
     MSYS_NO_PATHCONV=1 claude -p "/vault-compile"
 
-Typing the command inside Claude Code is not affected.
+This is Claude Code's command-line form; typing the command inside any agent's
+session is not affected.
 
 ## Line endings: a file turned CRLF
 

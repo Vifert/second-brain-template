@@ -12,11 +12,11 @@ updated: 2026-09-24
 ## Key Takeaways
 
 - **Compiling `raw/` and auditing the vault run only when the owner types the command** — `/vault-compile`, `/vault-audit` or `/vault-deep-audit` (D78, inherited from Vifert's vault).
-- **Four gated skills carry `disable-model-invocation: true`** — the compile, the two audits and `/vault-handoff` — so Claude Code itself refuses to start them; asking in plain words gets a request to type the command.
+- **Four gated skills carry `disable-model-invocation: true`** — the compile, the two audits and `/vault-handoff` — so Claude Code and Codex refuse to start them; asking in plain words gets a request to type the command.
 - **`/vault-compile` with no argument takes the next batch of the compile plan in HANDOFF.md**, compiles everything if little waits, or writes a plan first; `/vault-compile raw/daily` compiles just that folder.
 - **`/vault-audit` is the cheap health check** — self-test, build and `audit.js`, their output kept in a file, reported as problems, watch items and query cost, then which to fix.
 - **`/vault-deep-audit` adds the expensive checks** — facts answerable only from `raw/`, judgement on watch items, and a gap audit by agents asking questions in the owner's words; a topic argument limits it.
-- **vault-excalidraw and vault-tailor are the vault skills Claude may start on its own** — drawings round by round, and fitting the vault to the owner's needs: an interview in rounds, then new skills, subagents or rules they choose.
+- **vault-excalidraw and vault-tailor are the vault skills the agent may start on its own** — drawings round by round, and fitting the vault to the owner's needs: an interview in rounds, then new skills, subagents or rules they choose.
 - **Captures, the build and the self-test are never gated** — and the build also replays the fences and checks people links, `[sic]` notes and Obsidian settings.
 
 ## The Skills
@@ -26,19 +26,19 @@ updated: 2026-09-24
 | `/vault-compile [path…]` | the owner only | Compiles what waits in `raw/`: provenance, verbatim full texts, `[sic]` rules, routing, build, the D38 verification pass with NotebookLM as an optional reader, then moves each source to `raw/_compiled/` |
 | `/vault-audit` | the owner only | Runs `selftest.js`, `build-index.js` and `audit.js` into a temp folder and reports in a fixed short shape |
 | `/vault-deep-audit [topic]` | the owner only | The audit, plus the source-independence check, watch-item verdicts and a skeptic-checked gap audit in waves of two agents |
-| `/vault-handoff` | the owner only | The end-of-session record: a session entry in HANDOFF.md, its current state and open threads, the rules and global memory, then a commit and push. Claude reminds the owner once when a session changed the vault |
-| `/vault-tailor` | Claude at setup, then the owner, or Claude when asked | Studies the vault, interviews the owner in rounds (adapted from Matt Pocock's `grilling` skill, MIT), proposes additions with their token cost, and builds the chosen ones to the vault's conventions — `references/extending.md` in its folder is the guide |
-| `vault-excalidraw` | Claude or the owner | Drawings in `Excalidraw/<topic>/`, embedded live and transcribed with a `drawing-hash` |
+| `/vault-handoff` | the owner only | The end-of-session record: a session entry in HANDOFF.md, its current state and open threads, the rules and global memory, then a commit and push. The agent reminds the owner once when a session changed the vault |
+| `/vault-tailor` | The agent at setup, then the owner, or the agent when asked | Studies the vault, interviews the owner in rounds (adapted from Matt Pocock's `grilling` skill, MIT), proposes additions with their token cost, and builds the chosen ones to the vault's conventions — `references/extending.md` in its folder is the guide |
+| `vault-excalidraw` | The agent or the owner | Drawings in `Excalidraw/<topic>/`, embedded live and transcribed with a `drawing-hash` |
 
 ## What Is Gated
 
 - **Gated**: compiling anything in `raw/` outside `raw/_compiled/`; running `node tools/audit.js`; any vault-wide health check.
 - **Not gated**: quick captures ("log this", ideas, people, Status Log rows, decisions); the build after every write; the self-test after a tooling change; drawing lint and render.
-- **A file handed over** is saved into `raw/`, and Claude says in one line that `/vault-compile` will compile it.
+- **A file handed over** is saved into `raw/`, and the agent says in one line that `/vault-compile` will compile it.
 
 ## Why Skills, Not Only A Rule
 
-Vifert asked on 19 September 2026, in the vault this template comes from, that nothing be compiled from `raw/` and no audit run unless he asks — the audit especially, because checking the whole vault's health spends many tokens. A rule in `CLAUDE.md` would have depended on Claude remembering it. A skill with `disable-model-invocation: true` is refused by Claude Code itself, its description never enters Claude's context, and its body loads only when invoked — so moving the compile, NotebookLM and audit procedures out of `CLAUDE.md` also made every session lighter.
+Vifert asked on 19 September 2026, in the vault this template comes from, that nothing be compiled from `raw/` and no audit run unless he asks — the audit especially, because checking the whole vault's health spends many tokens. A rule in the manual would have depended on the agent remembering it. A skill with `disable-model-invocation: true` is refused by Claude Code itself (and, since 1.1, Codex refuses one whose `agents/openai.yaml` sets `allow_implicit_invocation: false`); in Claude Code its description never enters the context, and its body loads only when invoked — so moving the compile, NotebookLM and audit procedures out of the manual also made every session lighter.
 
 ## Where Things Moved
 
@@ -66,5 +66,5 @@ each carries only the brief its job needs.
 - [[vault-operations|Vault operations]] — the tools the skills run.
 - [[vault-capture-protocol|Vault capture protocol]] — what is captured directly, and what waits for `/vault-compile`.
 - [[notebooklm-compile-support|NotebookLM compile support]] — the instrument `/vault-compile` may use.
-- [[excalidraw-drawings|Excalidraw drawings]] — the one skill Claude may start itself.
+- [[excalidraw-drawings|Excalidraw drawings]] — the one skill the agent may start itself.
 - [[second-brain-architecture-figure|The architecture drawing]] — its sixth zone shows all six skills and the two agents.
