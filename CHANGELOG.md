@@ -5,6 +5,13 @@ All notable changes are recorded here. The format follows
 [Semantic Versioning](https://semver.org/) as defined for this project in
 [CONTRIBUTING.md](CONTRIBUTING.md#versioning).
 
+## [1.1.0](https://github.com/Vifert/second-brain-template/compare/v1.0.0...v1.1.0) (2026-09-24)
+
+
+### Features
+
+* run the vault under any coding agent ([#14](https://github.com/Vifert/second-brain-template/issues/14)) ([bac2fa7](https://github.com/Vifert/second-brain-template/commit/bac2fa79b1fc773e2178e0d375095e04dfdfcf9e))
+
 ## 1.0.0
 
 The first public release: the vault architecture, its tooling and 89 guarded
