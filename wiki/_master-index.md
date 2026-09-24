@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-**12 nodes** across **8 topics**. Last updated 2026-09-24.
+**13 nodes** across **8 topics**. Last updated 2026-09-24.
 
 > [!tip] To look something up, route on `wiki/_index.tsv`, then pull one card from `wiki/_cards.tsv`.
 > This page is human orientation. It is not the routing layer.
@@ -35,7 +35,7 @@ Idea dump — anything the owner might build or pursue, each with a status from 
 
 Who the owner is: identity, current status (Now), and how they want Claude to respond.
 
-### [[wiki/tooling/_index|Tooling]] · 10 nodes
+### [[wiki/tooling/_index|Tooling]] · 11 nodes
 
 The knowledge system itself — how this vault is built, how to capture into it, query it, draw in it and audit it.
 
@@ -48,10 +48,10 @@ The knowledge system itself — how this vault is built, how to capture into it,
 
 ## Retrieval Layer
 
-- `wiki/_index.tsv` — **12 rows**: path, title, topic, kind, status, aliases, tags, summary. Route here first.
-- `wiki/_cards.tsv` — **12 rows**: path, title, and the full Key Takeaways block. Pull exactly one row.
-- `wiki/_sections.tsv` — **74 rows**: path, heading, start line, end line, gist. Gives exact `sed` ranges with no discovery read.
-- `wiki/_links.tsv` — **56 edges**: source, target. Neighbourhood expansion without reading articles.
+- `wiki/_index.tsv` — **13 rows**: path, title, topic, kind, status, aliases, tags, summary. Route here first.
+- `wiki/_cards.tsv` — **13 rows**: path, title, and the full Key Takeaways block. Pull exactly one row.
+- `wiki/_sections.tsv` — **77 rows**: path, heading, start line, end line, gist. Gives exact `sed` ranges with no discovery read.
+- `wiki/_links.tsv` — **60 edges**: source, target. Neighbourhood expansion without reading articles.
 - `wiki/_mentions.tsv` — **0 rows**: person, date, log, line range, snippet. Every dated log entry that names or links someone.
 
 **Never read any of these whole. Always grep.**

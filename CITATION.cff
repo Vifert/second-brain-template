@@ -7,5 +7,5 @@ authors:
 repository-code: "https://github.com/Vifert/second-brain-template"
 license: MIT
 version: 1.0.0 # x-release-please-version
-date-released: "2026-10-01"
+date-released: "2026-09-24"
 keywords: [obsidian, second-brain, claude-code, knowledge-graph, pkm]

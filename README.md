@@ -23,9 +23,9 @@ corpus, where a smaller corpus lowers the ratio for the same answer.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/architecture-dark.png">
-  <img alt="How the second brain works: capture, the wiki graph, the build, the index layer and the query ladder, with the guards beneath" src="docs/assets/architecture.png">
+  <img alt="How the second brain works: capture, the wiki graph, the build, the index layer and the query ladder, with the guards beneath and what Claude loads, and when" src="docs/assets/architecture.png">
 </picture>
-<!-- drawing-hash: 49dd368b -->
+<!-- drawing-hash: debd47ea -->
 
 The drawing as text, and what each stage does: [docs/architecture.md](docs/architecture.md).
 

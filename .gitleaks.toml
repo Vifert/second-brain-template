@@ -1,0 +1,16 @@
+# Gitleaks: the default rules, with one allowance.
+#
+# The generated index files (wiki/_index.tsv and its siblings, here and in the
+# benchmark vault) join each note's tags without spaces, and the
+# generic-api-key rule reads "token-efficiency,subject/retrieval" as a token
+# followed by a secret. Every value in those files is copied from a note's
+# frontmatter, and the notes themselves are scanned, so nothing escapes the
+# scan by skipping them.
+title = "second-brain-template"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated index files, derived from scanned notes"
+paths = ['''(^|/)wiki/_[a-z]+\.tsv$''']
