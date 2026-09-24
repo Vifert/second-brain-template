@@ -289,9 +289,9 @@ const inbox = V.walk(path.join(VAULT, 'raw'), ['.md', '.pdf', '.docx', '.pptx', 
   const claudeMd = path.join(VAULT, 'CLAUDE.md');
   // A vault set up from 1.0 keeps its whole manual in CLAUDE.md: it still works
   // under Claude Code, so that is a warning with the way forward, not a failure.
+  // A folder with neither file — the benchmark's vault — has no manual to check.
   if (!fs.existsSync(manual) && fs.existsSync(claudeMd)) warnings.push('the manual is still in CLAUDE.md, which only Claude Code reads — to let any coding agent run this vault, move it to AGENTS.md and leave CLAUDE.md importing it (UPGRADING.md § 1.1, D90)');
-  else if (!fs.existsSync(manual)) problems.push('AGENTS.md IS MISSING — it is the manual every coding agent reads; CLAUDE.md only imports it (D90)');
-  else {
+  else if (fs.existsSync(manual)) {
     const text = fs.readFileSync(manual, 'utf8');
     if (fs.existsSync(claudeMd)) for (const p of V.shimProblems(fs.readFileSync(claudeMd, 'utf8'), text)) problems.push(`${p} (D90)`);
     if (V.templateOnlyLeft(text)) problems.push('AGENTS.md STILL HOLDS THE TEMPLATE-ONLY NOTE — setup removes the block between <!-- template-only --> and <!-- /template-only -->; left in, it tells your agent the manual is not its brief (D93)');
