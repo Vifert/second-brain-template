@@ -15,7 +15,9 @@ jobs:
         with:
           # Obsidian resolves a drawing embed, ![[name.excalidraw]], by basename
           # under Excalidraw/; lychee reads it as a file beside the note.
-          args: --no-progress --exclude '^https://example\.com' --exclude '\.excalidraw$' './**/*.md'
+          # release-please writes a compare link to the tag its PR is about to
+          # create, so on every release PR that link is a 404 until the merge.
+          args: --no-progress --exclude '^https://example\.com' --exclude '\.excalidraw$' --exclude '^https://github\.com/Vifert/second-brain-template/compare/' './**/*.md'
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
