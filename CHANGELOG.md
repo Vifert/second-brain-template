@@ -5,6 +5,13 @@ All notable changes are recorded here. The format follows
 [Semantic Versioning](https://semver.org/) as defined for this project in
 [CONTRIBUTING.md](CONTRIBUTING.md#versioning).
 
+## [1.1.1](https://github.com/Vifert/second-brain-template/compare/v1.1.0...v1.1.1) (2026-09-24)
+
+
+### Bug Fixes
+
+* name the agent, not Claude, wherever any agent is meant ([#17](https://github.com/Vifert/second-brain-template/issues/17)) ([29ac033](https://github.com/Vifert/second-brain-template/commit/29ac03362a60fa2d0b1486db79f9088ed6ece50e))
+
 ## [1.1.0](https://github.com/Vifert/second-brain-template/compare/v1.0.0...v1.1.0) (2026-09-24)
 
 
