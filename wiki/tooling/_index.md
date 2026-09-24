@@ -1,6 +1,6 @@
 ---
 title: Tooling Index
-summary: Index of the 10 nodes in the tooling topic.
+summary: Index of the 11 nodes in the tooling topic.
 aliases: [tooling index, tooling]
 topic: tooling
 kind: index
@@ -12,7 +12,7 @@ updated: 2026-09-24
 ## Key Takeaways
 
 - The knowledge system itself — how this vault is built, how to capture into it, query it, draw in it and audit it.
-- Contains **10 nodes** — 9 hub, 1 detail.
+- Contains **11 nodes** — 9 hub, 2 detail.
 - Orientation only. To look something up, route on `wiki/_index.tsv`, then pull one card from `wiki/_cards.tsv`.
 
 ## Hubs
@@ -29,6 +29,7 @@ updated: 2026-09-24
 
 ## Detail (deep reference)
 
+- [[second-brain-architecture-figure|Second Brain Architecture Drawing]] — The architecture drawing and its full transcription — every box, arrow and note, from capture to answering, the guards, and what Claude loads and when.
 - [[second-brain-architecture-layout|Second Brain Folder Layout]] — Every top-level path in the vault and what it holds, and why nesting folders costs nothing at query time since queries grep the index rather than walk directories.
 
 ## Related
