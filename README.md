@@ -140,9 +140,15 @@ Every release that moves the [benchmark](bench/README.md) adds a row.
 ## Contribute an idea
 
 The method is young, and the most valuable contributions make it cheaper or
-more faithful. Read the [roadmap](ROADMAP.md), then open an
-[Improvement Proposal](https://github.com/Vifert/second-brain-template/issues/new/choose);
-[CONTRIBUTING.md](CONTRIBUTING.md) explains how a proposal is measured.
+more faithful. Read the [roadmap](ROADMAP.md), then:
+
+1. Open an [Improvement Proposal](https://github.com/Vifert/second-brain-template/issues/new/choose)
+   for anything beyond a typo — [CONTRIBUTING.md](CONTRIBUTING.md) explains how
+   a proposal is measured.
+2. **Fork** this repository. Not *Use this template*: its copy has no link back
+   here, so a pull request from it cannot reach this repo.
+3. Make the change on a branch of your fork and open a pull request to `main`.
+
 Questions go to [SUPPORT.md](SUPPORT.md), security reports to
 [SECURITY.md](SECURITY.md).
 
