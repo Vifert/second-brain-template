@@ -26,6 +26,20 @@ three kinds of contribution are welcome:
   - `docs: explain the dated rung in the query protocol`
   - `refactor:`, `test:`, `chore:` for the rest.
 
+## Getting the code
+
+1. **Fork** this repository with the Fork button. Do not use *Use this
+   template*: it makes an unlinked copy with a fresh history, and GitHub
+   cannot open a pull request from it back to this repository.
+2. Clone your fork, and make a branch for the one topic.
+3. Make the change, then run the checks below until they pass.
+4. Push the branch and open a pull request to `main` here, linking the issue
+   and filling in the pull request checklist.
+
+**Never contribute from the vault you set up.** It holds your own notes, and
+`scan-private.js` fails on them anyway. Keep a separate clone of your fork for
+contributions, and carry a fix you made in your vault across by hand.
+
 ## Running the checks
 
 Node 22 (see `.node-version`); nothing to install.
