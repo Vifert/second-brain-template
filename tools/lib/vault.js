@@ -686,25 +686,29 @@ function iconlessFolders(vaultAbs, icons, exempt = []) {
 }
 
 // D95: a set-up vault must record tailoring before its first compile. The
-// template's own HANDOFF.md still holds {{OWNER_NAME}}, filled at SETUP.md
-// § 6.7 — before tailoring — while the other setup tokens wait for § 10, after
-// the compile, so only the owner's name decides. A folder with no HANDOFF.md
-// (the benchmark's vault) is never a set-up vault.
-const TAILORING_LINE = /^- \*\*\d{4}-\d{2}-\d{2} [—–-] (proposed|nothing cleared the bar|declined by the owner)\*\*/;
+// template's HANDOFF.md is recognised by its own heading, "## Waiting On
+// {{OWNER_NAME}}", which SETUP.md § 6.7 fills before tailoring — not by the
+// token anywhere, since an owner may write it in a note — while the other
+// setup tokens wait for § 10, after the compile. A folder with no HANDOFF.md
+// (the benchmark's vault) is never a set-up vault. The record's date must be
+// a real one.
+const TAILORING_LINE = /^- \*\*(\d{4}-\d{2}-\d{2}) [—–-] (proposed|nothing cleared the bar|declined by the owner)\*\*/;
+const TEMPLATE_HANDOFF = /^## Waiting On \{\{OWNER_NAME\}\}\s*$/m;
 function tailoringUnrecorded(text) {
   if (text === null || text === undefined) return false;
-  if (text.includes('{{OWNER_NAME}}')) return false;
+  if (TEMPLATE_HANDOFF.test(text)) return false;
   const lines = text.split(/\r?\n/);
   const start = lines.findIndex(l => /^## Tailoring\s*$/.test(l));
   if (start < 0) return true;
   for (let i = start + 1; i < lines.length && !/^## /.test(lines[i]); i++) {
-    if (TAILORING_LINE.test(lines[i])) return false;
+    const m = TAILORING_LINE.exec(lines[i]);
+    if (m && isRealDate(m[1])) return false;
   }
   return true;
 }
 
 module.exports = {
-  tailoringUnrecorded, TAILORING_LINE,
+  tailoringUnrecorded, TAILORING_LINE, TEMPLATE_HANDOFF,
   iconlessFolders, overBudget, strayLogHeadings, numberWords, creditCount, templateDefects, shimProblems, templateOnlyLeft, TEMPLATE_ONLY, sicTakesSide, codeIdentifiers, openingPronoun, tagProblems, nearDuplicateTags, inlineTags, secretSettings, rewrittenLines, strayNote, settingDrift, referenceBlocks,
   walk, parseFm, blankFences, blankInlineCode, extractLinks, drawingEmbeds, mediaOwner, untranscribed, controlCharLines, lineCount,
   splitRow, isRealDate, parseStatusLog, dateForms, shortDate, logHeading, mentionsDate, volatileHits, takeaways,
