@@ -1,7 +1,7 @@
 ---
 title: Vault Skills
 summary: The six skills in this vault — /vault-compile, the two audits and /vault-handoff, which only the owner starts, vault-excalidraw and vault-tailor — and the two agents.
-aliases: [vault skills, my skills, skills, slash commands, vault commands, vault-compile, /vault-compile, vault-audit, /vault-audit, vault-deep-audit, /vault-deep-audit, deep audit, cheap audit, how do I compile, how do I compile raw, compile command, audit command, gated skills, disable-model-invocation, health check, why didn't you compile, vault-handoff, /vault-handoff, handoff command, end of session, agents, subagents, vault agents, vault-fidelity-verifier, vault-gap-auditor, omitClaudeMd, vault-tailor, /vault-tailor, tailor the vault, adapt the vault, extend the vault, add a skill, custom skills, custom rules, research skill]
+aliases: [vault skills, my skills, skills, slash commands, vault commands, vault-compile, /vault-compile, vault-audit, /vault-audit, vault-deep-audit, /vault-deep-audit, deep audit, cheap audit, how do I compile, how do I compile raw, compile command, audit command, gated skills, disable-model-invocation, health check, why didn't you compile, vault-handoff, /vault-handoff, handoff command, end of session, agents, subagents, vault agents, vault-fidelity-verifier, vault-gap-auditor, omitClaudeMd, vault-tailor, /vault-tailor, tailor the vault, adapt the vault, extend the vault, add a skill, custom skills, custom rules, research skill, skill chain, skill chains, automation, automations, automate my day, free talk, plan my day, tailoring record, tailoring has not reached a proposal]
 topic: tooling
 kind: hub
 tags: [tech/claude-code, subject/second-brain, subject/workflow, subject/audit]
@@ -16,7 +16,7 @@ updated: 2026-09-24
 - **`/vault-compile` with no argument takes the next batch of the compile plan in HANDOFF.md**, compiles everything if little waits, or writes a plan first; `/vault-compile raw/daily` compiles just that folder.
 - **`/vault-audit` is the cheap health check** — self-test, build and `audit.js`, their output kept in a file, reported as problems, watch items and query cost, then which to fix.
 - **`/vault-deep-audit` adds the expensive checks** — facts answerable only from `raw/`, judgement on watch items, and a gap audit by agents asking questions in the owner's words; a topic argument limits it.
-- **vault-excalidraw and vault-tailor are the vault skills the agent may start on its own** — drawings round by round, and fitting the vault to the owner's needs: an interview in rounds, then new skills, subagents or rules they choose.
+- **vault-excalidraw and vault-tailor are the vault skills the agent may start on its own** — drawings round by round, and fitting the vault to the owner's life: skills, skill chains, automations or rules they choose, before any compiling (D95).
 - **Captures, the build and the self-test are never gated** — and the build also replays the fences and checks people links, `[sic]` notes and Obsidian settings.
 
 ## The Skills
@@ -27,7 +27,7 @@ updated: 2026-09-24
 | `/vault-audit` | the owner only | Runs `selftest.js`, `build-index.js` and `audit.js` into a temp folder and reports in a fixed short shape |
 | `/vault-deep-audit [topic]` | the owner only | The audit, plus the source-independence check, watch-item verdicts and a skeptic-checked gap audit in waves of two agents |
 | `/vault-handoff` | the owner only | The end-of-session record: a session entry in HANDOFF.md, its current state and open threads, the rules and global memory, then a commit and push. The agent reminds the owner once when a session changed the vault |
-| `/vault-tailor` | The agent at setup, then the owner, or the agent when asked | Studies the vault, interviews the owner in rounds (adapted from Matt Pocock's `grilling` skill, MIT), proposes additions with their token cost, and builds the chosen ones to the vault's conventions — `references/extending.md` in its folder is the guide |
+| `/vault-tailor` | The agent at setup, then the owner, or the agent when asked | Studies the vault and what exists about the owner, offers a free talk about their days and weeks, interviews them in rounds (adapted from Matt Pocock's `grilling` skill, MIT), proposes skills, skill chains and automations for any part of their life that clear a stated bar, with their evidence and token cost, and builds the chosen ones to the vault's conventions — `references/extending.md` in its folder is the guide. It runs at setup before any compiling, and its dated record in `HANDOFF.md` § Tailoring gates the first compile: until it exists the build warns and the audit fails (D95) |
 | `vault-excalidraw` | The agent or the owner | Drawings in `Excalidraw/<topic>/`, embedded live and transcribed with a `drawing-hash` |
 
 ## What Is Gated

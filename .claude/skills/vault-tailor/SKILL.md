@@ -1,31 +1,42 @@
 ---
 name: vault-tailor
-description: Fit this vault to its owner's own use — study the template's design, interview the owner in rounds, then propose and build the skills, subagents and rules their use needs. Use once during setup, and whenever the owner asks to adapt, extend or re-tailor the vault.
+description: You MUST always use this skill during setup (SETUP.md sends you here once the base vault builds, before any compiling), and whenever the owner asks to adapt, extend or re-tailor the vault, or asks for help with recurring work in their life or job. It studies the vault's design and what already exists about the owner, offers them a free talk about their days and weeks, grills them with that context, then proposes — and builds what they choose — skills, skill chains, automations, subagents and rules for any part of their life, each recording its results in the vault, and only those that make a noticeable difference.
 ---
 
 # Tailor the vault to its owner
 
 This vault is a foundation. Its rules, skills and tools were built for one
 person's use: capture everything about a life, and answer any question about
-it for a few hundred tokens. Your owner's use may differ. A researcher who
-explores a new topic every day needs a research procedure and rules for
-sources; someone preparing for interviews needs their notes shaped for
-rehearsal; a work-only vault needs rules about what may leave the machine.
-This skill finds out what your owner needs, and fits the vault to it without
-breaking what makes it cheap and safe.
+it for a few hundred tokens. But the agent that runs it can do far more than
+file notes. It can take work off the owner's plate across their whole life —
+plan their day from their calendar, catch them up on their field's news, sort
+their finance email, prepare them for the week's meetings — whatever their own
+days and weeks actually hold, with every result recorded in the vault so
+nothing is lost. This skill gets to know the owner, proposes only what would
+make a noticeable difference, and builds what they choose, without breaking
+what makes the vault cheap and safe.
 
-Work through the five steps in order. During setup (`SETUP.md` § 2) run all
-five; § 4, the building, waits until the base setup is done (`SETUP.md` § 12).
-When it runs again later, start by reading `HANDOFF.md` § Decisions for what earlier
-tailoring settled, and interview only about what has changed.
+Work through the six steps in order. **During setup**, `SETUP.md` sends you
+here once the base vault builds clean and before anything is compiled
+(`SETUP.md` § 4A.6 or § 4B.4): run all six then. The setup facts — name,
+topics, spelling, NotebookLM, GitHub and the rest — belong to `SETUP.md`'s own
+interview (§ 2); never ask them here. **On a later run**, read `HANDOFF.md`
+§ Tailoring and § Decisions first, and ask only about what has changed.
 
-## 1. Understand the whole design first
+**The owner may decline at any point** — before the free talk, mid-interview,
+or at the proposal. Stop there, and go straight to step 6 to record
+"declined by the owner": that is a complete run, and setup goes on.
+
+## 1. Study
+
+### 1a. The design — always
 
 **Do not ask your owner a single question until you understand how every part
 of this vault works** — the owner's order, not a suggestion. You cannot propose
 good additions to a design you only half understand, and the reasons behind the
 rules are spread across the rules, the skills, the ledger of what broke and the
-tooling notes.
+tooling notes. If this setup already wrote `output/tailor-study.md` and nothing
+in the design has changed since, it stands — go on to 1b.
 
 1. **Read the design, in full** — about 87,000 tokens at version 1.0.0
    (September 2026); reading every file of the template would be about
@@ -59,19 +70,56 @@ tooling notes.
    to the files — the code in `tools/`, a wiki node, a ledger row — until it is
    clear. A point you only guessed at is a gap. The study is done when every
    point is explained and sourced.
-4. **Account for it.** Before the first round, tell your owner in one line that
-   the study is done and where the brief is, and record it in `HANDOFF.md`.
 
 You will draw on the brief all through the interview, to explain the vault to
 your owner in plain words whenever a question needs it.
 
-**When this skill runs again later**, in a vault that has grown, study the
-machinery the same way — including anything the owner added since, such as
-their own skills and rules files — and reach the owner's notes through
-`wiki/_index.tsv` (every node's summary and tags), reading a note only where a
-question needs it.
+### 1b. What already exists about the owner
 
-## 2. Interview the owner
+What you can learn before asking anything depends on the case:
+
+- **An existing vault, during setup.** It is plain linked Markdown — no index,
+  no rules, no code of ours — still in the owner's own folders, because
+  tailoring runs before `SETUP.md` § 4A.7 moves the notes into `raw/`. Survey
+  it cheaply: the folder tree and how many notes each holds; the note titles;
+  the tags and aliases in their frontmatter; the most-linked notes, counting
+  `[[links]]` with a short script in a scratch folder outside the vault; the
+  most recently edited notes (when every file carries the same date, as a
+  copied or synced vault can, go by the dates in daily-note names instead);
+  their daily notes, if they keep them. Then read a small sample in full — the
+  ten or so most-linked and most recent — for what the owner actually tracks
+  and does. A vault of a few dozen notes can simply be read whole; in a large
+  one, never read every note.
+- **A new vault, during setup.** Nothing to read yet.
+- **A later run, in a vault built on this architecture.** `HANDOFF.md`
+  § Tailoring and § Decisions, then the owner's notes through
+  `wiki/_index.tsv` (every node's summary and tags), reading a note only where
+  a question needs it; and the machinery as it is now, including any skills or
+  rules the owner added since.
+
+Add what you learned to the study brief under **The owner**, each point naming
+the note it came from. Then tell your owner in one line that the study is
+done and where the brief is.
+
+## 2. Offer the free talk
+
+**Always offer it** — whatever 1b found, even in a rich existing vault. It is
+a suggestion, never a requirement, and it never replaces step 3: it only makes
+your questions about them instead of about anyone. Say, in your own words:
+
+> Before I ask you anything, would you like to tell me about your days and
+> weeks, in your own words, for ten to twenty minutes? Everything you do, at
+> work and outside it: what repeats, what you keep forgetting, what you dread
+> or put off, and the apps and accounts behind it all. If you have a
+> voice-to-text tool, just talk and paste the text in; if not, type it — in any
+> order, as roughly as you like. It's optional: say "skip" and I'll go straight
+> to my questions.
+
+If they talk, let them finish without interrupting. Then ask whether they
+would like the talk kept in `raw/` as a capture for `/vault-compile` — their
+choice; if not, it lives only in this session. Either way, go on to step 3.
+
+## 3. Grill the owner
 
 *The interview method below is adapted from Matt Pocock's `grilling` skill
 (https://github.com/mattpocock/skills, MIT License, © 2026 Matt Pocock; the
@@ -94,48 +142,116 @@ Finding facts is your job, never the user's. When a frontier question needs a fa
 The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
 
 **The branches this tree must reach.** Start from these; follow wherever the
-answers lead:
+answers lead. Build every question from the free talk and 1b: quote what they
+said back to them, so each question is about their life, not a form.
 
-- **During setup, first**: a vault they already have, or a new one — this
-  picks `SETUP.md` § 4A or § 4B — and every fact in `SETUP.md` § 3 (name,
-  optional pronouns, work kept separable, topics, answer style, spelling,
-  NotebookLM, share links, GitHub).
-- **What the vault is for, day to day**: what they will put in, how often,
-  and from where (typing, daily notes, files, web pages, meetings).
-- **What they will ask of it**: the questions they expect to ask, how precise
-  the answers must be, and which are frequent enough to deserve a procedure.
-- **Recurring work** that could become a skill: a daily research run, meeting
-  or interview preparation, a weekly review, a report built from the logs.
-- **Work to delegate** that could become a subagent: reading sources in
-  parallel, checking claims, gathering material, with what it may and may not
-  touch.
+- **Their days and weeks, work and personal**: what fills them, in the order
+  it happens; what repeats daily, weekly, monthly.
+- **Each recurring task**: what it is, how often, how long it takes, what is
+  tedious or error-prone about it, and whether they forget, dread or put it
+  off.
+- **What they would hand off**, and what they would never hand off.
+- **The tools and accounts behind each task** — calendar, email, messaging,
+  finance, code hosts, video, news — and which of them this agent can already
+  reach. Finding that out is your job: check the connectors and tools
+  available to you in this session yourself, never ask the owner.
+- **Tasks with separate steps**, where one skill could gather, the next
+  summarise, a third file the result — candidates for a skill chain.
+- **What should happen without being asked**, and when — candidates for an
+  automation.
+- **Delegable reading or checking** that could become a subagent, with what it
+  may and may not touch.
 - **Rules of their own**: how sources are cited, what counts as verified, what
   must never leave the machine, naming, tone, anything they correct you on
   twice.
 - **Cost and control**: which procedures are expensive enough that only they
-  should start them, and how much a task may spend.
+  should start them, and how much a task or a month of automations may spend.
 - **Their agent and harness**: Claude Code, Codex or another — it decides what
-  a skill, subagent or hook can be (`references/extending.md` § Other agents).
+  a skill, subagent, hook or schedule can be (`references/extending.md`
+  § Other agents).
+- **On a later run**: what has changed since the last dated line in
+  `HANDOFF.md` § Tailoring, and whether anything waiting on a connector can
+  now be built.
 
-## 3. Propose
+## 4. Propose
 
 When the frontier is empty, state the shared understanding back in a short
 paragraph and ask your owner to confirm it, or correct it. Propose nothing
-until they confirm. Then propose a numbered
-list of additions. For each: what it is (skill, subagent, rules file, topic,
-capture-table row, probe terms, hook), what it does for them, when it loads
-and roughly what it costs in tokens per session or per use, and how its rules
-are guarded. Prefer the smallest change that meets the need; say which of
-their needs the existing vault already covers. Then ask which to build.
+until they confirm. Then propose a numbered list, each item in this shape:
 
-## 4. Build what they chose
+```markdown
+**1. Plan my day** — a skill (or: a skill chain `gather-agenda → plan-day`; an automation; a subagent; a rules file; a topic; a capture-table row; probe terms; a hook)
+- **Takes over**: "every morning I copy my calendar into a to-do list and still miss things" — your words, from the talk
+- **How often · time saved**: every weekday · about 1 hour 15 minutes a week
+- **Needs**: Google Calendar (connected); Gmail (missing — to connect it: …)
+- **Cost**: about … tokens a run; guarded by …; records its plan in the journal
+```
 
-One addition at a time, following `references/extending.md`:
+- **The bar.** Propose an item only if the task comes up at least weekly and
+  saves real time, or it is something they said they forget, dread or put off.
+  An automation must also be worth doing without being asked. A skill chain is
+  judged as a whole, and proposed only when the task truly has separate steps
+  — steps that are useful on their own, or that run at different times or
+  with different tools; one skill is the default when one skill will do.
+- **The owner's own rules come first.** Where one keeps something off the
+  machine or out of the repository — work email, say — the item records only
+  what that rule allows (a summary, a pointer, nothing), and says so under
+  **Cost**.
+- **Cost** is in tokens per run and per month, with anything else it spends.
+- **Everything else** goes below the list as **Considered, not proposed**, one
+  line each with the reason, so they can overrule you.
+- **If nothing clears the bar**, say so and propose nothing. That is a good
+  outcome, not a failure.
+- **Say which needs the existing vault already covers**, and prefer the
+  smallest change that meets each need.
 
-- **A skill** is modelled on the vault's own: a `SKILL.md` with a
-  description that says exactly when to use it, the procedure in numbered
-  steps, and `disable-model-invocation: true` only when your owner wants to be
-  the one who starts it — usually because it is expensive.
+Then ask which to build.
+
+## 5. Build what they chose
+
+First ask the building questions below — where each skill lives, how each
+automation runs — for every chosen item together, in one round, so nothing
+waits on them later. Then build one addition at a time, following
+`references/extending.md`. For each:
+
+- **Where a skill lives — ask every time.** Ask whether it should live in the
+  vault only, or globally so it works from any folder; recommend one and do
+  what they choose. Recommend the vault unless they clearly need it elsewhere:
+  there it is versioned, copied to other agents by `agents-sync`, and rebuilt
+  with the vault. A **global** skill keeps its source in the vault and is
+  copied into the agent's user-level skills folder — `~/.claude/skills/` for
+  Claude Code; for another agent, the folder its documentation names — and it
+  still records its results in the vault by the vault's full path.
+- **Every skill records its results in the vault** through the capture table
+  in `AGENTS.md`: a day plan goes to the journal, a finance summary to its
+  node, a news digest to its log — within the owner's own rules on what may
+  leave the machine.
+- **A skill chain** is several skills, each usable alone: each link's
+  `SKILL.md` ends with a `## Next` section naming the skill it calls and
+  exactly what it hands over. Build and test each link alone, then the chain.
+- **How an automation runs — list every option, and they choose.** Say which
+  ways exist on this owner's machine and agent — the agent's own scheduler
+  (Claude Code has scheduled tasks), a cloud routine that runs while the
+  computer is off, the operating system's scheduler (Task Scheduler on
+  Windows, cron on Linux, launchd on macOS) running the agent in the
+  background, or running it themselves when they want it — recommend one, and
+  set up the one they choose. An automation is an ordinary skill or skill
+  chain plus a schedule: it also runs by hand, the schedule starts the chain's
+  first skill, no gated skill (compile, audits, handoff) is anywhere in it,
+  and each run records its result in the vault. Set it up only after they
+  approve its schedule and its estimated monthly cost. If their agent cannot
+  run in the background, say so and offer it as a skill they start. A cloud
+  routine cannot reach a vault on their computer: offer it only when the
+  vault is in a git repository the routine can clone and push to, and say
+  that each run's result lands in the vault through that repository.
+- **Connectors.** A skill whose connector is still missing is not built yet:
+  it is recorded as *waiting on a connector*, with the steps to connect it, and
+  a later run builds it. Your owner signs in to every account themselves; you
+  never handle a password or a token.
+- **A skill** is modelled on the vault's own: a `SKILL.md` with a description
+  that says exactly when to use it, the procedure in numbered steps, and
+  `disable-model-invocation: true` only when your owner wants to be the one
+  who starts it — usually because it is expensive.
 - **A subagent** is read-only unless it must write, carries its own brief,
   and sets `omitClaudeMd: true` so it does not pay for the whole manual.
 - **A rule** goes where it loads only when needed: a `.claude/rules/` file
@@ -147,18 +263,38 @@ One addition at a time, following `references/extending.md`:
 - **A topic** is registered in `tools/build-index.js` before any node uses it,
   with a folder icon.
 
-After each: `node tools/selftest.js` and `node tools/build-index.js` must pass.
+After each: `node tools/selftest.js` and `node tools/build-index.js` must pass,
+and `node tools/agents-sync.js` must run after any change to `.claude/`.
+During a conversion the build still lists the owner's own notes as
+`NOTE OUTSIDE THE INDEXED FOLDERS` until `SETUP.md` § 4A.7 moves them, and
+warns that tailoring has no record until step 6: neither counts against an
+addition.
 
-## 5. Record it
+## 6. Record it
 
-In `HANDOFF.md`: one line per addition under Decisions, with why; the
-interview's outcome and anything deliberately not built under the session
-entry. Then tell your owner, in a few lines, what changed and how to use it —
-and that they can run `/vault-tailor` again whenever their needs change.
+Under `## Tailoring` in `HANDOFF.md` — create that exact heading above
+`## Decisions` if it is missing, as it is in a vault set up before this skill
+recorded its runs — add this run's entry, newest last. Its first line is
+dated, in exactly one of three forms:
+
+```markdown
+- **2026-09-28 — proposed**: …
+- **2026-09-28 — nothing cleared the bar**: …
+- **2026-09-28 — declined by the owner**
+```
+
+Beneath it: what was proposed, chosen, built, and considered but not proposed;
+which skills are global; which automations run, how and when; and what waits
+on a connector. Until the vault's first dated line exists, the build warns and
+the audit fails (D95) — that is what stops a setup from reaching its compile
+without ever proposing anything. Add one line per addition under § Decisions,
+with why. Then tell your owner, in a few lines, what changed and how to use
+it — and that they can run `/vault-tailor` again whenever their life or work
+changes.
 
 ---
 
-The interview method in § 2 is adapted from `grilling`, in
+The interview method in § 3 is adapted from `grilling`, in
 https://github.com/mattpocock/skills, under this licence:
 
 ```

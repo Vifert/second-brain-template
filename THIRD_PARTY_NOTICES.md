@@ -5,7 +5,7 @@ includes material from the project below, used under its own licence.
 
 ## grilling — Matt Pocock
 
-- **Used in**: [`.claude/skills/vault-tailor/SKILL.md`](.claude/skills/vault-tailor/SKILL.md) § 2,
+- **Used in**: [`.claude/skills/vault-tailor/SKILL.md`](.claude/skills/vault-tailor/SKILL.md) § 3,
   the interview method the setup agent uses to learn what a user needs their
   vault for.
 - **Source**: the `grilling` skill in https://github.com/mattpocock/skills

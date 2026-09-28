@@ -823,10 +823,17 @@ ok('D78: the manual keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && 
   ok('D92: the Stop hook answers with JSON when it lets the agent finish', stop.status !== 0 || (() => { try { JSON.parse(stop.stdout); return true; } catch { return false; } })(), stop.stdout);
 
   const filled = manual.replace(/\{\{OWNER_NAME\}\}/g, 'Mira');
-  ok('D93: the template ships the contributor note in the manual', V.TEMPLATE_ONLY.test(manual) && !V.templateOnlyLeft(manual));
-  ok('D93: a vault whose manual keeps the note is reported', V.templateOnlyLeft(filled));
   ok('D93: a vault with the note removed passes', !V.templateOnlyLeft(filled.replace(V.TEMPLATE_ONLY, '')));
-  ok('D93: the note points to a brief that exists', fs.existsSync(path.join(VAULT, 'docs', 'for-ai-agents.md')) && /docs\/for-ai-agents\.md/.test(manual));
+  // D96: three of these read the manual as the template's. In a set-up vault
+  // setup has removed the note (and the brief never arrives), so there they
+  // would fail every owner; the vault checks its own manual instead.
+  if (manual.includes('{{OWNER_NAME}}')) {
+    ok('D93: the template ships the contributor note in the manual', V.TEMPLATE_ONLY.test(manual) && !V.templateOnlyLeft(manual));
+    ok('D93: a vault whose manual keeps the note is reported', V.templateOnlyLeft(filled));
+    ok('D93: the note points to a brief that exists', fs.existsSync(path.join(VAULT, 'docs', 'for-ai-agents.md')) && /docs\/for-ai-agents\.md/.test(manual));
+  } else {
+    ok('D96: a set-up vault\'s manual no longer holds the template-only note', !V.TEMPLATE_ONLY.test(manual));
+  }
 }
 eq('D58: a log keeps names as written', W.unlinkedPeople([person, wnode('wiki/journal/journal-2026-09.md', { kind: 'log' }, '---\ntitle: J\n---\n\n## Key Takeaways\n- Priya Shah called.\n')], R.OWNER.slug).length, 0);
 
@@ -880,6 +887,45 @@ ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} fou
     })(VAULT);
   }
   ok('D94: no template file calls the running agent by name — say "the agent" (a vault is not scanned)', hits.length === 0, hits.slice(0, 10).join(', '));
+}
+
+// ---------------------------------------------------------------------------
+// TAILORING BEFORE COMPILING (D95). A converted vault reached its compile, six
+// batches of it, without vault-tailor ever proposing anything: the proposal
+// was queued behind the compile and nothing checked it. A set-up vault whose
+// HANDOFF.md has no dated line under ## Tailoring now warns in the build and
+// fails the audit, until the first run records one.
+// ---------------------------------------------------------------------------
+{
+  const set = '# HANDOFF\n\n## Decisions\n\n- **Settled at setup**: topics\n';
+  ok('D95: a set-up HANDOFF with no Tailoring section is unrecorded', V.tailoringUnrecorded(set));
+  ok('D95: an empty Tailoring section is unrecorded', V.tailoringUnrecorded(set + '\n## Tailoring\n\n<!-- vault-tailor records each run here -->\n'));
+  ok('D95: a dated proposal records it', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 — proposed**: three skills and a chain\n'));
+  ok('D95: nothing cleared the bar records it', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 — nothing cleared the bar**\n'));
+  ok('D95: declined by the owner records it', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 — declined by the owner**\n'));
+  ok('D95: a hyphen or an en dash in the dated line still counts', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 - proposed**\n') && !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 – proposed**\n'));
+  ok('D95: CRLF line endings are read like LF', !V.tailoringUnrecorded((set + '\n## Tailoring\n\n- **2026-09-28 — proposed**\n').replace(/\n/g, '\r\n')));
+  ok('D95: a heading with trailing spaces is still the section', !V.tailoringUnrecorded(set + '\n## Tailoring  \n\n- **2026-09-28 — proposed**\n'));
+  ok('D95: a dated line under another heading does not count', V.tailoringUnrecorded('# HANDOFF\n\n## Tailoring\n\n## Decisions\n\n- **2026-09-28 — proposed**\n'));
+  ok('D95: the unfilled template is never flagged', !V.tailoringUnrecorded('## Waiting On {{OWNER_NAME}}\n\n- Nothing yet.\n'));
+  ok('D95: {{OWNER_NAME}} written in a set-up vault\'s notes does not hide it', V.tailoringUnrecorded(set + '\nThe template said {{OWNER_NAME}} here.\n<!-- {{OWNER_NAME}} -->\n'));
+  ok('D95: an impossible date does not count as a record', V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-99-99 — proposed**\n') && V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-02-30 — proposed**\n'));
+  ok('D95: mid-setup — owner named, setup tokens still open — is already a set-up vault', V.tailoringUnrecorded(set + '\n- **Setup**: {{SETUP_STATE}}\n- **Snapshot**: {{SETUP_SNAPSHOT}}\n'));
+  ok('D95: lowercase Templater braces do not hide a set-up vault', V.tailoringUnrecorded(set + '\nNext review: {{date}}\n'));
+  ok('D95: a vault without HANDOFF.md is never flagged', !V.tailoringUnrecorded(null));
+  // Only the template itself: an owner's vault without its first record is
+  // flagged by design, by the build and the audit, not by the self-test.
+  const own = path.join(VAULT, 'HANDOFF.md');
+  const ownText = fs.existsSync(own) ? fs.readFileSync(own, 'utf8') : null;
+  if (ownText !== null && V.TEMPLATE_HANDOFF.test(ownText)) ok('D95: this template\'s own HANDOFF.md is not flagged', !V.tailoringUnrecorded(ownText));
+  const tailor = skillText('vault-tailor') || '';
+  const desc = (tailor.match(/^description:\s*(.*)$/m) || [])[1] || '';
+  ok('D95: vault-tailor\'s description opens "You MUST always"', desc.startsWith('You MUST always'), desc.slice(0, 60));
+  ok('D95: vault-tailor\'s description fits the 1,024-character limit', desc.length <= 1024, `${desc.length}`);
+  const steps = ['## 1. Study', '## 2. Offer the free talk', '## 3. Grill the owner', '## 4. Propose', '## 5. Build what they chose', '## 6. Record it'];
+  const at = steps.map(s => tailor.indexOf(`\n${s}\n`));
+  ok('D95: vault-tailor keeps its six steps, in order', at.every((p, i) => p > 0 && (i === 0 || p > at[i - 1])), steps.filter((_, i) => at[i] < 0).join(', '));
+  ok('D95: the grilling method travels word for word with its notice', tailor.includes('Interview the user relentlessly until reaching a shared understanding.') && tailor.includes('Do not act on it until the user confirms you have reached a shared understanding.') && tailor.includes('Copyright (c) 2026 Matt Pocock'));
 }
 
 // ---------------------------------------------------------------------------

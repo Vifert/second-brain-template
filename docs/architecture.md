@@ -63,7 +63,7 @@ flowchart LR
     n37["Skills the agent may start<br>vault-excalidraw · vault-tailor"]
     n38["Hooks — enforced, not remembered<br>block bash that runs backticks<br>refuse CRLF and control bytes<br>rebuild a stale index at Stop"]
     n39["Read-only agents, skip the manual<br>vault-fidelity-verifier<br>vault-gap-auditor"]
-    n40["vault-tailor — fits the vault to you<br>study → interview in rounds →<br>propose → build your own<br>skills · agents · rules"]
+    n40["vault-tailor — fits the vault to your life<br>study → free talk → grill →<br>propose skills · chains · automations<br>→ build what you choose"]
   end
   n41["NotebookLM — grounded second reader<br>triage the batch · verify the compile · never a source (D74)"]
   n2 --> n3
@@ -131,8 +131,10 @@ Read alongside the flowchart:
   Claude Code reads it through `CLAUDE.md` (D90) — points to the
   `.claude/rules/` files, which load only when a file they cover is read (D87).
   The gated skills dispatch the two read-only agents, which skip the manual and
-  carry their own brief. `vault-tailor`, which the agent may start, fits the vault to its owner: it studies the design, interviews them in
-  rounds, then proposes and builds their own skills, agents and rules. The
+  carry their own brief. `vault-tailor`, which the agent may start, fits the vault to its owner: it studies the design and what exists about them,
+  offers a free talk, interviews them in rounds, then proposes and builds
+  skills, skill chains and automations for their life, and their own agents
+  and rules. The
   hooks enforce three traps rather than trusting memory, and rebuild a stale
   index at the end of a turn. The note: "Budgets warn, never fail: past its
   token budget, AGENTS.md or HANDOFF.md warns, and detail moves to a rules

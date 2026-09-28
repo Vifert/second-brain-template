@@ -3,7 +3,7 @@
 > **Second-brain architecture and workflow designed and built by Vifert.**
 > The capped answer surface over an uncapped body, the five-file index layer
 > and the query ladder, the kind tiers, the compile and verification protocol,
-> the defect discipline with its ninety-four mechanically guarded defects,
+> the defect discipline with its ninety-six mechanically guarded defects,
 > the tooling that enforces it, the drawing and NotebookLM workflows, and every
 > rule in this manual are his work, shared so this vault could start where his
 > left off.
@@ -53,9 +53,9 @@ session. Each is backed by the builder, so a slip fails the build.
 ## Skills
 
 - `vault-excalidraw` — any drawing request — and `vault-tailor` — fitting the
-  vault to my needs: new skills, subagents and rules, after an interview in
-  rounds; run once at setup, and whenever I ask — the vault skills the agent
-  may start itself.
+  vault to my life and work: skills, skill chains, automations, subagents and
+  rules; run once at setup, before any compiling, and whenever I ask — the
+  vault skills the agent may start itself.
 - `/vault-compile`, `/vault-audit`, `/vault-deep-audit`, `/vault-handoff` —
   {{OWNER_NAME}}'s to start (§ Compile and Audit, § Session Handoff).
 - Skills, agents and hooks are written once, in `.claude/`; the copies other

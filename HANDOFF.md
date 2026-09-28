@@ -48,6 +48,15 @@
 
 - None yet.
 
+## Tailoring
+
+<!-- The vault-tailor skill records each run here, newest last. Its first line
+     is dated — "- **YYYY-MM-DD — proposed**", "— nothing cleared the bar" or
+     "— declined by the owner" — followed by what was chosen, built, and
+     considered but not proposed; which skills are global; which automations
+     run, and how; and what waits on a connector. Until that first dated line
+     exists the build warns and the audit fails (D95). -->
+
 ## Decisions
 
 - **Settled at setup**: {{SETUP_DECISIONS}}
