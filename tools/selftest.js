@@ -883,6 +883,31 @@ ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} fou
 }
 
 // ---------------------------------------------------------------------------
+// TAILORING BEFORE COMPILING (D95). A converted vault reached its compile, six
+// batches of it, without vault-tailor ever proposing anything: the proposal
+// was queued behind the compile and nothing checked it. A set-up vault whose
+// HANDOFF.md has no dated line under ## Tailoring now warns in the build and
+// fails the audit, until the first run records one.
+// ---------------------------------------------------------------------------
+{
+  const set = '# HANDOFF\n\n## Decisions\n\n- **Settled at setup**: topics\n';
+  ok('D95: a set-up HANDOFF with no Tailoring section is unrecorded', V.tailoringUnrecorded(set));
+  ok('D95: an empty Tailoring section is unrecorded', V.tailoringUnrecorded(set + '\n## Tailoring\n\n<!-- vault-tailor records each run here -->\n'));
+  ok('D95: a dated proposal records it', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 — proposed**: three skills and a chain\n'));
+  ok('D95: nothing cleared the bar records it', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 — nothing cleared the bar**\n'));
+  ok('D95: declined by the owner records it', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 — declined by the owner**\n'));
+  ok('D95: a hyphen or an en dash in the dated line still counts', !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 - proposed**\n') && !V.tailoringUnrecorded(set + '\n## Tailoring\n\n- **2026-09-28 – proposed**\n'));
+  ok('D95: CRLF line endings are read like LF', !V.tailoringUnrecorded((set + '\n## Tailoring\n\n- **2026-09-28 — proposed**\n').replace(/\n/g, '\r\n')));
+  ok('D95: a heading with trailing spaces is still the section', !V.tailoringUnrecorded(set + '\n## Tailoring  \n\n- **2026-09-28 — proposed**\n'));
+  ok('D95: a dated line under another heading does not count', V.tailoringUnrecorded('# HANDOFF\n\n## Tailoring\n\n## Decisions\n\n- **2026-09-28 — proposed**\n'));
+  ok('D95: the unfilled template is never flagged', !V.tailoringUnrecorded('## Waiting On {{OWNER_NAME}}\n\n- Nothing yet.\n'));
+  ok('D95: lowercase Templater braces do not hide a set-up vault', V.tailoringUnrecorded(set + '\nNext review: {{date}}\n'));
+  ok('D95: a vault without HANDOFF.md is never flagged', !V.tailoringUnrecorded(null));
+  const own = path.join(VAULT, 'HANDOFF.md');
+  ok('D95: this template\'s own HANDOFF.md is not flagged', !V.tailoringUnrecorded(fs.existsSync(own) ? fs.readFileSync(own, 'utf8') : null));
+}
+
+// ---------------------------------------------------------------------------
 // GRAPH COLOURS (D86). One visible, distinct colour per folder, kept stable.
 // ---------------------------------------------------------------------------
 const G = require('./lib/graphcolours');

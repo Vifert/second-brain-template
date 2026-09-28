@@ -685,7 +685,24 @@ function iconlessFolders(vaultAbs, icons, exempt = []) {
   return dirs.filter(d => !icons[d] && !rules.some(re => re.test(d.split('/').pop())));
 }
 
+// D95: a set-up vault must record tailoring before its first compile. The
+// template's own HANDOFF.md still holds its uppercase {{TOKENS}}; a folder
+// with no HANDOFF.md (the benchmark's vault) is never a set-up vault.
+const TAILORING_LINE = /^- \*\*\d{4}-\d{2}-\d{2} [—–-] (proposed|nothing cleared the bar|declined by the owner)\*\*/;
+function tailoringUnrecorded(text) {
+  if (text === null || text === undefined) return false;
+  if (/\{\{[A-Z][A-Z0-9_]*\}\}/.test(text)) return false;
+  const lines = text.split(/\r?\n/);
+  const start = lines.findIndex(l => /^## Tailoring\s*$/.test(l));
+  if (start < 0) return true;
+  for (let i = start + 1; i < lines.length && !/^## /.test(lines[i]); i++) {
+    if (TAILORING_LINE.test(lines[i])) return false;
+  }
+  return true;
+}
+
 module.exports = {
+  tailoringUnrecorded, TAILORING_LINE,
   iconlessFolders, overBudget, strayLogHeadings, numberWords, creditCount, templateDefects, shimProblems, templateOnlyLeft, TEMPLATE_ONLY, sicTakesSide, codeIdentifiers, openingPronoun, tagProblems, nearDuplicateTags, inlineTags, secretSettings, rewrittenLines, strayNote, settingDrift, referenceBlocks,
   walk, parseFm, blankFences, blankInlineCode, extractLinks, drawingEmbeds, mediaOwner, untranscribed, controlCharLines, lineCount,
   splitRow, isRealDate, parseStatusLog, dateForms, shortDate, logHeading, mentionsDate, volatileHits, takeaways,
