@@ -5,6 +5,13 @@ All notable changes are recorded here. The format follows
 [Semantic Versioning](https://semver.org/) as defined for this project in
 [CONTRIBUTING.md](CONTRIBUTING.md#versioning).
 
+## [1.2.0](https://github.com/Vifert/second-brain-template/compare/v1.1.1...v1.2.0) (2026-09-28)
+
+
+### Features
+
+* tailor the vault to the owner's whole life, and gate setup on its proposal ([#20](https://github.com/Vifert/second-brain-template/issues/20)) ([419a3f9](https://github.com/Vifert/second-brain-template/commit/419a3f95b63c108294803578a665cc8703407c82))
+
 ## [1.1.1](https://github.com/Vifert/second-brain-template/compare/v1.1.0...v1.1.1) (2026-09-24)
 
 
