@@ -77,13 +77,15 @@ What you can learn before asking anything depends on the case:
 - **An existing vault, during setup.** It is plain linked Markdown — no index,
   no rules, no code of ours — still in the owner's own folders, because
   tailoring runs before `SETUP.md` § 4A.7 moves the notes into `raw/`. Survey
-  it cheaply, as `SETUP.md` § 4A.1 does: the folder tree and how many notes
-  each holds; the note titles; the tags and aliases in their frontmatter; the
-  most-linked notes, counting `[[links]]` with a short script in a scratch
-  folder outside the vault, never by reading every note; the most recently
-  edited notes; their daily notes, if they keep them. Then read a small sample
-  in full — the ten or so most-linked and most recent — for what the owner
-  actually tracks and does.
+  it cheaply: the folder tree and how many notes each holds; the note titles;
+  the tags and aliases in their frontmatter; the most-linked notes, counting
+  `[[links]]` with a short script in a scratch folder outside the vault; the
+  most recently edited notes (when every file carries the same date, as a
+  copied or synced vault can, go by the dates in daily-note names instead);
+  their daily notes, if they keep them. Then read a small sample in full — the
+  ten or so most-linked and most recent — for what the owner actually tracks
+  and does. A vault of a few dozen notes can simply be read whole; in a large
+  one, never read every note.
 - **A new vault, during setup.** Nothing to read yet.
 - **A later run, in a vault built on this architecture.** `HANDOFF.md`
   § Tailoring and § Decisions, then the owner's notes through
@@ -147,7 +149,8 @@ said back to them, so each question is about their life, not a form.
 - **What they would hand off**, and what they would never hand off.
 - **The tools and accounts behind each task** — calendar, email, messaging,
   finance, code hosts, video, news — and which of them this agent can already
-  reach. Finding that out is your job: check the connected tools yourself.
+  reach. Finding that out is your job: check the connectors and tools
+  available to you in this session yourself, never ask the owner.
 - **Tasks with separate steps**, where one skill could gather, the next
   summarise, a third file the result — candidates for a skill chain.
 - **What should happen without being asked**, and when — candidates for an
@@ -183,8 +186,14 @@ until they confirm. Then propose a numbered list, each item in this shape:
 - **The bar.** Propose an item only if the task comes up at least weekly and
   saves real time, or it is something they said they forget, dread or put off.
   An automation must also be worth doing without being asked. A skill chain is
-  judged as a whole, and proposed only when the task truly has separate steps;
-  one skill is the default when one skill will do.
+  judged as a whole, and proposed only when the task truly has separate steps
+  — steps that are useful on their own, or that run at different times or
+  with different tools; one skill is the default when one skill will do.
+- **The owner's own rules come first.** Where one keeps something off the
+  machine or out of the repository — work email, say — the item records only
+  what that rule allows (a summary, a pointer, nothing), and says so under
+  **Cost**.
+- **Cost** is in tokens per run and per month, with anything else it spends.
 - **Everything else** goes below the list as **Considered, not proposed**, one
   line each with the reason, so they can overrule you.
 - **If nothing clears the bar**, say so and propose nothing. That is a good
@@ -196,7 +205,10 @@ Then ask which to build.
 
 ## 5. Build what they chose
 
-One addition at a time, following `references/extending.md`. For each:
+First ask the building questions below — where each skill lives, how each
+automation runs — for every chosen item together, in one round, so nothing
+waits on them later. Then build one addition at a time, following
+`references/extending.md`. For each:
 
 - **Where a skill lives — ask every time.** Ask whether it should live in the
   vault only, or globally so it works from any folder; recommend one and do
@@ -208,7 +220,8 @@ One addition at a time, following `references/extending.md`. For each:
   still records its results in the vault by the vault's full path.
 - **Every skill records its results in the vault** through the capture table
   in `AGENTS.md`: a day plan goes to the journal, a finance summary to its
-  node, a news digest to its log.
+  node, a news digest to its log — within the owner's own rules on what may
+  leave the machine.
 - **A skill chain** is several skills, each usable alone: each link's
   `SKILL.md` ends with a `## Next` section naming the skill it calls and
   exactly what it hands over. Build and test each link alone, then the chain.
