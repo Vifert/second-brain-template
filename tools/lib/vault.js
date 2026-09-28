@@ -686,12 +686,14 @@ function iconlessFolders(vaultAbs, icons, exempt = []) {
 }
 
 // D95: a set-up vault must record tailoring before its first compile. The
-// template's own HANDOFF.md still holds its uppercase {{TOKENS}}; a folder
-// with no HANDOFF.md (the benchmark's vault) is never a set-up vault.
+// template's own HANDOFF.md still holds {{OWNER_NAME}}, filled at SETUP.md
+// § 6.7 — before tailoring — while the other setup tokens wait for § 10, after
+// the compile, so only the owner's name decides. A folder with no HANDOFF.md
+// (the benchmark's vault) is never a set-up vault.
 const TAILORING_LINE = /^- \*\*\d{4}-\d{2}-\d{2} [—–-] (proposed|nothing cleared the bar|declined by the owner)\*\*/;
 function tailoringUnrecorded(text) {
   if (text === null || text === undefined) return false;
-  if (/\{\{[A-Z][A-Z0-9_]*\}\}/.test(text)) return false;
+  if (text.includes('{{OWNER_NAME}}')) return false;
   const lines = text.split(/\r?\n/);
   const start = lines.findIndex(l => /^## Tailoring\s*$/.test(l));
   if (start < 0) return true;

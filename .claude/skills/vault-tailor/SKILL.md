@@ -23,6 +23,10 @@ topics, spelling, NotebookLM, GitHub and the rest — belong to `SETUP.md`'s own
 interview (§ 2); never ask them here. **On a later run**, read `HANDOFF.md`
 § Tailoring and § Decisions first, and ask only about what has changed.
 
+**The owner may decline at any point** — before the free talk, mid-interview,
+or at the proposal. Stop there, and go straight to step 6 to record
+"declined by the owner": that is a complete run, and setup goes on.
+
 ## 1. Study
 
 ### 1a. The design — always
@@ -236,7 +240,10 @@ waits on them later. Then build one addition at a time, following
   first skill, no gated skill (compile, audits, handoff) is anywhere in it,
   and each run records its result in the vault. Set it up only after they
   approve its schedule and its estimated monthly cost. If their agent cannot
-  run in the background, say so and offer it as a skill they start.
+  run in the background, say so and offer it as a skill they start. A cloud
+  routine cannot reach a vault on their computer: offer it only when the
+  vault is in a git repository the routine can clone and push to, and say
+  that each run's result lands in the vault through that repository.
 - **Connectors.** A skill whose connector is still missing is not built yet:
   it is recorded as *waiting on a connector*, with the steps to connect it, and
   a later run builds it. Your owner signs in to every account themselves; you
@@ -258,11 +265,17 @@ waits on them later. Then build one addition at a time, following
 
 After each: `node tools/selftest.js` and `node tools/build-index.js` must pass,
 and `node tools/agents-sync.js` must run after any change to `.claude/`.
+During a conversion the build still lists the owner's own notes as
+`NOTE OUTSIDE THE INDEXED FOLDERS` until `SETUP.md` § 4A.7 moves them, and
+warns that tailoring has no record until step 6: neither counts against an
+addition.
 
 ## 6. Record it
 
-Under `## Tailoring` in `HANDOFF.md`, add this run's entry, newest last. Its
-first line is dated, in exactly one of three forms:
+Under `## Tailoring` in `HANDOFF.md` — create that exact heading above
+`## Decisions` if it is missing, as it is in a vault set up before this skill
+recorded its runs — add this run's entry, newest last. Its first line is
+dated, in exactly one of three forms:
 
 ```markdown
 - **2026-09-28 — proposed**: …

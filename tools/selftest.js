@@ -901,10 +901,14 @@ ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} fou
   ok('D95: a heading with trailing spaces is still the section', !V.tailoringUnrecorded(set + '\n## Tailoring  \n\n- **2026-09-28 — proposed**\n'));
   ok('D95: a dated line under another heading does not count', V.tailoringUnrecorded('# HANDOFF\n\n## Tailoring\n\n## Decisions\n\n- **2026-09-28 — proposed**\n'));
   ok('D95: the unfilled template is never flagged', !V.tailoringUnrecorded('## Waiting On {{OWNER_NAME}}\n\n- Nothing yet.\n'));
+  ok('D95: mid-setup — owner named, setup tokens still open — is already a set-up vault', V.tailoringUnrecorded(set + '\n- **Setup**: {{SETUP_STATE}}\n- **Snapshot**: {{SETUP_SNAPSHOT}}\n'));
   ok('D95: lowercase Templater braces do not hide a set-up vault', V.tailoringUnrecorded(set + '\nNext review: {{date}}\n'));
   ok('D95: a vault without HANDOFF.md is never flagged', !V.tailoringUnrecorded(null));
+  // Only the template itself: an owner's vault without its first record is
+  // flagged by design, by the build and the audit, not by the self-test.
   const own = path.join(VAULT, 'HANDOFF.md');
-  ok('D95: this template\'s own HANDOFF.md is not flagged', !V.tailoringUnrecorded(fs.existsSync(own) ? fs.readFileSync(own, 'utf8') : null));
+  const ownText = fs.existsSync(own) ? fs.readFileSync(own, 'utf8') : null;
+  if (ownText !== null && ownText.includes('{{OWNER_NAME}}')) ok('D95: this template\'s own HANDOFF.md is not flagged', !V.tailoringUnrecorded(ownText));
   const tailor = skillText('vault-tailor') || '';
   const desc = (tailor.match(/^description:\s*(.*)$/m) || [])[1] || '';
   ok('D95: vault-tailor\'s description opens "You MUST always"', desc.startsWith('You MUST always'), desc.slice(0, 60));

@@ -307,7 +307,7 @@ const inbox = V.walk(path.join(VAULT, 'raw'), ['.md', '.pdf', '.docx', '.pptx', 
 // Tailoring reaches a proposal before the first compile (D95).
 {
   const handoff = path.join(VAULT, 'HANDOFF.md');
-  if (V.tailoringUnrecorded(fs.existsSync(handoff) ? fs.readFileSync(handoff, 'utf8') : null)) warnings.push('tailoring has not reached a proposal — run the vault-tailor skill, or record that the owner declined, so HANDOFF.md § Tailoring has its dated line, before any compiling (SETUP.md § 4A.6, § 4B.4, D95)');
+  if (V.tailoringUnrecorded(fs.existsSync(handoff) ? fs.readFileSync(handoff, 'utf8') : null)) warnings.push('tailoring has not reached a proposal — run the vault-tailor skill, or record that the owner declined, so HANDOFF.md § Tailoring has its dated line, before any compiling (.claude/skills/vault-tailor/SKILL.md § 6, D95)');
 }
 for (const o of V.overBudget(VAULT, R.CONTEXT_BUDGET_TOKENS)) {
   const home = o.file === 'HANDOFF.md' ? 'a log or detail node in wiki/tooling/' : 'a .claude/rules/ file, a skill or a wiki node';

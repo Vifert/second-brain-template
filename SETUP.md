@@ -262,6 +262,7 @@ without asking:
 | `.claude/skills/` — all six: `vault-excalidraw`, `vault-tailor`, `vault-compile`, `vault-audit`, `vault-deep-audit`, `vault-handoff` | same | If they already have `.claude/`, add beside what is there |
 | `.claude/rules/` | same | The four path-scoped rules files `AGENTS.md` points to; Claude Code loads each when a file it covers is read, other agents read one when the manual says |
 | `.claude/agents/` | same | `vault-fidelity-verifier` and `vault-gap-auditor`, the read-only agents `/vault-compile` and `/vault-deep-audit` dispatch |
+| `output/tailor-study.md` | same | The study brief you wrote in § 0; `vault-tailor` builds on it after the restart instead of studying the design again |
 | `.claude/settings.json` | same | The hooks (`tools/hooks/`). If they already have one, add its `hooks` entries to theirs and leave their other settings alone |
 | `AGENTS.md` | `AGENTS.md` | The manual every agent reads. Remove the block from `<!-- template-only` to `<!-- /template-only -->`: it is for contributors to the template, and the build fails a vault that keeps it (D93). If they already had an `AGENTS.md`, save theirs as `raw/their-previous-AGENTS.md`, show them its rules, and add the ones they still want to the end of the new one under `## My Additions` |
 | `CLAUDE.md` | `CLAUDE.md` | Claude Code's entry point: it imports `AGENTS.md`. If they already had one, save theirs as `raw/their-previous-CLAUDE.md` and treat its rules the same way — into `AGENTS.md` § My Additions, so every agent sees them; only a line that is true for Claude Code alone stays in `CLAUDE.md` (D90) |
@@ -297,7 +298,9 @@ Do § 6 (owner, topics, tokens, icons, probes), then § 5 (Obsidian settings),
 then § 8 (templates).
 
 **Then tailor, before anything is compiled.** Once `node tools/build-index.js`
-reports `PROBLEMS: none`, run the `vault-tailor` skill — all six steps; it is
+reports no problem except `NOTE OUTSIDE THE INDEXED FOLDERS` — their own notes,
+which stay where they are until § 4A.7 moves them (D68) — run the
+`vault-tailor` skill — all six steps; it is
 installed now (§ 4A.4) — and build what your user chooses. Its survey of their
 notes (step 1b) needs them where they are, so it runs before § 4A.7 moves them.
 Do not start § 4A.7 until `HANDOFF.md` § Tailoring has its dated line: until
