@@ -39,3 +39,25 @@ ask your agent to do these steps, or do them yourself:
    credit block goes on counting only the rows you received from the template.
 5. `node tools/selftest.js` and `node tools/build-index.js` — both clean — then
    the steps for your agent in `SETUP.md` § 4C.
+
+### 1.2 — tailoring fitted to your life (recommended)
+
+`vault-tailor` now gets to know your days and weeks — an optional free talk,
+then questions built from it — and proposes skills, skill chains and
+automations for any part of your life, recording every result in your vault.
+A set-up vault now records each tailoring run in `HANDOFF.md` § Tailoring;
+until its first dated line exists, the build warns and the audit fails (D95).
+
+To upgrade a vault set up with 1.0 or 1.1, ask your agent to:
+
+1. Copy `.claude/skills/vault-tailor/` and `.agents/skills/vault-tailor/`
+   from this template over yours.
+2. Copy `tools/lib/vault.js`, `tools/build-index.js`, `tools/audit.js` and
+   `tools/selftest.js` — or merge them, if you changed them — and append the
+   D95 row of `tools/DEFECTS.md` to yours.
+3. Run `node tools/selftest.js` and `node tools/build-index.js`; the build
+   now warns that tailoring has no record.
+4. Run `/vault-tailor`. It ends by writing the dated line, and the warning
+   goes for good. If you would rather not, add
+   `- **YYYY-MM-DD — declined by the owner**`, with today's date, under a
+   `## Tailoring` heading in `HANDOFF.md` yourself.

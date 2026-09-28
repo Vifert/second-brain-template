@@ -188,10 +188,10 @@ Read-only agents, skip the manual
 vault-fidelity-verifier
 vault-gap-auditor ^Ccokp5P1
 
-vault-tailor — fits the vault to you
-study → interview in rounds →
-propose → build your own
-skills · agents · rules ^WX67adUY
+vault-tailor — fits the vault to your life
+study → free talk → grill →
+propose skills · chains · automations
+→ build what you choose ^WX67adUY
 
 %%
 ## Drawing
@@ -5167,8 +5167,8 @@ skills · agents · rules ^WX67adUY
 				"type": 3
 			},
 			"seed": 2003293590,
-			"version": 5,
-			"versionNonce": 110401173,
+			"version": 6,
+			"versionNonce": 1787064893,
 			"isDeleted": false,
 			"boundElements": [
 				{
@@ -5180,7 +5180,7 @@ skills · agents · rules ^WX67adUY
 					"type": "arrow"
 				}
 			],
-			"updated": 1790247175059,
+			"updated": 1790604309068,
 			"link": null,
 			"locked": false
 		},
@@ -5421,9 +5421,9 @@ skills · agents · rules ^WX67adUY
 		{
 			"id": "WX67adUY",
 			"type": "text",
-			"x": 1690.2001342773438,
+			"x": 1671.680160522461,
 			"y": 1655,
-			"width": 279.5997314453125,
+			"width": 316.6396789550781,
 			"height": 80,
 			"angle": 0,
 			"strokeColor": "#2f9e44",
@@ -5438,21 +5438,21 @@ skills · agents · rules ^WX67adUY
 			"index": "b10",
 			"roundness": null,
 			"seed": 1936254102,
-			"version": 5,
-			"versionNonce": 66875893,
+			"version": 6,
+			"versionNonce": 1193393031,
 			"isDeleted": false,
 			"boundElements": null,
-			"updated": 1790247175061,
+			"updated": 1790604309077,
 			"link": null,
 			"locked": false,
-			"text": "vault-tailor — fits the vault to you\nstudy → interview in rounds →\npropose → build your own\nskills · agents · rules",
-			"rawText": "vault-tailor — fits the vault to you\nstudy → interview in rounds →\npropose → build your own\nskills · agents · rules",
+			"text": "vault-tailor — fits the vault to your life\nstudy → free talk → grill →\npropose skills · chains · automations\n→ build what you choose",
+			"rawText": "vault-tailor — fits the vault to your life\nstudy → free talk → grill →\npropose skills · chains · automations\n→ build what you choose",
 			"fontSize": 16,
 			"fontFamily": 5,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "tailorBx",
-			"originalText": "vault-tailor — fits the vault to you\nstudy → interview in rounds →\npropose → build your own\nskills · agents · rules",
+			"originalText": "vault-tailor — fits the vault to your life\nstudy → free talk → grill →\npropose skills · chains · automations\n→ build what you choose",
 			"autoResize": true,
 			"lineHeight": 1.25,
 			"labelPosition": null

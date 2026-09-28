@@ -25,7 +25,7 @@ corpus, where a smaller corpus lowers the ratio for the same answer.
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/architecture-dark.png">
   <img alt="How the second brain works: capture, the wiki graph, the build, the index layer and the query ladder, with the guards beneath and what the agent loads, and when" src="docs/assets/architecture.png">
 </picture>
-<!-- drawing-hash: d659aefe -->
+<!-- drawing-hash: 854ca1db -->
 
 The drawing as text, and what each stage does: [docs/architecture.md](docs/architecture.md).
 
@@ -44,13 +44,15 @@ where your vault should live, open your coding agent **in that folder**, and say
 
 > Read SETUP.md and set up my second brain.
 
-Either way the agent first studies how this template works, then interviews you
-in rounds about what you need the vault for — every question comes with its
-recommended answer — and walks you through every step. The template is a
-foundation: from your answers it proposes the skills, subagents and rules
-your own use needs (a daily research routine, interview preparation, rules for
-a work-only vault) and builds the ones you pick. `SETUP.md` is written for
-the agent; you never need to read it.
+Either way the agent first studies how this template works, then asks you in
+rounds what setup needs — every question comes with its recommended answer —
+and walks you through every step. The template is a foundation: once the base
+vault builds, and before anything is compiled, the agent offers you a free
+talk about your days and weeks, asks about them, and proposes skills, skill
+chains and automations for any part of your life — plan your day, catch up on
+your field, sort your finances — each recording its results in the vault, and
+only those that make a noticeable difference. `SETUP.md` is written for the
+agent; you never need to read it.
 
 **Just read about it.** [docs/how-it-works.md](docs/how-it-works.md) explains
 the method without installing anything.
@@ -76,13 +78,13 @@ the method without installing anything.
 | `/vault-audit` | A cheap health check of the vault, then asks which problems to fix |
 | `/vault-deep-audit` | The expensive check, with agents asking questions in your words |
 | `/vault-handoff` | Records the session in `HANDOFF.md`, so the next session starts where this one ended |
-| `/vault-tailor` | Fits the vault to a new need: studies it, interviews you in rounds, then proposes and builds new skills, subagents or rules |
+| `/vault-tailor` | Gets to know your days and weeks — an optional free talk, then questions — and proposes skills, skill chains and automations for any part of your life, plus the vault's own subagents and rules; builds what you choose |
 
 In Codex, type `$vault-compile` and so on. Your agent cannot start the first
 four on its own — only you do, by typing them: Claude Code and Codex enforce
 it, and any other agent is bound by the manual's rule. `/vault-tailor` runs
-once during setup, and again whenever you type it or ask your agent to adapt
-the vault.
+once during setup, before anything is compiled, and again whenever you type
+it or ask your agent to adapt the vault or help with recurring work.
 
 ## What the tooling guarantees
 

@@ -53,9 +53,9 @@ session. Each is backed by the builder, so a slip fails the build.
 ## Skills
 
 - `vault-excalidraw` — any drawing request — and `vault-tailor` — fitting the
-  vault to my needs: new skills, subagents and rules, after an interview in
-  rounds; run once at setup, and whenever I ask — the vault skills the agent
-  may start itself.
+  vault to my life and work: skills, skill chains, automations, subagents and
+  rules; run once at setup, before any compiling, and whenever I ask — the
+  vault skills the agent may start itself.
 - `/vault-compile`, `/vault-audit`, `/vault-deep-audit`, `/vault-handoff` —
   {{OWNER_NAME}}'s to start (§ Compile and Audit, § Session Handoff).
 - Skills, agents and hooks are written once, in `.claude/`; the copies other
