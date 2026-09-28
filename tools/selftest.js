@@ -905,6 +905,14 @@ ok('D87: the rules files exist', ruleFiles.length >= 4, `${ruleFiles.length} fou
   ok('D95: a vault without HANDOFF.md is never flagged', !V.tailoringUnrecorded(null));
   const own = path.join(VAULT, 'HANDOFF.md');
   ok('D95: this template\'s own HANDOFF.md is not flagged', !V.tailoringUnrecorded(fs.existsSync(own) ? fs.readFileSync(own, 'utf8') : null));
+  const tailor = skillText('vault-tailor') || '';
+  const desc = (tailor.match(/^description:\s*(.*)$/m) || [])[1] || '';
+  ok('D95: vault-tailor\'s description opens "You MUST always"', desc.startsWith('You MUST always'), desc.slice(0, 60));
+  ok('D95: vault-tailor\'s description fits the 1,024-character limit', desc.length <= 1024, `${desc.length}`);
+  const steps = ['## 1. Study', '## 2. Offer the free talk', '## 3. Grill the owner', '## 4. Propose', '## 5. Build what they chose', '## 6. Record it'];
+  const at = steps.map(s => tailor.indexOf(`\n${s}\n`));
+  ok('D95: vault-tailor keeps its six steps, in order', at.every((p, i) => p > 0 && (i === 0 || p > at[i - 1])), steps.filter((_, i) => at[i] < 0).join(', '));
+  ok('D95: the grilling method travels word for word with its notice', tailor.includes('Interview the user relentlessly until reaching a shared understanding.') && tailor.includes('Do not act on it until the user confirms you have reached a shared understanding.') && tailor.includes('Copyright (c) 2026 Matt Pocock'));
 }
 
 // ---------------------------------------------------------------------------

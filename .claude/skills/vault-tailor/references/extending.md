@@ -54,7 +54,7 @@ Look at the six that ship. Each teaches a pattern:
 | `vault-deep-audit` | a superset of another skill; dispatches read-only subagents in waves of two |
 | `vault-handoff` | end-of-session upkeep; records reasoning, not just actions |
 | `vault-excalidraw` | a tool-driven, round-by-round skill the agent may start itself |
-| `vault-tailor` | an interview in rounds, then a proposal, then building what was chosen |
+| `vault-tailor` | a study, an always-offered free talk, an interview in rounds, a proposal with its evidence and a bar, then building what was chosen; its record gates setup (D95) |
 
 A skill is `.claude/skills/<name>/SKILL.md`:
 
@@ -83,6 +83,15 @@ The decisions a later session must not undo.
   compile, both audits and the handoff; it leaves drawing and tailoring open.
 - **Name the checks** the skill ends with — the self-test and the build — and
   what it records in `HANDOFF.md`.
+
+### Skill chains
+
+A chain is several skills where one does its part and calls the next: gather
+from each source → summarise → file the summary in the vault. Each link is a
+skill of its own that works alone; its `SKILL.md` ends with a `## Next`
+section naming the skill it calls and exactly what it hands over. Build and
+test each link alone before the chain. An automation that runs a chain
+schedules its first skill.
 
 ## Writing a subagent
 
