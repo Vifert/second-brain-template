@@ -81,6 +81,8 @@ if (noFullText.length) problems.push(`${noFullText.length} compiled document(s) 
 const waiting = V.walk(path.join(VAULT, 'raw'), ['.md', '.pdf', '.docx', '.pptx', '.txt', '.csv', '.html', '.png', '.jpg', '.jpeg'], d => d === R.RAW_COMPILED).map(p => path.relative(VAULT, p).replace(/\\/g, '/'));
 console.log(`   captures waiting in raw/ to be compiled: ${waiting.length}`);
 if (waiting.length) problems.push(`${waiting.length} capture(s) waiting in raw/ — they wait for /vault-compile, which compiles each into wiki/ and moves it to raw/${R.RAW_COMPILED}/ (D68): ${waiting.join(', ')}`);
+const handoffPath = path.join(VAULT, 'HANDOFF.md');
+if (V.tailoringUnrecorded(fs.existsSync(handoffPath) ? rd(handoffPath) : null)) problems.push('tailoring never reached a proposal — run the vault-tailor skill, or record that the owner declined, so HANDOFF.md § Tailoring has its dated line (UPGRADING.md § 1.2, D95)');
 
 // ------------------------------------------------------------ 3. alias probe
 H('3. ALIAS / ROUTING PROBE');

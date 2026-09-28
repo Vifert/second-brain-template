@@ -304,6 +304,11 @@ const inbox = V.walk(path.join(VAULT, 'raw'), ['.md', '.pdf', '.docx', '.pptx', 
   const { changed, stale } = d;
   if (changed.length || stale.length) warnings.push(`${changed.length + stale.length} file(s) in .agents/ or .codex/ no longer match .claude/, so Codex and Gemini see an older vault — run node tools/agents-sync.js (D91): ${[...changed, ...stale].slice(0, 6).join(', ')}`);
 }
+// Tailoring reaches a proposal before the first compile (D95).
+{
+  const handoff = path.join(VAULT, 'HANDOFF.md');
+  if (V.tailoringUnrecorded(fs.existsSync(handoff) ? fs.readFileSync(handoff, 'utf8') : null)) warnings.push('tailoring has not reached a proposal — run the vault-tailor skill, or record that the owner declined, so HANDOFF.md § Tailoring has its dated line, before any compiling (SETUP.md § 4A.6, § 4B.4, D95)');
+}
 for (const o of V.overBudget(VAULT, R.CONTEXT_BUDGET_TOKENS)) {
   const home = o.file === 'HANDOFF.md' ? 'a log or detail node in wiki/tooling/' : 'a .claude/rules/ file, a skill or a wiki node';
   warnings.push(`${o.file} is about ${o.tokens} tokens, over its ${o.budget}-token budget, and every session loads it — move detail into ${home}; never delete or compress it to fit (D87, D01)`);
