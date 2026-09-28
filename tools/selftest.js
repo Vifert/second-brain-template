@@ -823,10 +823,17 @@ ok('D78: the manual keeps only a NotebookLM stub', nlmAt >= 0 && nlmLen >= 0 && 
   ok('D92: the Stop hook answers with JSON when it lets the agent finish', stop.status !== 0 || (() => { try { JSON.parse(stop.stdout); return true; } catch { return false; } })(), stop.stdout);
 
   const filled = manual.replace(/\{\{OWNER_NAME\}\}/g, 'Mira');
-  ok('D93: the template ships the contributor note in the manual', V.TEMPLATE_ONLY.test(manual) && !V.templateOnlyLeft(manual));
-  ok('D93: a vault whose manual keeps the note is reported', V.templateOnlyLeft(filled));
   ok('D93: a vault with the note removed passes', !V.templateOnlyLeft(filled.replace(V.TEMPLATE_ONLY, '')));
-  ok('D93: the note points to a brief that exists', fs.existsSync(path.join(VAULT, 'docs', 'for-ai-agents.md')) && /docs\/for-ai-agents\.md/.test(manual));
+  // D96: three of these read the manual as the template's. In a set-up vault
+  // setup has removed the note (and the brief never arrives), so there they
+  // would fail every owner; the vault checks its own manual instead.
+  if (manual.includes('{{OWNER_NAME}}')) {
+    ok('D93: the template ships the contributor note in the manual', V.TEMPLATE_ONLY.test(manual) && !V.templateOnlyLeft(manual));
+    ok('D93: a vault whose manual keeps the note is reported', V.templateOnlyLeft(filled));
+    ok('D93: the note points to a brief that exists', fs.existsSync(path.join(VAULT, 'docs', 'for-ai-agents.md')) && /docs\/for-ai-agents\.md/.test(manual));
+  } else {
+    ok('D96: a set-up vault\'s manual no longer holds the template-only note', !V.TEMPLATE_ONLY.test(manual));
+  }
 }
 eq('D58: a log keeps names as written', W.unlinkedPeople([person, wnode('wiki/journal/journal-2026-09.md', { kind: 'log' }, '---\ntitle: J\n---\n\n## Key Takeaways\n- Priya Shah called.\n')], R.OWNER.slug).length, 0);
 
