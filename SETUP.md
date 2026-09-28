@@ -26,13 +26,15 @@ every part of the vault. The rules are long on purpose; every one exists
 because something broke — `tools/DEFECTS.md` says what, and why.
 
 **Then understand how every part of it works before you ask your user
-anything.** `.claude/skills/vault-tailor/SKILL.md` § 1 lists the design to read
+anything.** `.claude/skills/vault-tailor/SKILL.md` § 1a lists the design to read
 in full — every skill and agent, the hooks, the tools' guarantees and the
 ledger, the tooling nodes, the benchmark's summary — and has you prove it: a
 sourced study brief in `output/tailor-study.md` explaining how each part works,
 every gap closed by going back to the files. This vault is a foundation your
 user will build on, and you cannot propose good additions to a design you do
-not fully understand.
+not fully understand. The skill's later steps — getting to know your user, and
+proposing what would help them — come after the base vault builds (§ 4A.6,
+§ 4B.4).
 
 **What you are setting up, in one paragraph you can say to your user**: an
 Obsidian vault where they capture anything and you compile it into a graph of
@@ -140,15 +142,13 @@ directory — § 4B.2 plans around that.
 
 ---
 
-## 2. The tailoring interview
+## 2. The setup interview
 
-Start the **`vault-tailor`** skill yourself now: invoke `/vault-tailor` if this
-session has it, and otherwise — when you run in their existing vault, the
-template's skills are not copied yet — read
-`<template>/.claude/skills/vault-tailor/SKILL.md` and follow it. It interviews
-your user in rounds, each question with your recommended answer, until you
-both confirm a shared understanding of what their vault is for; then it
-proposes additions fitted to that use.
+Interview your user in rounds about the facts setup needs — § 3 — and nothing
+else: each round numbers its questions and gives your recommended answer for
+each, in the format `vault-tailor` § 3 uses. Keep it short; this is not where
+you get to know their life. That is `vault-tailor`'s job, and it runs later,
+once the base vault builds and before anything is compiled (§ 4A.6, § 4B.4).
 
 Its first round decides which setup this is — **"Do you already keep an
 Obsidian vault?"**:
@@ -158,16 +158,13 @@ Obsidian vault?"**:
   any name; nothing in this system depends on it.
 - **No** → **§ 4B, turning this template into their vault.**
 
-The interview must also settle every fact in § 3. Record each answer in
-`HANDOFF.md` as you get it, and the proposal your user accepted. Run the
-skill's §§ 1–3 now; its § 4, building the additions, waits for § 12, when the
-base vault builds clean.
+Record each answer in `HANDOFF.md` as you get it.
 
 ---
 
 ## 3. What the interview must settle
 
-These are branches of the design tree in § 2 — ask each in the round where
+These are the setup interview's questions (§ 2) — ask each in the round where
 its prerequisites are settled, with your recommended answer, and explain why
 you are asking. Write the answers into `HANDOFF.md` as you get them. Anything
 they decline to answer stays out.
@@ -299,7 +296,17 @@ their vault, does § 4C for its agent, and picks up at § 4A.6.
 Do § 6 (owner, topics, tokens, icons, probes), then § 5 (Obsidian settings),
 then § 8 (templates).
 
+**Then tailor, before anything is compiled.** Once `node tools/build-index.js`
+reports `PROBLEMS: none`, run the `vault-tailor` skill — all six steps; it is
+installed now (§ 4A.4) — and build what your user chooses. Its survey of their
+notes (step 1b) needs them where they are, so it runs before § 4A.7 moves them.
+Do not start § 4A.7 until `HANDOFF.md` § Tailoring has its dated line: until
+then the build warns, naming `vault-tailor` (D95).
+
 ### 4A.7 Sources, then notes
+
+**Only after tailoring** (§ 4A.6): `HANDOFF.md` § Tailoring has its dated
+line, and the build no longer warns about it.
 
 A vault built without these rules is mostly summaries, less faithful than the
 sources behind them. So the knowledge base is rebuilt from scratch: `wiki/`
@@ -360,7 +367,8 @@ cheaper.
 ### 4A.9 Hand the compile to your user
 
 You cannot compile: `/vault-compile` carries `disable-model-invocation: true`,
-so only your user can start it (`AGENTS.md` § Compile and Audit). Tell them:
+so only your user can start it (`AGENTS.md` § Compile and Audit) — and only
+once `HANDOFF.md` § Tailoring has its dated line (§ 4A.6). Tell them:
 
 > Type **`/vault-compile`**. The first run sees how much is waiting, groups it
 > into batches of about one session each — sources first — writes that plan
@@ -440,6 +448,11 @@ already installed (§ 1); the settings for Calendar, Iconize and Templater ship
 in `.obsidian/plugins/`, so each works as soon as your user installs it. Then
 run `node tools/build-index.js` — no `OBSIDIAN SETTING DRIFTED` or
 `REQUIRED PLUGIN NOT INSTALLED` problem.
+
+**Then tailor.** Run the `vault-tailor` skill — all six steps — and build what
+your user chooses, before the first capture (§ 4B.5). There is nothing of
+theirs to survey yet, so its free talk (step 2) matters most here. The build
+warns until `HANDOFF.md` § Tailoring has its dated line (D95).
 
 ### 4B.5 A first capture together
 
@@ -847,9 +860,9 @@ It must print nothing.
 
 ## 12. Finish
 
-**First, build the additions your user chose** from the tailoring proposal
-(§ 2): `vault-tailor` § 4, one at a time, each passing the self-test and the
-build before the next, then its § 5 to record them.
+**First, check tailoring ran.** It ran before any compiling (§ 4A.6, § 4B.4).
+If `HANDOFF.md` § Tailoring has no dated line — the build warns if so (D95) —
+run `vault-tailor` now, before anything else here.
 
 Then run everything, in the vault:
 
@@ -864,6 +877,7 @@ check, and read its report together. You never run the audit yourself.
 
 Then check:
 
+- [ ] `HANDOFF.md` § Tailoring has its dated line, and the additions your user chose are built, verified and recorded (§ 4A.6 / § 4B.4, D95).
 - [ ] The credit block is at the top of `AGENTS.md` (§ 11), and the template-only note under it is gone (D93).
 - [ ] No `{{TOKEN}}` left (§ 11).
 - [ ] `node tools/agents-sync.js --check` passes, and § 4C is done for their agent — for Codex, the project and its three hooks are trusted.
@@ -871,7 +885,6 @@ Then check:
 - [ ] Obsidian opens the vault, the plugins are on, and the build reports no drifted setting (§ 5).
 - [ ] The private repository exists, and the setup commit is pushed (§ 9).
 - [ ] `HANDOFF.md` records the setup, its decisions and anything left (§ 10).
-- [ ] The additions chosen from the tailoring proposal are built, verified and recorded (§ 2).
 - [ ] NotebookLM is set up and signed in, if they wanted it (§ 7).
 - [ ] The Obsidian skills and defuddle are installed, if they wanted them (§ 13).
 
@@ -903,10 +916,10 @@ it if they prefer.
 - how to capture — "log this: …", "idea: …", a daily note, or a file dropped in `raw/`;
 - how to ask — just ask; you route through the index and show the trace;
 - the commands only they can start — see "Their commands" below;
-- that the vault can keep growing with them: `/vault-tailor` studies it again,
-  interviews them about what changed, and proposes and builds new skills,
-  subagents or rules — they can type it any time, or just ask you to adapt the
-  vault;
+- that the vault can keep growing with them: `/vault-tailor` asks about what
+  has changed in their days and weeks, and proposes new skills, skill chains
+  and automations for any part of their life — they can type it any time, or
+  just ask you;
 - that every session starts by reading `AGENTS.md` and `HANDOFF.md`, whichever
   coding agent they use;
 - that the architecture is Vifert's.
@@ -935,11 +948,11 @@ skill the tailoring added (a research run, say) belongs in this list too.
 **`/vault-tailor` is different, and say so plainly**: it is not gated. It ran
 once during setup, and it is theirs to use whenever their needs change — they
 type `/vault-tailor`, or just ask you to adapt the vault, and you start it.
-Explain in two or three sentences how it works: you study the vault's design
-first, then interview them in rounds, each question with your recommended
-answer, until they confirm you have understood; then you propose new skills,
-subagents, rules or topics, each with what it costs, and build only the ones
-they pick.
+Explain in two or three sentences how it works: you offer them a free talk
+about their days and weeks, ask about them in rounds with your recommended
+answers, then propose only what would make a noticeable difference —
+skills, skill chains and automations, for work and life — and build what they
+choose, recording every result in the vault.
 
 **Drawings** need no command: ask for one and the agent uses `vault-excalidraw`
 itself.
